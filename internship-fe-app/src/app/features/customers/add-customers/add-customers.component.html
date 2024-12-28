@@ -1,0 +1,295 @@
+<div class = "block">
+<div class="flex flex-row gap-[26rem] items-center mt-3 justify-center">
+  <div class = "font-extrabold pt-4 text-3xl">New Customer</div>
+  <app-progress-bar [step]="step"></app-progress-bar>
+</div>
+<div class="flex flex-row gap-[20rem] items-center mt-3 justify-center">
+<div
+  class="bg-white shadow-lg flex flex-col justify-center gap-12 mt-2 w-[74rem] h-[34rem] p-20 rounded-tl-lg border-t border-opacity-0"
+>
+
+  <form [formGroup]="form">
+    <div *ngIf="step === 1 || step === 2">
+      <div formGroupName="customerGeneralDataForm">
+        <div class="flex justify-between">
+          <div class="flex items-center md:flex md:items-center mb-7 gap-5">
+            <label
+            class="w-40 color-rtb-black  text-rtb-black text-lg font-medium"
+            for="name"
+            >
+          Customer Name
+            </label>
+            <div class = "flex flex-col gap-2">
+            <input
+            class="w-[34.3rem] h-14 rounded-md border-solid border-2 border-rtb-light-gray text-rtb-black text-base font-normal px-3 py-4 placeholder:text-rtb-diabled-gray"
+            id="name"
+            type="text"
+            formControlName="name"
+            placeholder="Customer Name"
+            [ngClass]="{'border-red-600': submitted && form.get('customerGeneralDataForm.name')!.invalid }"
+            />
+            <div *ngIf="submitted && form.get('customerGeneralDataForm.name')!.errors?.['required']" class="text-sm text-red-600">Customer name is required</div>
+            <div *ngIf="submitted && form.get('customerGeneralDataForm.name')!.errors?.['minlength']" class="text-sm text-red-600">Customer name should have at least 6 characters.</div>
+          </div>
+          </div>
+        </div>
+
+      <div class="flex justify-between">
+        <div class="flex items-center md:flex md:items-center mb-7 gap-5">
+          <label
+            class="w-40 color-rtb-black text-rtb-black text-lg font-medium"
+            for="billingType"
+          >
+            Billing Type
+          </label>
+          <div class = "flex flex-col gap-2">
+          <select
+            class="w-[34.3rem] h-14 rounded-md border-solid border-2 border-rtb-light-gray text-rtb-black text-base font-normal px-3 py-4 placeholder:text-rtb-diabled-gray"
+            id="billingType"
+            formControlName="billingType"
+            [ngClass]="{'border-red-600': submitted && form.get('customerGeneralDataForm.billingType')!.invalid }"
+          >
+            <option value="" disabled selected>Billing Type</option>
+            <option value="monthly">Monthly</option>
+            <option value="yearly">Yearly</option>
+          </select>
+          <div *ngIf="submitted && form.get('customerGeneralDataForm.billingType')?.invalid" class="text-sm text-red-600">Please choose a billing type</div>
+        </div>
+        </div>
+      </div>
+
+      <div class="flex justify-between">
+        <div class="flex items-center md:flex md:items-center mb-7 gap-5">
+          <label
+            class="w-40 color-rtb-black text-rtb-black text-lg font-medium"
+            for="tva"
+          >
+            TVA/VAT
+          </label>
+          <div class = "fles flex-col gap-2">
+          <input
+            class="w-[34.3rem] h-14 rounded-md border-solid border-2 border-rtb-light-gray text-rtb-black text-base font-normal px-3 py-4 placeholder:text-rtb-diabled-gray"
+            id="tva"
+            type="text"
+            formControlName="tva"
+            placeholder="TVA/VAT"
+            [ngClass]="{'border-red-600': submitted && form.get('customerGeneralDataForm.tva')!.invalid }"
+          />
+          <div *ngIf="submitted && form.get('customerGeneralDataForm.tva')!.errors?.['required']" class="text-sm text-red-600">TVA is required</div>
+          <div *ngIf="submitted && form.get('customerGeneralDataForm.tva')!.errors?.['min']" class="text-sm text-red-600">TVA must be greater than 0.</div>
+         <div *ngIf="submitted && form.get('customerGeneralDataForm.tva')!.errors?.['max']" class="text-sm text-red-600">TVA must be smaller than 100.</div>
+        </div>
+        </div>
+      </div>
+
+      <div class="flex justify-between">
+        <div class="flex items-center md:flex md:items-center mb-7 gap-5">
+          <label
+            class="w-40 color-rtb-black text-rtb-black text-lg font-medium"
+            for="email"
+          >
+            E-mail
+          </label>
+          <div class = "flex flex-col gap-2">
+          <input
+            class="w-[34.3rem] h-14 rounded-md border-solid border-2 border-rtb-light-gray text-rtb-black text-base font-normal px-3 py-4 placeholder:text-rtb-diabled-gray"
+            id="email"
+            type="text"
+            formControlName="email"
+            placeholder="Email"
+            [ngClass]="{'border-red-600': submitted && form.get('customerGeneralDataForm.email')!.invalid }"
+          />
+          <div *ngIf="submitted && form.get('customerGeneralDataForm.email')?.errors?.['required']" class="text-sm text-red-600">Email is required</div>
+          <div *ngIf="submitted && form.get('customerGeneralDataForm.email')?.errors?.['pattern']" class="text-sm text-red-600">A valid email address is required</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-between">
+        <div class="flex items-center md:flex md:items-center mb-7 gap-5">
+          <label
+            class="w-40 color-rtb-black text-rtb-black text-lg font-medium"
+            for="phoneNumber"
+          >
+           Phone Number
+          </label>
+          <div class = "flex flex-col gap-2">
+          <input
+            class="w-[34.3rem] h-14 rounded-md border-solid border-2 border-rtb-light-gray text-rtb-black text-base font-normal px-3 pt-4 placeholder:text-rtb-diabled-gray"
+            id="phoneNumber"
+            type="text"
+            formControlName="phoneNumber"
+            placeholder="phoneNumber"
+            [ngClass]="{'border-red-600': submitted && form.get('customerGeneralDataForm.phoneNumber')!.invalid }"
+          />
+          <div *ngIf="submitted && form.get('customerGeneralDataForm.phoneNumber')!.errors?.['required']" class="text-sm text-red-600">Phone Number is required</div>
+          <div *ngIf="submitted && form.get('customerGeneralDataForm.phoneNumber')!.errors?.['pattern']" class="text-sm text-red-600">Invalid phone number</div>
+        </div>
+        </div>
+      </div>
+    </div>
+   </div>
+
+    <div *ngIf="step === 3">
+    <div formGroupName="customerAddressForm">
+      <div class="flex justify-between">
+        <div
+          class="flex items-center md:flex md:items-center gap-5 mb-6"
+          [ngClass]="{ 'item-selected': selectedCountry }"
+        >
+          <label class="w-40 color-rtb-black text-rtb-black text-lg font-medium pb-5"
+            >Country</label
+          >
+          <div class = "flex flex-col">
+          <mat-select-country
+            formControlName="country"
+            placeHolder="country"
+            [(ngModel)]="selectedCountry"
+            [ngClass]="{'invalid-border': submitted && form.get('customerAddressForm.country')!.invalid }"
+          >
+          </mat-select-country>
+          <div *ngIf="submitted && form.get('customerAddressForm.country')!.errors?.['required']" class="text-sm text-red-600">Country is required</div>
+          </div>
+        </div>
+        </div>
+     
+        <div class="flex justify-between">
+        <div class="flex items-center md:flex md:items-center mb-7 gap-5">
+          <label class="w-40 color-rtb-black text-rtb-black text-lg font-medium" for="city">
+            City
+          </label>
+          <div class = "flex flex-col gap-2">
+          <input
+            class="w-[34.3rem] h-14 rounded-md border-solid border-2 border-rtb-light-gray text-rtb-black text-base font-normal px-3 py-4 placeholder:text-rtb-diabled-gray"
+            id="city"
+            type="text"
+            formControlName="city"
+            placeholder="city"
+            [ngClass]="{'border-red-600': submitted && form.get('customerAddressForm.city')!.invalid }"
+          />
+          <div *ngIf="submitted && form.get('customerAddressForm.city')!.errors?.['required']" class="text-sm text-red-600">City is required</div>
+          <div *ngIf="submitted && form.get('customerAddressForm.city')!.errors?.['minlength']" class="text-sm text-red-600">City should have at least 6 characters.</div>
+        </div>
+        </div>
+        </div>
+
+        <div class="flex justify-between">
+        <div class="flex items-center md:flex md:items-center mb-7 gap-5">
+          <label class="w-40 color-rtb-black text-rtb-black text-lg font-medium" for="postalCode">
+            Zipcode
+          </label>
+          <div class = "flex flex-col gap-2">
+          <input
+            class="w-[34.3rem] h-14 rounded-md border-solid border-2 border-rtb-light-gray text-rtb-black text-base font-normal px-3 py-4 placeholder:text-rtb-diabled-gray"
+            id="postalCode"
+            type="text"
+            formControlName="postalCode"
+            placeholder="postalCode"
+            [ngClass]="{'border-red-600': submitted && form.get('customerAddressForm.postalCode')!.invalid }"
+          />
+          <div *ngIf="submitted && form.get('customerAddressForm.postalCode')!.errors?.['required']" class="text-sm text-red-600">Postal Code is required</div>
+          <div *ngIf="submitted && form.get('customerAddressForm.postalCode')!.errors?.['pattern'] " class="text-sm text-red-600">Invalid postal code.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-between">
+        <div class="flex items-center md:flex md:items-center mb-7 gap-5">
+          <label class="w-40 color-rtb-black text-rtb-black text-lg font-medium" for="street">
+            Street
+          </label>
+          <div class = "flex flex-col gap-2">
+          <input
+            class="w-[34.3rem] h-14 rounded-md border-solid border-2 border-rtb-light-gray text-rtb-black text-base font-normal px-3 py-4 placeholder:text-rtb-diabled-gray"
+            id="street"
+            type="text"
+            formControlName="street"
+            placeholder="street"
+            [ngClass]="{'border-red-600': submitted && form.get('customerAddressForm.street')!.invalid }"
+          />
+          <div *ngIf="submitted && form.get('customerAddressForm.street')!.errors?.['required']" class="text-sm text-red-600">Street is required</div>
+          <div *ngIf="submitted && form.get('customerAddressForm.street')!.errors?.['minlength']" class="text-sm text-red-600">Street should have at least 6 characters.</div>
+          </div>
+      </div>
+        </div>
+
+      <div class="flex justify-between">
+        <div class="flex items-center md:flex md:items-center mb-7 gap-5">
+          <label
+            class="w-40 color-rtb-black text-rtb-black text-lg font-medium"
+            for="number"
+          >
+            House number
+          </label>
+          <div class = "flex flex-col gap-2">
+          <input
+            class="w-[34.3rem] h-14 rounded-md border-solid border-2 border-rtb-light-gray text-rtb-black text-base font-normal px-3 pt-4 placeholder:text-rtb-diabled-gray"
+            id="number"
+            type="text"
+            formControlName="number"
+            placeholder="number"
+            [ngClass]="{'border-red-600': submitted && form.get('customerAddressForm.number')!.invalid }"
+          />
+          <div *ngIf="submitted && form.get('customerAddressForm.number')!.errors?.['required']" class="text-sm text-red-600">House Number is required</div>
+          <div *ngIf="submitted && form.get('customerAddressForm.number')!.errors?.['min']" class="text-sm text-red-600">House Number must be greater than 0</div>
+          <div *ngIf="submitted && form.get('customerAddressForm.number')!.errors?.['max']" class="text-sm text-red-600">House Number must be smaller than 100</div>
+          </div>
+        </div>
+
+        <div class="flex items-center md:flex md:items-center mb-7 ml-8 gap-5">
+          <label
+            class="w-20 color-rtb-black text-rtb-black text-lg font-medium"
+            for="addition"
+          >
+            Addition
+          </label>
+          <input
+            class="w-40 h-14 rounded-md border-solid border-2 border-rtb-light-gray text-rtb-black text-base font-normal px-3 pt-4 placeholder:text-rtb-diabled-gray"
+            id="addition"
+            type="text"
+            formControlName="addition"
+            placeholder="addition"
+          />
+        </div>
+      </div>
+      </div>
+    </div>
+    <div *ngIf="step === 4">
+          <app-document-loader class = "flex justify-center items-center m-auto" (documentAdded)="documentUploadConfirmation()"></app-document-loader>
+    </div>
+    <div *ngIf="step === 5" class="flex justify-center items-center ml-8 my-auto">
+      <app-document-history-view></app-document-history-view>
+</div>
+</form> 
+</div>
+</div>
+</div>
+
+<div class="flex justify-center gap-[72px] mt-5">
+  <button
+    (click)="previousStep()"
+    [disabled]="step === 1"
+    class = "text-base"
+    [ngClass]="{
+      ' text-light-gray cursor-not-allowed': step === 1 || step === 2
+    }"
+  >
+  &lt; Previous
+  </button>
+  <button
+  *ngIf="step < 5"
+  (click)="nextStep()"
+  class = "text-base"
+>
+  Next &gt;
+</button>
+
+<button
+  *ngIf="step === 5"
+  type="button"
+  (click)="submitFrom()"
+  class="bg-rtb-blue text-white py-2.5 px-14 hover:bg-rtb-dark-blue rounded-lg text-lg"
+    >
+  Add Customer
+</button>
+</div>

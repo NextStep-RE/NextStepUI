@@ -1,0 +1,19 @@
+.nav-section {
+  .nav-section-title {
+    @apply text-rtb-grey-01 py-6;
+  }
+  li {
+    @apply items-center pb-6;
+    a {
+      @apply no-underline text-white flex items-center;
+      img {
+        @apply pr-1;
+      }
+    }
+  }
+}
+
+.active-link img {
+  filter: invert(46%) sepia(83%) saturate(1429%) hue-rotate(162deg) brightness(98%) contrast(102%);
+}
+

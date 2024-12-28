@@ -1,0 +1,136 @@
+<div class="flex flex-col gap-6">
+  <div class="flex justify-between w-full">
+    <mat-tab-group (selectedIndexChange)="onTabChange($event)">
+      <mat-tab label="All Customers"></mat-tab>
+      <mat-tab label="Active"></mat-tab>
+      <mat-tab label="Inactive"></mat-tab>
+    </mat-tab-group>
+
+    <app-customer-search
+      (searchValue)="setSearchValue($event)"
+    ></app-customer-search>
+  </div>
+  <div>
+    <table
+      mat-table
+      [dataSource]="dataSource.data"
+      matSort
+      (matSortChange)="onSortChange($event)"
+      class="min-w-full md:min-w-[50rem] table-auto"
+    >
+      <ng-container matColumnDef="checkbox">
+        <th mat-header-cell *matHeaderCellDef class="w-10">
+          <mat-checkbox
+            [checked]="allChecked"
+            (change)="checkOrUncheckAll($event.checked)"
+          >
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let customer; let i = index">
+          <div class="flex items-center">
+            <mat-checkbox
+              [checked]="selectedCustomers.has(customer.id)"
+              (change)="updateIndividualCheckbox(customer.id, $event.checked)"
+            >
+            </mat-checkbox>
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th
+          mat-header-cell
+          mat-sort-header
+          *matHeaderCellDef
+          class="pl-4 text-left"
+        >
+          <div class="flex items-center">
+            <span class="ml-2">Customer Name</span>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let customer; let i = index" class="pl-4">
+          <div class="flex items-center">
+            <span class="ml-2 font-semibold"
+              ><a [routerLink]="['/customers', customer.id]">{{
+                customer.name
+              }}</a></span
+            >
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="date">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          class="text-left font-bold"
+        >
+          Date
+        </th>
+        <td mat-cell *matCellDef="let customer">
+          {{ customer.date | date : "dd/MM/yyyy" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef class="text-left">Status</th>
+        <td mat-cell *matCellDef="let customer">
+          {{ customer.status ? "Active" : "Inactive" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="text-left">Actions</th>
+        <td mat-cell *matCellDef="let customer">
+          <div class="flex space-x-2">
+            <img
+              class="w-5 h-5 cursor-pointer"
+              [src]="'../assets/icons/Bin.svg'"
+              alt="Delete Icon"
+              (click)="onDeleteCustomer(customer.id)"
+            />
+            <img
+              class="w-5 h-5 cursor-pointer"
+              [src]="'../assets/icons/eye.svg'"
+              alt="View Icon"
+              (click)="onViewCustomer(customer)"
+            />
+          </div>
+        </td>
+      </ng-container>
+
+      <tr
+        id="customHeaderRow"
+        mat-header-row
+        *matHeaderRowDef="displayedColumns"
+        class="drop-shadow-lg"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        class="border-b border-gray-300"
+      ></tr>
+    </table>
+  </div>
+  <div class="flex justify-between">
+    <button
+      class="inline-flex items-center gap-2 red hover:bg-red-200 rounded-lg"
+      (click)="onDeleteCustomer(undefined, selectedCustomers)"
+    >
+      <img [src]="'../assets/icons/red-bin.svg'" alt="" />
+      <span class="text-rtb-red">
+        Delete {{ selectedCustomers.size }} customers
+      </span>
+    </button>
+    <div>
+      <mat-paginator
+        [hidePageSize]="true"
+        [length]="totalCount$ | async"
+        [pageSize]="pageSize"
+        showFirstLastButtons
+        (page)="onPageFired($event)"
+      >
+        ></mat-paginator
+      >
+    </div>
+  </div>
+</div>

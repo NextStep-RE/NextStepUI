@@ -1,0 +1,66 @@
+<div class="overflow-hidden">
+  <div class="flex text-lg cursor-pointer" (click)="toggleDropdown()">
+    <img
+      *ngIf="selectedProfile"
+      [src]="
+        '../../assets/images/' +
+        selectedProfile.firstName +
+        selectedProfile.lastName +
+        '.png'
+      "
+      alt="Profile Picture"
+      class="w-14 h-14 mr-4"
+    />
+    <div *ngIf="selectedProfile" class="text-[#151618] inline-block text-start">
+      <div class="font-semibold">
+        {{ selectedProfile.firstName }} {{ selectedProfile.lastName }}
+      </div>
+      <div class="font-normal">{{ selectedProfile.job.title }}</div>
+    </div>
+  </div>
+
+  @if(isDropdownOpen){
+
+  <div
+    class="absolute z-10 hidden w-96 bg-white rounded-lg drop-shadow-md border-solid border-2 border-[#E9EAEA] right-6"
+    [ngClass]="{ hidden: !isDropdownOpen }"
+  >
+    <ul>
+      <li *ngFor="let profile of profiles$ | async">
+        <a
+          class="flex justify-between items-center px-4 py-2 hover:bg-[#E9EAEA]"
+          (click)="selectProfile(profile)"
+        >
+          <div class="flex text-lg">
+            <img
+              [src]="
+                '../../assets/images/' +
+                profile.firstName +
+                profile.lastName +
+                '.png'
+              "
+              alt="Profile Picture"
+              class="w-14 h-14 mr-4"
+            />
+            <div class="text-[#232931] inline-block text-start">
+              <div class="font-semibold">
+                {{ profile.firstName }} {{ profile.lastName }}
+              </div>
+              <div class="font-normal">{{ profile.job.title }}</div>
+            </div>
+          </div>
+          @if(profile === selectedProfile){
+          <div>
+            <img
+              src="../../assets/icons/check-icon.svg"
+              alt="Selected Profile Icon"
+            />
+          </div>
+          }
+        </a>
+      </li>
+    </ul>
+  </div>
+  }
+</div>
+<app-switch-users-popup class="absolute right-4 top-[550px] z-10" [showPopup]="isSwitchPopupShown"></app-switch-users-popup>

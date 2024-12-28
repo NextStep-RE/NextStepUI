@@ -1,0 +1,36 @@
+<div>
+  <div class="text-center" *ngIf="isLoading$ | async; else userInfoContent">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <ng-template #userInfoContent>
+    <div class="user-information-card" *ngIf="userInfo$ | async as userInfo">
+      <div class="header">
+        <div class="name-and-role">
+          <h2>{{ userInfo.firstName }} {{ userInfo.lastName }}</h2>
+          <h3>{{ userInfo.job.title }}</h3>
+        </div>
+        <div class="days-left">
+          <div class="days">
+            <h2>{{ userInfo.remainingLeaveDays }}</h2>
+            <h3>/{{ userInfo.annualLeaveDays }}</h3>
+          </div>
+          <p>leave days left</p>
+        </div>
+      </div>
+      <div class="information-section">
+        <div class="information">
+          <p>E-mail</p>
+          <h3>{{ userInfo.email }}</h3>
+        </div>
+        <div class="information">
+          <p>Job title</p>
+          <h3>{{ userInfo.job.title }}</h3>
+        </div>
+        <div class="information">
+          <p>Department</p>
+          <h3>{{ userInfo.department.name }}</h3>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

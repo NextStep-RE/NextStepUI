@@ -1,0 +1,252 @@
+<div>
+  <div class="flex justify-between w-auto h-14 items-center mt-9">
+    <div class="text-3xl font-bold">
+      {{ customer.name }}
+    </div>
+    <div class="inline-flex gap-6">
+      <button
+        type="submit"
+        [disabled]="isSaveDisabled()"
+        (click)="saveChanges()"
+        [ngClass]="{
+          'bg-rtb-diabled-gray': isSaveDisabled(),
+          'bg-rtb-blue': !isSaveDisabled()
+        }"
+        class="text-white text-lg rounded-lg w-56 h-14"
+      >
+        Save
+      </button>
+      <button
+        (click)="cancelEdit()"
+        class="bg-white text-black border-2 border-black text-lg rounded-lg w-56 h-14"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+  <div
+    class="w-auto border-gray-200 shadow-lg bg-white rounded-lg mt-9 px-16 py-8"
+  >
+    <div>
+      <div class="flex justify-end">
+        <button
+          [disabled]="isEditMode"
+          (click)="enterEditMode()"
+          class="text-lg w-20 h-9 rounded-2xl border-2"
+          [ngClass]="{
+            'bg-white text-rtb-grey-01 border-rtb-grey-01': isEditMode,
+            'bg-rtb-blue text-white': !isEditMode,
+            'border-rtb-blue': !isEditMode
+          }"
+        >
+          <div class="flex justify-center gap-2">
+            <div class="self-center">Edit</div>
+            <div class="self-center">
+              <img
+                *ngIf="isEditMode; else normalIcon"
+                [src]="'../assets/icons/add-document-icon-grey.svg'"
+                alt="Add Document Icon"
+              />
+              <ng-template #normalIcon>
+                <img
+                  [src]="'../assets/icons/add-document-icon.svg'"
+                  alt="Add Document Icon"
+                />
+              </ng-template>
+            </div>
+          </div>
+        </button>
+      </div>
+      <form [formGroup]="customerGeneralDataForm" (ngSubmit)="saveChanges()">
+        <fieldset [disabled]="!isEditMode">
+          <div class="flex justify-between mt-2">
+            <div class="w-auto">
+              <div class="text-2xl font-bold mb-4">General Data</div>
+              <div
+                class="flex flex-row justify-between items-center gap-15px mb-6"
+              >
+                <label class="block text-gray-900 text-base mb-1" for="name"
+                  >Customer Name</label
+                >
+                <input
+                  class="bg-white border border-gray-300 rounded-md w-80 py-3 px-3 ml-3 text-gray-700 placeholder-gray-400"
+                  id="name"
+                  type="text"
+                  formControlName="name"
+                  placeholder="Name"
+                />
+              </div>
+
+              <div
+                class="flex flex-row justify-between items-center gap-15px mb-6"
+              >
+                <label class="block text-gray-900 text-base mb-1" for="email"
+                  >E-mail</label
+                >
+                <input
+                  class="bg-white border border-gray-300 w-80 rounded-md py-3 px-3 text-gray-700 placeholder-gray-400"
+                  id="email"
+                  type="text"
+                  formControlName="email"
+                  placeholder="Email"
+                />
+              </div>
+              <div
+                class="flex flex-row justify-between items-center gap-15px mb-6"
+              >
+                <label
+                  class="block text-gray-900 text-base mb-1"
+                  for="phoneNumber"
+                  >Phone Number</label
+                >
+                <input
+                  class="bg-white border border-gray-300 rounded-md w-80 py-3 px-3 text-gray-700 placeholder-gray-400"
+                  id="phoneNumber"
+                  type="text"
+                  formControlName="phoneNumber"
+                  placeholder="Phone number"
+                />
+              </div>
+
+              <div
+                class="flex flex-row justify-between items-center gap-15px mb-6"
+              >
+                <label
+                  class="block text-gray-900 text-base mb-1"
+                  for="billingType"
+                  >Billing Type</label
+                >
+                <select
+                  class="bg-white border border-gray-300 rounded-md w-80 py-3 px-3"
+                  id="billingType"
+                  formControlName="billingType"
+                >
+                  <option value="" disabled selected>Billing type</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="yearly">Yearly</option>
+                  <option value="weekly">Weekly</option>
+                </select>
+              </div>
+
+              <div
+                class="flex flex-row justify-between items-center gap-15px mb-6"
+              >
+                <label class="block text-gray-900 text-base mb-1" for="tva"
+                  >VAT/TVA</label
+                >
+                <input
+                  class="bg-white border border-gray-300 rounded-md w-80 py-3 px-3 text-gray-700 placeholder-gray-400"
+                  id="tva"
+                  type="text"
+                  formControlName="tva"
+                  placeholder="VAT/TVA"
+                />
+              </div>
+            </div>
+            <div class="w-auto">
+              <div class="text-2xl font-bold mb-4">Address</div>
+              <div
+                class="flex flex-row justify-between items-center gap-15px mb-6"
+              >
+                <label
+                  class="block text-gray-900 text-base mb-1 mr-3"
+                  for="name"
+                  >Country</label
+                >
+                <mat-select-country
+                  class="custom-select-country"
+                  id="country"
+                  formControlName="country"
+                  placeHolder="Country"
+                >
+                </mat-select-country>
+              </div>
+
+              <div
+                class="flex flex-row justify-between items-center gap-15px mb-6"
+              >
+                <label class="block text-gray-900 text-base mb-1" for="email"
+                  >City</label
+                >
+                <input
+                  class="bg-white border border-gray-300 w-80 rounded-md py-3 px-3 text-gray-700 placeholder-gray-400"
+                  id="city"
+                  type="text"
+                  formControlName="city"
+                  placeholder="City"
+                />
+              </div>
+              <div
+                class="flex flex-row justify-between items-center gap-15px mb-6"
+              >
+                <label class="block text-gray-900 text-base mb-1" for="zipCode"
+                  >Zipcode</label
+                >
+                <input
+                  class="bg-white border border-gray-300 rounded-md w-80 py-3 px-3 text-gray-700 placeholder-gray-400"
+                  id="phoneNumber"
+                  type="number"
+                  formControlName="postalCode"
+                  placeholder="Zipcode"
+                />
+              </div>
+
+              <div
+                class="flex flex-row justify-between items-center gap-15px mb-6"
+              >
+                <label
+                  class="block text-gray-900 text-base mb-1"
+                  for="billingType"
+                  >Street</label
+                >
+                <input
+                  class="bg-white border border-gray-300 rounded-md w-80 py-3 px-3 text-gray-700 placeholder-gray-400"
+                  id="street"
+                  type="text"
+                  formControlName="street"
+                  placeholder="Street"
+                />
+              </div>
+
+              <div
+                class="flex flex-row justify-between items-center gap-15px mb-6"
+              >
+                <label class="block text-gray-900 text-base mb-1" for="tva"
+                  >Addition</label
+                >
+                <input
+                  class="bg-white border border-gray-300 rounded-md w-80 py-3 px-3 text-gray-700 placeholder-gray-400"
+                  id="addition"
+                  type="text"
+                  formControlName="addition"
+                  placeholder="Addition"
+                />
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+
+      <div class="mt-4">
+        <div class="flex justify-between mb-5">
+          <div class="text-2xl font-bold">Documents</div>
+          <button (click)="handleFileInputClick()">
+            <img
+              src="../../../../assets/icons/upload icon.svg"
+              alt="Upload Icon"
+            />
+          </button>
+        </div>
+
+        <app-dnd
+          *ngIf="showDndArea"
+          (onSaveClick)="onDocumentUpload()"
+        ></app-dnd>
+        <app-documents-table
+          *ngIf="!showDndArea"
+          [customerId]="customer.id"
+        ></app-documents-table>
+      </div>
+    </div>
+  </div>
+</div>

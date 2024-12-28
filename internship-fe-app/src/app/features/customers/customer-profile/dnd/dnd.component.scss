@@ -1,0 +1,12 @@
+.fileover {
+  animation: backgroundChange 1s infinite alternate;
+}
+
+@keyframes backgroundChange {
+  0% {
+    background-color: rgba(#b3e9ff, 0.5);
+  }
+  100% {
+    background-color: rgba(#b3e9ff, 0.3);
+  }
+}

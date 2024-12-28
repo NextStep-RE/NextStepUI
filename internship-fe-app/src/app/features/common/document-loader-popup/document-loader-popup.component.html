@@ -1,0 +1,13 @@
+<div class="w-popup-container h-popup-container border-2 rounded-lg p-12 gap-10 border-light-gray flex items-center font-[Yaldevi] font-semibold shadow-md">
+    <div class="w-popup-light-blue-container h-popup-light-blue-container bg-rtb-super-light-blue gap-4 flex flex-col items-center justify-center border-2 border-dashed border-rtb-blue rounded-lg">
+        <img class="w-check-icon h-check-icon" [src]="'../assets/icons/check-icon-black.svg'" alt="Check Icon">
+        <div class="w-items-container h-items-container flex flex-col items-center">
+            <div class="text-2xl font-bold">Upload completed!</div>
+            <div class="text-base font-medium">Do you want to add another document?</div>
+        </div>
+        <div class="w-button-container h-14 text-base flex items-center gap-8">
+            <button class="w-button h-button rounded-lg border-2 border-rtb-black gap-2 bg-white" (click) = "onClose()">No</button>
+            <button class="w-button h-button rounded-lg gap-2 bg-rtb-blue text-white">Add Document</button>
+        </div>
+    </div>
+</div>

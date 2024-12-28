@@ -1,0 +1,236 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$hr-management-fe-app-primary: mat.define-palette(mat.$indigo-palette);
+$hr-management-fe-app-accent: mat.define-palette(
+  mat.$pink-palette,
+  A200,
+  A100,
+  A400
+);
+
+// The warn palette is optional (defaults to red).
+$hr-management-fe-app-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$hr-management-fe-app-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $hr-management-fe-app-primary,
+      accent: $hr-management-fe-app-accent,
+      warn: $hr-management-fe-app-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($hr-management-fe-app-theme);
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Regular styling for the toastr library
+@import "ngx-toastr/toastr";
+@import url("https://fonts.googleapis.com/css2?family=Yaldevi:wght@600&display=swap");
+
+.toast-top-center {
+  top: 0;
+  right: 0;
+  padding-top: 10px;
+  width: 100%;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: #f8fdff;
+  font-family: "Yaldevi", sans-serif;
+}
+
+.mdc-checkbox
+  .mdc-checkbox__native-control:enabled:checked
+  ~ .mdc-checkbox__background,
+.mdc-checkbox
+  .mdc-checkbox__native-control:enabled:indeterminate
+  ~ .mdc-checkbox__background,
+.mdc-checkbox
+  .mdc-checkbox__native-control[data-indeterminate="true"]:enabled
+  ~ .mdc-checkbox__background {
+  border-color: #00aeef !important;
+  background-color: #00aeef !important;
+}
+
+.mat-mdc-checkbox-ripple,
+.mdc-checkbox__ripple {
+  display: none;
+}
+
+.mdc-checkbox__checkmark {
+  color: white !important;
+}
+
+.mat-calendar-header {
+  font-family: "Yaldevi";
+}
+.mat-calendar-table {
+  background-color: #d6f4ff;
+  border-radius: 10px;
+}
+
+.mat-calendar-table-header span {
+  color: #00aeef;
+}
+.mat-calendar-body span {
+  color: #96a0b6;
+}
+.mat-calendar-body-label {
+  visibility: hidden;
+  padding-top: 0vw !important;
+  padding-bottom: 0vw !important;
+}
+.mat-calendar-body-cell.mat-calendar-body-active {
+  background-color: #232931;
+  border-radius: 10px;
+}
+.mat-calendar-body-cell {
+  background-color: #232931;
+  border-radius: 10px;
+}
+.mat-calendar-body-cell:hover {
+  background-color: #232931;
+  border-radius: 10px;
+}
+.mat-calendar-body-cell:active {
+  background-color: #232931;
+  border-radius: 10px;
+}
+.mat-calendar-body-selected {
+  background-color: transparent !important;
+}
+
+.mat-calendar-table-header-divider::after {
+  background-color: transparent !important;
+}
+
+mat-card.mat-mdc-card.mdc-card.w-96 {
+  box-shadow: 0px 2px 1px -1px rgb(255, 255, 255),
+    0px 1px 1px 0px rgb(255, 255, 255), 0px 1px 3px 0px rgb(255, 255, 255) !important;
+}
+
+.mdc-linear-progress__bar-inner {
+  border-color: #00aeef !important;
+}
+
+.mat-mdc-progress-bar {
+  --mdc-linear-progress-track-color: #d3d4d6;
+}
+
+// mat-select-country
+.mat-mdc-text-field-wrapper {
+  width: 550px !important;
+  height: 56px !important;
+}
+
+.invalid-border {
+  width: 550px !important;
+  height: 56px !important;
+  border-radius: 6px !important;
+  border: 2px solid rgb(220 38 38) !important;
+}
+
+::after {
+  color: #232931 !important;
+}
+
+.mdc-notched-outline {
+  border: 2px solid #e9eaea !important;
+  border-radius: 6px !important;
+}
+
+.mdc-notched-outline--no-label {
+  left: 0 !important;
+}
+
+.mdc-notched-outline__leading {
+  display: none !important;
+}
+
+.mdc-notched-outline__trailing {
+  border: 0 solid #e9eaea !important;
+  border-right: none;
+}
+
+.mat-mdc-input-element {
+  color: #232931 !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+}
+
+.mat-mdc-input-element::placeholder {
+  color: #d3d4d6 !important;
+  opacity: 1;
+}
+
+// mat-select-country - arrow
+.mat-mdc-form-field-flex::after {
+  content: "\2039" !important;
+  font-size: 25px !important;
+  margin-right: 10px !important;
+  color: #232931 !important;
+  transform: rotate(270deg) translate(-35%);
+}
+
+// remove the arrow when country selected
+.item-selected .mat-mdc-form-field-flex::after {
+  content: "" !important;
+}
+
+// mat-tab
+.mat-mdc-tab .mdc-tab__text-label {
+  color: #96a0b6 !important;
+}
+
+.mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+  color: #232931 !important;
+}
+
+.mat-mdc-tab .mdc-tab-indicator__content--underline {
+  border: 1px solid #00aeef !important;
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+.custom-select-country{
+.mat-mdc-text-field-wrapper {
+  width: 320px !important;
+  height: 45px !important;
+}
+
+.mat-mdc-form-field-subscript-wrapper.mat-mdc-form-field-bottom-align{
+  display: none !important;
+}
+}

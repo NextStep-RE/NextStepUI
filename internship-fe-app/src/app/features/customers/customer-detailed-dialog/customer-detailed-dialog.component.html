@@ -1,0 +1,154 @@
+<div mat-dialog-content class="p-10">
+  <h1 mat-dialog-title>Customer Details</h1>
+  <fieldset
+    [disabled]="true"
+    class="flex flex-wrap justify-center lg:space-x-10"
+  >
+    <div class="w-80 p-2">
+      <h2>General Data</h2>
+      <div class="flex flex-col mb-6">
+        <label class="block text-gray-900 text-base mb-1" for="name"
+          >Customer Name</label
+        >
+        <input
+          class="bg-white border border-gray-300 rounded-md w-full py-3 px-3 text-gray-700 placeholder-gray-400"
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="Name"
+          [value]="data.name"
+        />
+      </div>
+
+      <div class="flex flex-col mb-6">
+        <label class="block text-gray-900 text-base mb-1" for="email"
+          >E-mail</label
+        >
+        <input
+          class="bg-white border border-gray-300 rounded-md w-full py-3 px-3 text-gray-700 placeholder-gray-400"
+          id="email"
+          type="text"
+          formControlName="email"
+          placeholder="Email"
+          [value]="data.email"
+        />
+      </div>
+      <div class="flex flex-col mb-6">
+        <label class="block text-gray-900 text-base mb-1" for="phoneNumber"
+          >Phone Number</label
+        >
+        <input
+          class="bg-white border border-gray-300 rounded-md w-full py-3 px-3 text-gray-700 placeholder-gray-400"
+          id="phoneNumber"
+          type="text"
+          formControlName="phoneNumber"
+          placeholder="Phone number"
+          [value]="data.phoneNumber"
+        />
+      </div>
+
+      <div class="flex flex-col mb-6">
+        <label class="block text-gray-900 text-base mb-1" for="billingType"
+          >Billing Type</label
+        >
+        <select
+          class="bg-white border border-gray-300 rounded-md w-full py-3 px-3 text-gray-700"
+          id="billingType"
+          formControlName="billingType"
+          [selectedIndex]="data.billingType == 'Monthly' ? 1 : 2"
+        >
+          <option value="" disabled selected>billing type</option>
+          <option value="monthly">Monthly</option>
+          <option value="yearly">Yearly</option>
+        </select>
+      </div>
+
+      <div class="flex flex-col mb-6">
+        <label class="block text-gray-900 text-base mb-1" for="tva"
+          >VAT/TVA</label
+        >
+        <input
+          class="bg-white border border-gray-300 rounded-md w-full py-3 px-3 text-gray-700 placeholder-gray-400"
+          id="tva"
+          type="text"
+          formControlName="tva"
+          placeholder="VAT/TVA"
+          [value]="data.tva"
+        />
+      </div>
+    </div>
+    <div class="w-80 p-2">
+      <h2>Address</h2>
+      <!-- TODO: Change country input type text to dropdown, as shown in the mockup.  -->
+      <div class="flex flex-col mb-6">
+        <label class="block text-gray-900 text-base mb-1" for="country"
+          >Country</label
+        >
+        <input
+          class="bg-white border border-gray-300 rounded-md w-full py-3 px-3 text-gray-700 placeholder-gray-400"
+          id="country"
+          type="text"
+          formControlName="country"
+          placeholder="Country"
+          [value]="data.country"
+        />
+      </div>
+
+      <div class="flex flex-col mb-6">
+        <label class="block text-gray-900 text-base mb-1" for="city"
+          >City</label
+        >
+        <input
+          class="bg-white border border-gray-300 rounded-md w-full py-3 px-3 text-gray-700 placeholder-gray-400"
+          id="city"
+          type="text"
+          formControlName="city"
+          placeholder="City"
+          [value]="data.city"
+        />
+      </div>
+
+      <div class="flex flex-col mb-6">
+        <label class="block text-gray-900 text-base mb-1" for="street"
+          >Street</label
+        >
+        <input
+          class="bg-white border border-gray-300 rounded-md w-full py-3 px-3 text-gray-700 placeholder-gray-400"
+          id="street"
+          type="text"
+          formControlName="street"
+          placeholder="Street"
+          [value]="data.street"
+        />
+      </div>
+
+      <div class="flex flex-col mb-6">
+        <label class="block text-gray-900 text-base mb-1" for="zipcode"
+          >Zipcode</label
+        >
+        <input
+          class="bg-white border border-gray-300 rounded-md w-full py-3 px-3 text-gray-700 placeholder-gray-400"
+          id="zipcode"
+          type="number"
+          formControlName="zipcode"
+          placeholder="Zipcode"
+          [value]="data.postalCode"
+        />
+      </div>
+
+      <div class="flex flex-col mb-6">
+        <label class="block text-gray-900 text-base mb-1" for="addition"
+          >Addition</label
+        >
+        <input
+          class="bg-white border border-gray-300 rounded-md w-full py-3 px-3 text-gray-700 placeholder-gray-400"
+          id="addition"
+          type="text"
+          formControlName="addition"
+          placeholder="Addition"
+          [value]="data.addition"
+        />
+      </div>
+    </div>
+  </fieldset>
+</div>
