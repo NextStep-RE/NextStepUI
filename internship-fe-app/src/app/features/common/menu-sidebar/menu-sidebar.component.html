@@ -4,11 +4,10 @@
   (mouseleave)="onMouseLeave()"
 >
   <a [routerLink]="'/dashboard'">
-    <img src="/assets/images/logo-symbol.svg" class="w-8 h-12 pb-4" />
+    <img src="/assets/images/logo-cut-removebg.png" class="w-16 h-18 pb-4" />
   </a>
-
-  @if (managerView) {
   <ul class="list-none" *ngIf="managerView">
+    <!-- My Profile Section -->
     <div class="nav-section">
       <p
         class="nav-section-title"
@@ -16,142 +15,19 @@
           'flex flex-col items-center justify-center': !isHovered
         }"
       >
-        Customers
+        My Profile
       </p>
       <li>
         <a
-          [routerLink]="'/customers'"
+          [routerLink]="'/profile'"
           routerLinkActive="active"
           [ngClass]="{
             'flex flex-col items-center justify-center': !isHovered,
-            'active-link': isActive('/customers')
+            'active-link': isActive('/profile')
           }"
         >
-          <img src="/assets/icons/customers-icon.svg" alt="all icon" />
-          <span *ngIf="isHovered">All Customer</span>
-        </a>
-      </li>
-      <li>
-        <a
-          [routerLink]="'/addCustomers'"
-          routerLinkActive="active"
-          [ngClass]="{
-            'flex flex-col items-center justify-center': !isHovered,
-            'active-link': isActive('/addCustomers')
-          }"
-        >
-          <img src="/assets/icons/add-customer-icon.svg" alt="add icon" />
-          <span *ngIf="isHovered"> Add Customer </span>
-        </a>
-      </li>
-      <li>
-        <a
-          [routerLink]="'/ga'"
-          routerLinkActive="active"
-          [ngClass]="{
-            'flex flex-col items-center justify-center': !isHovered,
-            'active-link': isActive('/ga')
-          }"
-        >
-          <img src="/assets/icons/ga-icon.svg" alt="GA icon" />
-          <span *ngIf="isHovered">General Agreement</span>
-        </a>
-      </li>
-      <li>
-        <a
-          [routerLink]="'/statement-of-work'"
-          routerLinkActive="active"
-          [ngClass]="{
-            'flex flex-col items-center justify-center': !isHovered,
-            'active-link': isActive('/statement-of-work')
-          }"
-        >
-          <img src="/assets/icons/sow-icon.svg" alt="SoW icon" />
-          <span *ngIf="isHovered">Statement of Work</span>
-        </a>
-      </li>
-    </div>
-    <div class="nav-section">
-      <p
-        class="nav-section-title"
-        [ngClass]="{
-          'flex flex-col items-center justify-center pl-[0.65rem]': !isHovered
-        }"
-      >
-        Create Invoice
-      </p>
-      <li>
-        <a
-          [routerLink]="'/create-invoice'"
-          routerLinkActive="active"
-          [ngClass]="{
-            'flex flex-col items-center justify-center': !isHovered,
-            'active-link': isActive('/create-invoice')
-          }"
-        >
-          <img src="/assets/icons/bill-icon.svg" alt="bill icon" />
-          <span *ngIf="isHovered">Create Invoice</span>
-        </a>
-      </li>
-      <li>
-        <a
-          [routerLink]="'/invoice-history'"
-          [ngClass]="{
-            'flex flex-col items-center justify-center': !isHovered,
-            'active-link': isActive('/invoice-history')
-          }"
-        >
-          <img src="/assets/icons/tempo-icon.svg" alt="tempo icon" />
-          <span *ngIf="isHovered">Invoice History</span>
-        </a>
-      </li>
-      <li>
-        <a
-          [routerLink]="'/received-payments'"
-          routerLinkActive="active"
-          [ngClass]="{
-            'flex flex-col items-center justify-center': !isHovered,
-            'active-link': isActive('/received-payments')
-          }"
-        >
-          <img src="/assets/icons/pending.svg" alt="pending icon" />
-          <span *ngIf="isHovered">Received Payments</span>
-        </a>
-      </li>
-    </div>
-    <div class="nav-section">
-      <p
-        class="nav-section-title"
-        [ngClass]="{
-          'flex flex-col items-center justify-center': !isHovered
-        }"
-      >
-        HR
-      </p>
-      <li>
-        <a
-          [routerLink]="'/people'"
-          routerLinkActive="active"
-          [ngClass]="{
-            'flex flex-col items-center justify-center': !isHovered,
-            'active-link': isActive('/people')
-          }"
-        >
-          <img src="/assets/icons/people-icon.svg" alt="people icon" />
-          <span *ngIf="isHovered">People</span>
-        </a>
-      </li>
-      <li>
-        <a
-          [routerLink]="'/leaves'"
-          routerLinkActive="active"
-          [ngClass]="{
-            'flex flex-col items-center justify-center': !isHovered,
-            'active-link': isActive('/leaves')
-          }"
-        >
-          <img src="/assets/icons/leaves-icon.svg" alt="leave icon" />
-          <span *ngIf="isHovered">Leaves</span>
+          <img src="/assets/icons/customers-icon.svg" alt="profile icon" />
+          <span *ngIf="isHovered">View Profile</span>
         </a>
       </li>
       <li>
@@ -164,125 +40,51 @@
           }"
         >
           <img src="/assets/icons/cv-icon.svg" alt="CV icon" />
-          <span *ngIf="isHovered">CV</span>
+          <span *ngIf="isHovered">Update CV</span>
+        </a>
+      </li>
+    </div>
+
+    <!-- Internship Options Section -->
+    <div class="nav-section">
+      <p
+        class="nav-section-title"
+        [ngClass]="{
+          'flex flex-col items-center justify-center pl-[0.65rem]': !isHovered
+        }"
+      >
+        Internships
+      </p>
+      <li>
+        <a
+          [routerLink]="'/find-internships'"
+          routerLinkActive="active"
+          [ngClass]="{
+            'flex flex-col items-center justify-center': !isHovered,
+            'active-link': isActive('/find-internships')
+          }"
+        >
+          <img src="/assets/icons/find-icon.svg" alt="find icon" />
+          <span *ngIf="isHovered">Find Internships</span>
         </a>
       </li>
       <li>
         <a
-          [routerLink]="'/organigram'"
+          [routerLink]="'/applied-internships'"
           routerLinkActive="active"
           [ngClass]="{
             'flex flex-col items-center justify-center': !isHovered,
-            'active-link': isActive('/organigram')
+            'active-link': isActive('/applied-internships')
           }"
         >
-          <img src="/assets/icons/evaluation-icon.svg" alt="evaluation icon" />
-          <span *ngIf="isHovered">Organigram</span>
-        </a>
-      </li>
-      <li>
-        <a
-          [routerLink]="'/my-evaluation'"
-          routerLinkActive="active"
-          [ngClass]="{
-            'flex flex-col items-center justify-center': !isHovered,
-            'active-link': isActive('/my-evaluation')
-          }"
-        >
-          <img src="/assets/icons/sow.svg" alt="SoW icon" />
-          <span *ngIf="isHovered">My Evaluations</span>
+          <img src="/assets/icons/sow-icon.svg" alt="applied icon" />
+          <span *ngIf="isHovered">Applied Internships</span>
         </a>
       </li>
     </div>
   </ul>
-  } @else {
-  <ul>
-    <div class="nav-section">
-      <p class="nav-section-title">Profile</p>
-      <li>
-        <a
-          [routerLink]="'/profile'"
-          routerLinkActive="active"
-          [ngClass]="{
-            'flex flex-col items-center justify-center': !isHovered,
-            'active-link': isActive('/profile')
-          }"
-        >
-          <img src="/assets/icons/people-icon.svg" alt="profile icon" />
-          <span *ngIf="isHovered">Profile</span>
-        </a>
-      </li>
-      <li>
-        <a
-          [routerLink]="'/leave'"
-          routerLinkActive="active"
-          [ngClass]="{
-            'flex flex-col items-center justify-center': !isHovered,
-            'active-link': isActive('/leave')
-          }"
-        >
-          <img src="/assets/icons/leaves-icon.svg" alt="leave icon" />
-          <span *ngIf="isHovered">Leaves</span>
-        </a>
-      </li>
-      <li>
-        <a
-          [routerLink]="'/cv2'"
-          routerLinkActive="active"
-          [ngClass]="{
-            'flex flex-col items-center justify-center': !isHovered,
-            'active-link': isActive('/cv2')
-          }"
-        >
-          <img src="/assets/icons/cv-icon.svg" alt="CV icon" />
-          <span *ngIf="isHovered">CV</span>
-        </a>
-      </li>
-    </div>
-    <div class="nav-section">
-      <p class="nav-section-title">Internal</p>
-      <li>
-        <a
-          [routerLink]="'/internal'"
-          routerLinkActive="active"
-          [ngClass]="{
-            'flex flex-col items-center justify-center': !isHovered,
-            'active-link': isActive('/internal')
-          }"
-        >
-          <img src="/assets/icons/people-icon.svg" alt="people icon" />
-          <span *ngIf="isHovered">People</span>
-        </a>
-      </li>
-      <li>
-        <a
-          [routerLink]="'/people2'"
-          routerLinkActive="active"
-          [ngClass]="{
-            'flex flex-col items-center justify-center': !isHovered,
-            'active-link': isActive('/people2')
-          }"
-        >
-          <img src="/assets/icons/evaluation-icon.svg" alt="evaluation icon" />
-          <span *ngIf="isHovered">Organigram</span>
-        </a>
-      </li>
-      <li>
-        <a
-          [routerLink]="'/my-evaluation'"
-          routerLinkActive="active"
-          [ngClass]="{
-            'flex flex-col items-center justify-center': !isHovered,
-            'active-link': isActive('/my-evaluation')
-          }"
-        >
-          <img src="/assets/icons/sow.svg" alt="SoW icon" />
-          <span *ngIf="isHovered">My Evaluations</span>
-        </a>
-      </li>
-    </div>
-  </ul>
-  }
+
+  <!-- Settings Button -->
   <div
     class="mt-auto w-full flex items-center justify-center"
     [ngClass]="{
