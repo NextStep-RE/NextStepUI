@@ -41,7 +41,7 @@ export class UserInfoCardsComponent implements OnInit {
     ];
 
     this.userCards = [
-      { title: 'My Leaves', imagePath: 'assets/icons/leaves.svg' },
+      { title: 'My Applications', imagePath: 'assets/icons/applications.svg' },
       { title: 'My CV', imagePath: 'assets/icons/cv.svg' },
       { title: 'My Profile', imagePath: 'assets/icons/profile.svg' },
     ];

@@ -1,34 +1,33 @@
 <div>
-  <div class="text-center" *ngIf="isLoading$ | async; else userInfoContent">
+  <div class="text-center" *ngIf="isLoading; else userInfoContent">
     <app-loading-spinner></app-loading-spinner>
   </div>
   <ng-template #userInfoContent>
-    <div class="user-information-card" *ngIf="userInfo$ | async as userInfo">
-      <div class="header">
-        <div class="name-and-role">
-          <h2>{{ userInfo.firstName }} {{ userInfo.lastName }}</h2>
-          <h3>{{ userInfo.job.title }}</h3>
+    <div class="w-[30rem] h-[28.5rem] rounded-lg border border-[#E9EAEA] shadow-md p-6 gap-[3rem] bg-white">
+      <div class="w-[27.25rem] h-[4.4375rem] flex justify-between items-center">
+        <div class="space-y-1">
+          <h2 class="w-[21rem] h-[2.437rem] font-[Yaldevi] font-semibold text-[1.875rem] m-0">John Doe</h2>
+          <h3 class="w-[21rem] h-[1.75rem] font-[Yaldevi] text-[1.125rem] leading-[1.48rem] text-[#7B7F83] m-0">student at BBU</h3>
         </div>
-        <div class="days-left">
-          <div class="days">
-            <h2>{{ userInfo.remainingLeaveDays }}</h2>
-            <h3>/{{ userInfo.annualLeaveDays }}</h3>
+        <div class="w-[5.875rem] h-[3.437rem] rounded-lg">
+          <div class="w-[6.375rem] h-[2.437rem] flex items-center ml-[1.7rem]">
+            <h2 class="font-[Yaldevi] font-bold text-[1.875rem] text-[#00AEEF]">10</h2>
           </div>
-          <p>leave days left</p>
+          <p class="font-[Yaldevi] font-medium text-[0.75rem] m-0">Applications pending</p>
         </div>
       </div>
-      <div class="information-section">
-        <div class="information">
-          <p>E-mail</p>
-          <h3>{{ userInfo.email }}</h3>
+      <div class="w-[13.625rem] h-[11.438rem] flex flex-col gap-[1.5rem] mt-[4rem]">
+        <div class="w-[17.625rem] h-[2.813rem] flex flex-col">
+          <p class="font-[Yaldevi] text-[1rem] font-semibold text-[#7B7F83] m-0">E-mail</p>
+          <h3 class="font-[Yaldevi] font-semibold text-[1.125rem] text-[#232931] m-0">jhon&#64;example.com</h3>
         </div>
-        <div class="information">
-          <p>Job title</p>
-          <h3>{{ userInfo.job.title }}</h3>
+        <div class="w-[17.625rem] h-[2.813rem] flex flex-col">
+          <p class="font-[Yaldevi] text-[1rem] font-semibold text-[#7B7F83] m-0">Faculty</p>
+          <h3 class="font-[Yaldevi] font-semibold text-[1.125rem] text-[#232931] m-0">Mathematics and Computer Science</h3>
         </div>
-        <div class="information">
-          <p>Department</p>
-          <h3>{{ userInfo.department.name }}</h3>
+        <div class="w-[17.625rem] h-[2.813rem] flex flex-col">
+          <p class="font-[Yaldevi] text-[1rem] font-semibold text-[#7B7F83] m-0">University</p>
+          <h3 class="font-[Yaldevi] font-semibold text-[1.125rem] text-[#232931] m-0">Babes Bolyai University</h3>
         </div>
       </div>
     </div>
