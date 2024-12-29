@@ -3,11 +3,10 @@
   (mouseenter)="onMouseEnter()"
   (mouseleave)="onMouseLeave()"
 >
-  <a [routerLink]="'/dashboard'">
+  <a [routerLink]="'/internships'">
     <img src="/assets/images/logo-cut-removebg.png" class="w-16 h-18 pb-4" />
   </a>
-  <ul class="list-none" *ngIf="managerView">
-    <!-- My Profile Section -->
+  <ul class="list-none">
     <div class="nav-section">
       <p
         class="nav-section-title"
@@ -19,11 +18,11 @@
       </p>
       <li>
         <a
-          [routerLink]="'/profile'"
+          [routerLink]="'/my-profile'"
           routerLinkActive="active"
           [ngClass]="{
             'flex flex-col items-center justify-center': !isHovered,
-            'active-link': isActive('/profile')
+            'active-link': isActive('/my-profile')
           }"
         >
           <img src="/assets/icons/customers-icon.svg" alt="profile icon" />
@@ -45,23 +44,23 @@
       </li>
     </div>
 
-    <!-- Internship Options Section -->
     <div class="nav-section">
       <p
         class="nav-section-title"
         [ngClass]="{
-          'flex flex-col items-center justify-center pl-[0.65rem]': !isHovered
+          'flex flex-col items-center justify-center pl-[0.65rem]': !isHovered,
+          'active-link': isActive('/my-profile')
         }"
       >
         Internships
       </p>
       <li>
         <a
-          [routerLink]="'/find-internships'"
+          [routerLink]="'/internships'"
           routerLinkActive="active"
           [ngClass]="{
             'flex flex-col items-center justify-center': !isHovered,
-            'active-link': isActive('/find-internships')
+            'active-link': isActive('/internships')
           }"
         >
           <img src="/assets/icons/find-icon.svg" alt="find icon" />

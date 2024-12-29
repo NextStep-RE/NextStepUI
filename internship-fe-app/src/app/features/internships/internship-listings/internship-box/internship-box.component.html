@@ -1,0 +1,48 @@
+<div class="border border-gray-300 bg-white rounded-lg p-6 shadow-sm mb-4 flex items-start">
+    <div class="flex flex-col items-center mr-10">
+        <img [src]="'assets/images/' + internship.company.logoUrl" alt="{{ internship.company.companyName }} Logo"
+            class="w-32 h-32 rounded-sm mb-2 object-cover" />
+    </div>
+
+    <div class="flex flex-col w-full">
+        <div class="flex justify-between items-start">
+            <h2 class="text-lg font-semibold text-rtb-dark-blue hover:text-rtb-gray cursor-pointer"
+                (click)="viewDetails(internship.internshipId)">
+                {{ internship.title }}
+            </h2>
+            <div class="flex flex-row mx-2">
+                <img [src]="isHeartClicked ? 'assets/icons/heart-red.svg' : 'assets/icons/heart.svg'"
+                    class="w-5 h-5 cursor-pointer transition-colors duration-200" (mouseenter)="onMouseEnter()"
+                    (mouseleave)="onMouseLeave()" (click)="toggleHeartColor()">
+            </div>
+
+        </div>
+        <p class="text-sm text-gray-500 mb-6">
+            {{ internship.location === 'Remote' ? 'Remote' : internship.location + ' | Remote' }}
+        </p>
+
+        <div class="flex flex-wrap gap-2 mb-6">
+            <span *ngFor="let req of internship.requirements"
+                class="bg-gray-100 text-gray-700 text-sm px-2 py-1 rounded-lg">
+                {{ req }}
+            </span>
+        </div>
+
+        <div class="grid grid-cols-3 text-sm text-gray-700">
+            <p><strong>Starting date:</strong> {{ internship.startDate.toDateString() }}</p>
+            <p><strong>Experience level:</strong> {{ internship.experience }}</p>
+            <p>
+                <strong>Deadline application:</strong> <span
+                    [ngClass]="{'text-red-500': isDeadlineApproaching(internship.applicationDeadline), 'text-gray-500': !isDeadlineApproaching(internship.applicationDeadline)}">
+                    {{ internship.applicationDeadline.toDateString() }}</span>
+            </p>
+        </div>
+
+        <div class="flex justify-between items-center mt-4">
+            <p class="text-sm text-gray-500">
+                Company: <span class="font-medium hover:text-slate-700"> <a [href]="internship.company.website">{{
+                        internship.company.companyName }} </a></span>
+            </p>
+        </div>
+    </div>
+</div>

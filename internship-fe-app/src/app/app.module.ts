@@ -29,6 +29,8 @@ import { UserInfoEffects } from './features/customers/store/effects/userInfo.eff
 import { CustomersModule } from './features/customers/customers.module';
 import { DocumentsDetailedDialogComponent } from './features/common/documents/documents-detailed-dialog/documents-detailed-dialog.component';
 import { SwitchUsersPopupComponent } from './features/common/switch-users-popup/switch-users-popup.component';
+import { InternshipListingsComponent } from './features/internships/internship-listings/internship-listings.component';
+import { InternshipBoxComponent } from './features/internships/internship-listings/internship-box/internship-box.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { SwitchUsersPopupComponent } from './features/common/switch-users-popup/
     DropdownProfileMenuComponent,
     DocumentsDetailedDialogComponent,
     SwitchUsersPopupComponent,
+    InternshipListingsComponent,
+    InternshipBoxComponent
   ],
   imports: [
     BrowserModule,
