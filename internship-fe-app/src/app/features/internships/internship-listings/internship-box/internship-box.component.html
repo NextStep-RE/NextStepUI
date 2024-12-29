@@ -12,7 +12,7 @@
             </h2>
             <div class="flex flex-row mx-2">
                 <img [src]="isHeartClicked ? 'assets/icons/heart-red.svg' : 'assets/icons/heart.svg'"
-                    class="w-5 h-5 cursor-pointer transition-colors duration-200" (mouseenter)="onMouseEnter()"
+                    class="w-7 h-7 cursor-pointer transition-colors duration-200" (mouseenter)="onMouseEnter()"
                     (mouseleave)="onMouseLeave()" (click)="toggleHeartColor()">
             </div>
 
@@ -27,6 +27,8 @@
                 {{ req }}
             </span>
         </div>
+
+        <hr class="my-3 border-t border-gray-300">
 
         <div class="grid grid-cols-3 text-sm text-gray-700">
             <p><strong>Starting date:</strong> {{ internship.startDate.toDateString() }}</p>
