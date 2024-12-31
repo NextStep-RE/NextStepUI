@@ -1,0 +1,83 @@
+<app-dashboard
+  style="opacity: 0.2"
+  (click)="onOutsideClick()"
+></app-dashboard>
+<div class="header">
+  <div class="login-container">
+    <div class="login-box">
+      <button class="close-button" (click)="closeForm()">X</button>
+      <h1>Login</h1>
+      <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
+        <div class="form-group">
+          <label for="username">Email:</label>
+          <input
+            type="email"
+            id="username"
+            name="username"
+            placeholder="john.doe@example.com"
+            [(ngModel)]="email"
+            #emailField="ngModel"
+            required
+            email
+          />
+          <div
+            *ngIf="
+              emailField.errors && (emailField.dirty || emailField.touched)
+            "
+            class="error-message"
+          >
+            <span *ngIf="emailField.errors['required']">
+              Email is required
+            </span>
+            <span *ngIf="emailField.errors['email']">
+              Please enter a valid email in the format "example&commat;example.com"
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            [(ngModel)]="password"
+            #passwordField="ngModel"
+            required
+            minlength="8"
+          />
+          <div
+            *ngIf="
+              passwordField.errors &&
+              (passwordField.dirty || passwordField.touched)
+            "
+            class="error-message"
+          >
+            <span *ngIf="passwordField.errors['required']">
+              Password is required
+            </span>
+            <span *ngIf="passwordField.errors['minlength']">
+              Password must be at least 8 characters long
+            </span>
+          </div>
+        </div>
+
+        <button
+          class="redirect-button"
+          [disabled]="!loginForm.valid"
+        >
+          <span class="button-text">Login</span>
+          <div class="fill-container"></div>
+        </button>
+      </form>
+
+      <p class="create-account-link">
+        Don't have an account?
+        <a routerLinkActive="active" routerLink="/signup">
+          Create one now
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
