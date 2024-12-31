@@ -1,13 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Internship } from '../../../../core/models/internship.model';
 
 @Component({
   selector: 'app-internship-box',
   templateUrl: './internship-box.component.html',
-  styleUrl: './internship-box.component.scss',
+  styleUrls: ['./internship-box.component.scss'],
 })
 export class InternshipBoxComponent {
   @Input() internship!: Internship;
+  @Output() internshipSelected = new EventEmitter<string>(); // Event to emit internship ID
 
   isHeartClicked = false;
 
@@ -27,7 +28,7 @@ export class InternshipBoxComponent {
   }
 
   viewDetails(internshipId: string): void {
-    console.log(`Viewing details for internship with ID: ${internshipId}`);
+    this.internshipSelected.emit(internshipId); // Emit the internship ID to the parent component
   }
 
   isDeadlineApproaching(deadline: Date): boolean {

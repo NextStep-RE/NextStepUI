@@ -1,4 +1,5 @@
-<div class="border border-gray-300 bg-white rounded-lg p-6 shadow-sm mb-4 flex items-start">
+<div class="border border-gray-300 bg-white rounded-lg p-6 shadow-sm mb-4 flex items-start cursor-pointer"
+    (click)="viewDetails(internship.internshipId)">
     <div class="flex flex-col items-center mr-10">
         <img [src]="'assets/images/' + internship.company.logoUrl" alt="{{ internship.company.companyName }} Logo"
             class="w-32 h-32 rounded-sm mb-2 object-cover" />
@@ -6,17 +7,18 @@
 
     <div class="flex flex-col w-full">
         <div class="flex justify-between items-start">
-            <h2 class="text-lg font-semibold text-rtb-dark-blue hover:text-rtb-gray cursor-pointer"
-                (click)="viewDetails(internship.internshipId)">
-                {{ internship.title }}
+            <h2 class="text-lg font-semibold text-rtb-dark-blue hover:text-rtb-gray cursor-pointer">
+                <a [routerLink]="['/internship', internship.internshipId]">
+                    {{ internship.title }}
+                </a>
             </h2>
             <div class="flex flex-row mx-2">
                 <img [src]="isHeartClicked ? 'assets/icons/heart-red.svg' : 'assets/icons/heart.svg'"
                     class="w-7 h-7 cursor-pointer transition-colors duration-200" (mouseenter)="onMouseEnter()"
                     (mouseleave)="onMouseLeave()" (click)="toggleHeartColor()">
             </div>
-
         </div>
+
         <p class="text-sm text-gray-500 mb-6">
             {{ internship.location === 'Remote' ? 'Remote' : internship.location + ' | Remote' }}
         </p>
