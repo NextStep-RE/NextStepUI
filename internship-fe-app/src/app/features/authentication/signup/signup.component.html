@@ -1,0 +1,101 @@
+<app-dashboard style="opacity: 0.2" (click)="onOutsideClick()"></app-dashboard>
+
+<div class="signup-container">
+  <div class="signup-box">
+    <button class="close-button" (click)="closeForm()">X</button>
+    <h1>Sign Up</h1>
+    <form #signupForm="ngForm" (ngSubmit)="signup()" autocomplete="off">
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              [(ngModel)]="firstName"
+              #firstNameField="ngModel"
+              placeholder="John"
+              required>
+            <div *ngIf="firstNameField.errors && (firstNameField.dirty || firstNameField.touched)" class="error-message">
+              <span *ngIf="firstNameField.errors['required']">First name is required.</span>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              [(ngModel)]="lastName"
+              #lastNameField="ngModel"
+              placeholder="Doe"
+              required>
+            <div *ngIf="lastNameField.errors && (lastNameField.dirty || lastNameField.touched)" class="error-message">
+              <span *ngIf="lastNameField.errors['required']">Last name is required.</span>
+            </div>
+          </div>
+          
+    
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="email"
+          #emailField="ngModel"
+          placeholder="john.doe@example.com"
+          required
+          email>
+        <div *ngIf="emailField.errors && (emailField.dirty || emailField.touched)" class="error-message">
+          <span *ngIf="emailField.errors['required']">Email is required.</span>
+          <span *ngIf="emailField.errors['email']">Please enter a valid email in the format "example&commat;example.com".</span>
+        </div>
+      </div>
+    
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        [(ngModel)]="password"
+        #passwordField="ngModel"
+        placeholder="Create a secure password"
+        required
+        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,}">
+      <div *ngIf="passwordField.errors && (passwordField.dirty || passwordField.touched)" class="error-message">
+        <span *ngIf="passwordField.errors['required']">Password is required.</span>
+        <span *ngIf="passwordField.errors['pattern']">Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a symbol.</span>
+      </div>
+  </div>
+  
+  <div class="form-group">
+      <label for="confirm-password">Confirm Password:</label>
+      <input
+        type="password"
+        id="confirm-password"
+        name="confirm-password"
+        [(ngModel)]="confirmPassword"
+        #confirmPasswordField="ngModel"
+        placeholder="Re-enter your password"
+        required
+        [class.is-invalid]="confirmPasswordField.touched || !passwordsMatch()">
+      <div *ngIf="confirmPasswordField.errors && (confirmPasswordField.dirty || confirmPasswordField.touched)" class="error-message">
+        <span *ngIf="confirmPasswordField.errors['required']">Password confirmation is required.</span>
+        <span *ngIf="!passwordsMatch()">Passwords do not match.</span>
+      </div>
+      <div *ngIf="confirmPasswordField.dirty || confirmPasswordField.touched" class="error-message">
+        <span *ngIf="!passwordsMatch()">Passwords do not match.</span>
+      </div>
+  </div>
+  
+      <button type="submit" class="redirect-button" [disabled]="!signupForm.valid">Sign Up</button>
+    </form>
+    
+    <p class="login-link">
+      Already have an account?
+      <a routerLinkActive="active" routerLink="/login">Log In</a>
+    </p>
+  </div>
+</div>
