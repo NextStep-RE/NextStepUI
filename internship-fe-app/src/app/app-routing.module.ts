@@ -8,7 +8,7 @@ import { CustomerProfileComponent } from './features/customers/customer-profile/
 import { InternshipListingsComponent } from './features/internships/internship-listings/internship-listings.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/my-profile', pathMatch: 'full' },
+  { path: '', redirectTo: '/internships', pathMatch: 'full' },
   { path: 'internships', component: InternshipListingsComponent },
   { path: 'addCustomers', component: AddCustomersComponent },
   { path: 'my-profile', component: DashboardComponent },

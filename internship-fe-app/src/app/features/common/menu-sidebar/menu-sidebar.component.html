@@ -80,6 +80,19 @@
           <span *ngIf="isHovered">Applied Internships</span>
         </a>
       </li>
+      <li>
+        <a
+          [routerLink]="'/applied-internships'"
+          routerLinkActive="active"
+          [ngClass]="{
+            'flex flex-col items-center justify-center': !isHovered,
+            'active-link': isActive('/applied-internships')
+          }"
+        >
+          <img src="/assets/icons/wishlist-icon.svg" alt="applied icon" />
+          <span *ngIf="isHovered">Saved Internships</span>
+        </a>
+      </li>
     </div>
   </ul>
 
