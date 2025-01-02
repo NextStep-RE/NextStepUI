@@ -31,6 +31,8 @@ import { DocumentsDetailedDialogComponent } from './features/common/documents/do
 import { SwitchUsersPopupComponent } from './features/common/switch-users-popup/switch-users-popup.component';
 import { InternshipListingsComponent } from './features/internships/internship-listings/internship-listings.component';
 import { InternshipBoxComponent } from './features/internships/internship-listings/internship-box/internship-box.component';
+import { InternshipDetailsComponent } from './features/internships/internship-details/internship-details.component';
+import { InternshipsComponent } from './features/internships/internships.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { InternshipBoxComponent } from './features/internships/internship-listin
     DocumentsDetailedDialogComponent,
     SwitchUsersPopupComponent,
     InternshipListingsComponent,
-    InternshipBoxComponent
+    InternshipBoxComponent,
+    InternshipsComponent,
+    InternshipDetailsComponent,
   ],
   imports: [
     BrowserModule,

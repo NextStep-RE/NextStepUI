@@ -5,7 +5,10 @@ import { NotFoundPageComponent } from './features/common/not-found-page/not-foun
 import { CustomersComponent } from './features/customers/customers.component';
 import { AddCustomersComponent } from './features/customers/add-customers/add-customers.component';
 import { CustomerProfileComponent } from './features/customers/customer-profile/customer-profile.component';
-import { InternshipListingsComponent } from './features/internships/internship-listings/internship-listings.component';
+import { LoginComponent } from './features/authentication/login/login.component';
+import { SignupComponent } from './features/authentication/signup/signup.component';
+import { InternshipsComponent } from './features/internships/internships.component';
+import { InternshipDetailsComponent } from './features/internships/internship-details/internship-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/internships', pathMatch: 'full' },
@@ -14,6 +17,8 @@ const routes: Routes = [
   { path: 'my-profile', component: DashboardComponent },
   { path: 'customers', component: CustomersComponent },
   { path: 'customers/:id', component: CustomerProfileComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
   { path: 'not-found', component: NotFoundPageComponent },
   { path: '**', redirectTo: '/not-found' },
 ];
