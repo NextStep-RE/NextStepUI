@@ -16,8 +16,8 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { RouterModule } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { CUSTOMER_REDUCER } from './store/reducers/customers.reducer';
-import { CustomersEffects } from './store/effects/customers.effects';
+import { CUSTOMER_REDUCER } from '../../core/store/reducers/customers.reducer';
+import { CustomersEffects } from '../../core/store/effects/customers.effects';
 import { MatSortModule } from '@angular/material/sort';
 import { AddCustomersComponent } from './add-customers/add-customers.component';
 import { CustomerProfileComponent } from './customer-profile/customer-profile.component';
@@ -32,8 +32,8 @@ import { CheckIconComponent } from '../common/progress-bar/check-icon/check-icon
 import { DocumentLoaderComponent } from '../common/document-loader/document-loader.component';
 import { DndDirective } from '../../core/directives/dnd.directive';
 import { DocumentHistoryViewComponent } from '../common/document-history-view/document-history-view.component';
-import { DOCUMENT_REDUCER } from './store/reducers/documents.reducer';
-import { DocumentsEffects } from './store/effects/documents.effects';
+import { DOCUMENT_REDUCER } from '../../core/store/reducers/documents.reducer';
+import { DocumentsEffects } from '../../core/store/effects/documents.effects';
 import { DndComponent } from './customer-profile/dnd/dnd.component';
 import { DocumentsTableComponent } from '../common/documents/documents-table/documents-table.component';
 

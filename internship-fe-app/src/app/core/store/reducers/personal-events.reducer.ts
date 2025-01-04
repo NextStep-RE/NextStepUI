@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { PersonalEvent } from "../../../../core/models/personalEvent.model";
+import { PersonalEvent } from "../../models/personalEvent.model";
 import { SET_LOADING } from "../actions/events.actions";
 import { LOAD_PERSONAL_EVENTS,LOAD_PERSONAL_EVENTS_SUCCESS, LOAD_PERSONAL_EVENTS_FAILURE } from "../actions/personal-event.actions";
 

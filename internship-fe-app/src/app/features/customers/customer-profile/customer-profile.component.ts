@@ -11,8 +11,8 @@ import { Customer } from '../../../core/models/customer.model';
 import {
   LOAD_CUSTOMER,
   UPDATE_CUSTOMER,
-} from '../store/actions/customers.actions';
-import { SELECT_SELECTED_CUSTOMER } from '../store/selectors/customers.selectors';
+} from '../../../core/store/actions/customers.actions';
+import { SELECT_SELECTED_CUSTOMER } from '../../../core/store/selectors/customers.selectors';
 import { ToastrService } from 'ngx-toastr';
 import { Document } from '../../../core/models/document.model';
 import { DocumentsTableComponent } from '../../common/documents/documents-table/documents-table.component';

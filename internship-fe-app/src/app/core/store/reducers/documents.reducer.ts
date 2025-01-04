@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { Document } from '../../../../core/models/document.model';
+import { Document } from '../../models/document.model';
 import {
   LOAD_DOCUMENTS_DATA_SUCCESS,
   SET_DOCUMENTS_LOADING,

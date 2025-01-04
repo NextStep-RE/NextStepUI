@@ -15,14 +15,14 @@ import {
 } from '../actions/customers.actions';
 import { catchError, map, mergeMap, of, Observable, switchMap } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { CustomersService } from '../../../../core/services/customers.service';
+import { CustomersService } from '../../services/customers.service';
 import { Action } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 import {
   LoadCustomers,
   UpdateCustomer,
-} from '../../../../core/models/customer.model';
-import { Customer } from '../../../../core/models/customer.model';
+} from '../../models/customer.model';
+import { Customer } from '../../models/customer.model';
 
 @Injectable()
 export class CustomersEffects {

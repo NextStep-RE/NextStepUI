@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Document } from '../../../../core/models/document.model';
+import { Document } from '../../models/document.model';
 
 export const LOAD_DOCUMENTS_DATA = createAction(
   '[Documets] Load Data',

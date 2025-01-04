@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { PersonalEvent } from '../../../../core/models/personalEvent.model';
+import { PersonalEvent } from '../../models/personalEvent.model';
 
 export const LOAD_PERSONAL_EVENTS = createAction(
   '[PersonalEvents] Load Personal Events',

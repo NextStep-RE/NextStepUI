@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Document } from '../../../../core/models/document.model';
-import { IDocumentState } from '../../../customers/store/reducers/documents.reducer';
+import { IDocumentState } from '../../../../core/store/reducers/documents.reducer';
 import { Store } from '@ngrx/store';
 import { MatDialog } from '@angular/material/dialog';
 import {
   SELECT_DOCUMENT,
   SELECT_DOCUMENTS_ERROR,
-} from '../../../customers/store/selectors/documents.selector';
+} from '../../../../core/store/selectors/documents.selector';
 import { MatTableDataSource } from '@angular/material/table';
 import { DocumentsDetailedDialogComponent } from '../documents-detailed-dialog/documents-detailed-dialog.component';
 import { Router, NavigationEnd } from '@angular/router';
@@ -15,7 +15,7 @@ import { filter } from 'rxjs/operators';
 import {
   DELETE_DOCUMENT,
   LOAD_DOCUMENTS_DATA,
-} from '../../../customers/store/actions/documents.actions';
+} from '../../../../core/store/actions/documents.actions';
 
 @Component({
   selector: 'app-documents-table',

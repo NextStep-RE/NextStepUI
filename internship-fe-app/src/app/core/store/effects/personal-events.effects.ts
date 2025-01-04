@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EventsService } from '../../../../core/services/events.service';
+import { EventsService } from '../../services/events.service';
 import { Action, Store } from '@ngrx/store';
 import {
   LOAD_PERSONAL_EVENTS,
@@ -9,7 +9,7 @@ import {
   SET_LOADING,
 } from '../actions/personal-event.actions';
 import { catchError, map, mergeMap, Observable, of } from 'rxjs';
-import { PersonalEvent } from '../../../../core/models/personalEvent.model';
+import { PersonalEvent } from '../../models/personalEvent.model';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()

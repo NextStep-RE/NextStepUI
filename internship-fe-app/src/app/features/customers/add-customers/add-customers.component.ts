@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
-import { ADD_CUSTOMER } from '../store/actions/customers.actions';
+import { ADD_CUSTOMER } from '../../../core/store/actions/customers.actions';
 import { NewEntityConfirmationDialogComponent } from '../../common/dialogs/new-entity-dialog/new-entity-dialog-component';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EmployeeService } from '../../../../core/services/employee.service';
+import { EmployeeService } from '../../services/employee.service';
 import {
   LOAD_USER_INFO,
   LOAD_USER_INFO_FAIL,
@@ -9,7 +9,7 @@ import {
 } from '../actions/userInfo.actions';
 import { catchError, map, mergeMap, Observable, of, switchMap } from 'rxjs';
 import { Action, Store } from '@ngrx/store';
-import { UserInfo } from '../../../../core/models/userInfo.model';
+import { UserInfo } from '../../models/userInfo.model';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()

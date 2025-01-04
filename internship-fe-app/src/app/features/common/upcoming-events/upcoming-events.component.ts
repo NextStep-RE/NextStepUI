@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Event } from '../../../core/models/event.model';
 import { combineLatest, map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { SELECT_EVENTS } from '../../customers/store/selectors/events.selectors';
-import { LOAD_EVENTS } from '../../customers/store/actions/events.actions';
-import { SELECT_PERSONAL_EVENTS } from '../../customers/store/selectors/personal-events.selectors';
-import { LOAD_PERSONAL_EVENTS } from '../../customers/store/actions/personal-event.actions';
+import { SELECT_EVENTS } from '../../../core/store/selectors/events.selectors';
+import { LOAD_EVENTS } from '../../../core/store/actions/events.actions';
+import { SELECT_PERSONAL_EVENTS } from '../../../core/store/selectors/personal-events.selectors';
+import { LOAD_PERSONAL_EVENTS } from '../../../core/store/actions/personal-event.actions';
 import { PersonalEvent } from '../../../core/models/personalEvent.model';
 import { EmployeeService } from '../../../core/services/employee.service';
 

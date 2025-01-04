@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { UserProfile } from '../../../../core/models/userProfile.model';
+import { UserProfile } from '../../models/userProfile.model';
 import {
   LOAD_USER_PROFILES,
   LOAD_USER_PROFILES_FAILURE,

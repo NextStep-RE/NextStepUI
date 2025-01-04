@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { TimesheetCard } from '../../../core/models/timesheetCard.model';
-import { SELECT_USER_PROFILE_ROLE } from '../../customers/store/selectors/user-profiles.selectors';
+import { SELECT_USER_PROFILE_ROLE } from '../../../core/store/selectors/user-profiles.selectors';
 
 @Component({
   selector: 'app-user-info-cards',

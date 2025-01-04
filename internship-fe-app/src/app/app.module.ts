@@ -21,11 +21,11 @@ import { MenuSidebarComponent } from './features/common/menu-sidebar/menu-sideba
 import { DashboardModule } from './features/dashboard/dashboard.module';
 import { AppRoutingModule } from './app-routing.module';
 import { routes } from './app.routes';
-import { PROFILE_REDUCER } from './features/customers/store/reducers/user-profiles.reducers';
-import { UserProfilesEffects } from './features/customers/store/effects/user-profiles.effects';
+import { PROFILE_REDUCER } from './core/store/reducers/user-profiles.reducers';
+import { UserProfilesEffects } from './core/store/effects/user-profiles.effects';
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
-import { USER_INFO_REDUCER } from './features/customers/store/reducers/userInfo.reducer';
-import { UserInfoEffects } from './features/customers/store/effects/userInfo.effects';
+import { USER_INFO_REDUCER } from './core/store/reducers/userInfo.reducer';
+import { UserInfoEffects } from './core/store/effects/userInfo.effects';
 import { CustomersModule } from './features/customers/customers.module';
 import { DocumentsDetailedDialogComponent } from './features/common/documents/documents-detailed-dialog/documents-detailed-dialog.component';
 import { SwitchUsersPopupComponent } from './features/common/switch-users-popup/switch-users-popup.component';
