@@ -29,10 +29,9 @@ import { UserInfoEffects } from './features/customers/store/effects/userInfo.eff
 import { CustomersModule } from './features/customers/customers.module';
 import { DocumentsDetailedDialogComponent } from './features/common/documents/documents-detailed-dialog/documents-detailed-dialog.component';
 import { SwitchUsersPopupComponent } from './features/common/switch-users-popup/switch-users-popup.component';
-import { InternshipListingsComponent } from './features/internships/internship-listings/internship-listings.component';
-import { InternshipBoxComponent } from './features/internships/internship-listings/internship-box/internship-box.component';
-import { InternshipDetailsComponent } from './features/internships/internship-details/internship-details.component';
-import { InternshipsComponent } from './features/internships/internships.component';
+import { InternshipsModule } from './features/internships/internships.module';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -45,10 +44,6 @@ import { InternshipsComponent } from './features/internships/internships.compone
     DropdownProfileMenuComponent,
     DocumentsDetailedDialogComponent,
     SwitchUsersPopupComponent,
-    InternshipListingsComponent,
-    InternshipBoxComponent,
-    InternshipsComponent,
-    InternshipDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,8 +61,11 @@ import { InternshipsComponent } from './features/internships/internships.compone
     CustomersModule,
     AppRoutingModule,
     MatStepperModule,
+    MatIconModule,
+    FormsModule,
     MatSelectCountryModule.forRoot('en'),
     RouterModule.forRoot(routes),
+    InternshipsModule
   ],
   bootstrap: [AppComponent],
   providers: [
