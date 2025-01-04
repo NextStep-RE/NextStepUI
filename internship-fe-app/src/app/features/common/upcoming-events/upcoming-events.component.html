@@ -13,7 +13,7 @@
     @for (event of combinedEvents$ | async; track event.id){
     <li>
       <div class="font-semibold ml-2">
-        <div class="m-1 text-base" [ngClass]="{'text-rtb-blue': isPersonalEvent(event)}">{{ event.title }}</div>
+        <div class="m-1 text-base">{{ event.title }}</div>
         <div class="flex items-center ml-1">
           <img
             src="assets/icons/clock-icon-date.svg"

@@ -1,7 +1,5 @@
 import { Component, Input, input } from '@angular/core';
-import { InternshipBoxComponent } from './internship-box/internship-box.component';
 import { Internship } from '../../../core/models/internship.model';
-import { MOCK_INTERNSHIPS } from '../../../core/models/mock-data/internship.mock';
 
 @Component({
   selector: 'app-internship-listings',

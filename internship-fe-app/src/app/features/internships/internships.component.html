@@ -1,6 +1,5 @@
-<div class="flex justify-between items-center bg-white p-3 mt-3 shadow">
-
-    <mat-form-field class="example-form-field">
+<div class="flex justify-between items-center bg-white p-4 mt-3 gap-20 shadow">
+    <mat-form-field class="w-full ml-6">
         <mat-label>Search for internships</mat-label>
         <input matInput type="text" [(ngModel)]="searchQuery" (keydown.enter)="onSearchChange()">
         <button matSuffix mat-icon-button aria-label="Search" *ngIf="searchQuery" (click)="onSearchChange()">

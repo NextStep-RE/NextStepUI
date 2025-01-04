@@ -1,4 +1,4 @@
-<div class="p-6 bg-gray-100 border-rtb-black shadow-sm h-full space-y-6 flex flex-col">
+<div class="p-6 bg-gray-100 border-rtb-black shadow-lg h-full space-y-6 flex flex-col">
   <h3 class="font-semibold text-lg mb-4">Filters</h3>
 
   <mat-checkbox [(ngModel)]="filters['remote']" (ngModelChange)="onFilterChange()">
@@ -9,17 +9,17 @@
     Full-Time
   </mat-checkbox>
 
-  <mat-form-field class="w-full">
+  <mat-form-field class="w-10">
     <mat-label>Location</mat-label>
     <input matInput [(ngModel)]="filters['location']" placeholder="Location" (ngModelChange)="onFilterChange()" />
   </mat-form-field>
 
-  <mat-form-field class="w-full">
+  <mat-form-field>
     <mat-label>Experience</mat-label>
     <input matInput [(ngModel)]="filters['experience']" placeholder="Experience (e.g., 1-2 years)" (ngModelChange)="onFilterChange()" />
   </mat-form-field>
 
-  <mat-form-field class="w-full">
+  <mat-form-field>
     <mat-label>Common Requirements</mat-label>
     <mat-select [(ngModel)]="filters['commonRequirements']" (ngModelChange)="onFilterChange()">
       <mat-option *ngFor="let req of commonRequirements" [value]="req">{{ req }}</mat-option>

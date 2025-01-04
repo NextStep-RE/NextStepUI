@@ -47,8 +47,4 @@ export class UpcomingEventsComponent implements OnInit {
     );
     this.store.dispatch(LOAD_EVENTS());
   }
-
-  isPersonalEvent(event: Event | PersonalEvent): event is PersonalEvent {
-    return (event as PersonalEvent).employeeId !== undefined;
-  }
 }

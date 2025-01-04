@@ -82,9 +82,9 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
     });
   }
 
-  isPersonalEvent(event: Event | PersonalEvent): event is PersonalEvent {
-    return (event as PersonalEvent).employeeId !== undefined;
-  }
+  // isPersonalEvent(event: Event | PersonalEvent): event is PersonalEvent {
+  //   return (event as PersonalEvent).employeeId !== undefined;
+  // }
 
   isSameMonthAndYear(d1: Date, d2: Date): boolean {
     const date1 = new Date(d1);
