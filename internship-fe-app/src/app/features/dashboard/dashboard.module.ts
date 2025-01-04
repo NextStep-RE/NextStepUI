@@ -21,6 +21,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { PERSONAL_EVENT_REDUCER } from '../customers/store/reducers/personal-events.reducer';
 import { PersonalEventsEffect } from '../customers/store/effects/personal-events.effects';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -42,6 +44,8 @@ import { PersonalEventsEffect } from '../customers/store/effects/personal-events
     MatDatepickerModule,
     MatPaginator,
     RouterModule,
+    MatIconModule,
+    MatButtonModule,
     DashboardHeaderComponent,
     StoreModule.forFeature('events', EVENT_REDUCER),
     StoreModule.forFeature('personalEvents', PERSONAL_EVENT_REDUCER),

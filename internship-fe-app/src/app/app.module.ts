@@ -50,6 +50,7 @@ import { FormsModule } from '@angular/forms';
     DashboardModule,
     MatDialogModule,
     MatTableModule,
+    MatIconModule,
     CdkTableModule,
     StoreModule.forRoot({
       profiles: PROFILE_REDUCER,

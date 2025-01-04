@@ -25,25 +25,11 @@ export class UserInfoCardsComponent implements OnInit {
   }
 
   initializeTimesheetCards(): void {
-    this.adminCards = [
-      {
-        title: 'Import Timesheet',
-        imagePath: 'assets/icons/timesheet-icon.svg',
-      },
-      {
-        title: 'Check Timesheet',
-        imagePath: 'assets/icons/timesheet-icon.svg',
-      },
-      {
-        title: 'Approve Invoices',
-        imagePath: 'assets/icons/invoices-approve-icon.svg',
-      },
-    ];
 
     this.userCards = [
       { title: 'My Applications', imagePath: 'assets/icons/applications.svg' },
-      { title: 'My CV', imagePath: 'assets/icons/cv.svg' },
-      { title: 'My Profile', imagePath: 'assets/icons/profile.svg' },
+      { title: 'My Education', imagePath: 'assets/icons/education.svg' },
+      { title: 'My Experience', imagePath: 'assets/icons/experience.svg' },
     ];
   }
 
