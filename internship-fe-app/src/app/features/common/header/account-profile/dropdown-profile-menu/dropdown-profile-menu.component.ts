@@ -10,17 +10,17 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { UserProfile } from '../../../../../core/models/userProfile.model';
-import { IUserProfileState } from '../../../../customers/store/reducers/user-profiles.reducers';
+import { IUserProfileState } from '../../../../../core/store/reducers/user-profiles.reducers';
 import {
   SELECT_USER_PROFILES,
   SELECT_USER_PROFILE_ERROR,
-} from '../../../../customers/store/selectors/user-profiles.selectors';
-import { UPDATE_SELECTED_PROFILE_ROLE } from '../../../../customers/store/actions/user-profiles.actions';
-import { LOAD_USER_PROFILES } from '../../../../customers/store/actions/user-profiles.actions';
+} from '../../../../../core/store/selectors/user-profiles.selectors';
+import { UPDATE_SELECTED_PROFILE_ROLE } from '../../../../../core/store/actions/user-profiles.actions';
+import { LOAD_USER_PROFILES } from '../../../../../core/store/actions/user-profiles.actions';
 import { UserInfo } from '../../../../../core/models/userInfo.model';
-import { SELECT_USER_INFO } from '../../../../customers/store/selectors/userInfo.selectors';
-import { LOAD_USER_INFO } from '../../../../customers/store/actions/userInfo.actions';
-import { LOAD_PERSONAL_EVENTS } from '../../../../customers/store/actions/personal-event.actions';
+import { SELECT_USER_INFO } from '../../../../../core/store/selectors/userInfo.selectors';
+import { LOAD_USER_INFO } from '../../../../../core/store/actions/userInfo.actions';
+import { LOAD_PERSONAL_EVENTS } from '../../../../../core/store/actions/personal-event.actions';
 import { EmployeeService } from '../../../../../core/services/employee.service';
 
 @Component({

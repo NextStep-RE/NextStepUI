@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import {
   Customer,
   UpdateCustomer,
-} from '../../../../core/models/customer.model';
+} from '../../models/customer.model';
 import {
   DELETE_CUSTOMER,
   DELETE_CUSTOMER_FAILURE,

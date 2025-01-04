@@ -3,7 +3,7 @@ import {
   Customer,
   LoadCustomers,
   UpdateCustomer,
-} from '../../../../core/models/customer.model';
+} from '../../models/customer.model';
 
 export const LOAD_CUSTOMERS = createAction(
   '[Customers] Load Customers',

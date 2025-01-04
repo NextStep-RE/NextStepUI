@@ -16,16 +16,16 @@ import { CustomerDetailedDialogComponent } from '../customer-detailed-dialog/cus
 import { MatSort, Sort } from '@angular/material/sort';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Customer } from '../../../core/models/customer.model';
-import { ICustomerState } from '../store/reducers/customers.reducer';
+import { ICustomerState } from '../../../core/store/reducers/customers.reducer';
 import {
   SELECT_CUSTOMERS,
   SELECT_CUSTOMERS_ERROR,
   SELECT_TOTAL_COUNT,
-} from '../store/selectors/customers.selectors';
+} from '../../../core/store/selectors/customers.selectors';
 import {
   DELETE_CUSTOMER,
   LOAD_CUSTOMERS,
-} from '../store/actions/customers.actions';
+} from '../../../core/store/actions/customers.actions';
 
 @Component({
   selector: 'app-customers-table',

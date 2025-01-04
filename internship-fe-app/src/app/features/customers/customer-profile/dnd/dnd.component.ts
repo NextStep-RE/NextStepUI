@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
-import { ADD_DOCUMENT } from '../../store/actions/documents.actions';
+import { ADD_DOCUMENT } from '../../../../core/store/actions/documents.actions';
 import { ActivatedRoute, Params } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 

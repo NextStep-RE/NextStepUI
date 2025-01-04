@@ -4,7 +4,7 @@ import {
   LOAD_EVENTS_SUCCESS,
   SET_LOADING,
 } from '../actions/events.actions';
-import { Event } from '../../../../core/models/event.model';
+import { Event } from '../../models/event.model';
 
 export interface IEventState {
   events: Event[];

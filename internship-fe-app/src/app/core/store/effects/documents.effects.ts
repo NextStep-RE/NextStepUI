@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { DocumentsService } from '../../../../core/services/documents.service';
+import { DocumentsService } from '../../services/documents.service';
 import { Action, Store } from '@ngrx/store';
-import { Document } from '../../../../core/models/document.model';
+import { Document } from '../../models/document.model';
 import {
   ADD_DOCUMENT,
   DELETE_DOCUMENT,

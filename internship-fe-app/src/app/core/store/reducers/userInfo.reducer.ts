@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { UserInfo } from '../../../../core/models/userInfo.model';
+import { UserInfo } from '../../models/userInfo.model';
 import {
   LOAD_USER_INFO,
   LOAD_USER_INFO_FAIL,

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EventsService } from '../../../../core/services/events.service';
+import { EventsService } from '../../services/events.service';
 import { catchError, map, mergeMap, Observable, of, switchMap } from 'rxjs';
 import {
   ADD_EVENT,
@@ -11,7 +11,7 @@ import {
 } from '../actions/events.actions';
 import { Action, Store } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Event } from '../../../../core/models/event.model';
+import { Event } from '../../models/event.model';
 
 @Injectable()
 export class EventsEffects {
