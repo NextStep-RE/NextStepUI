@@ -15,6 +15,7 @@ export interface User {
   export interface Experience {
     role: string;
     company: string;
+    description: string;
     startDate: Date;
     endDate?: Date; 
   }
@@ -23,5 +24,6 @@ export interface User {
     degree: string;
     major: string;
     university: string;
-    graduationDate: Date;
+    startYear: Date;
+    graduationYear: Date;
   }
