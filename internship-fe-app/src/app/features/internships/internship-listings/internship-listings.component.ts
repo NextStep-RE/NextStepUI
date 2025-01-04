@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
 import { InternshipBoxComponent } from './internship-box/internship-box.component';
 import { Internship } from '../../../core/models/internship.model';
 import { MOCK_INTERNSHIPS } from '../../../core/models/mock-data/internship.mock';
@@ -9,7 +9,7 @@ import { MOCK_INTERNSHIPS } from '../../../core/models/mock-data/internship.mock
   styleUrl: './internship-listings.component.scss',
 })
 export class InternshipListingsComponent {
-  internships: Internship[] = MOCK_INTERNSHIPS;
+  @Input() internships!: Internship[];
   currentPage: number = 1;
   itemsPerPage: number = 5;
 

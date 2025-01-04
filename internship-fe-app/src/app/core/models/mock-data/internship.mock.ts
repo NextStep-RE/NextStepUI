@@ -1,5 +1,15 @@
 import { MOCK_COMPANIES } from './company.mock';
 import { Internship } from '../internship.model';
+import { getLocaleTimeFormat } from '@angular/common';
+
+function getRandomDateInLastMonth(): Date {
+  const currentDate = new Date();
+  const oneMonthAgo = new Date();
+  oneMonthAgo.setMonth(currentDate.getMonth() - 1);
+
+  const randomTime = oneMonthAgo.getTime() + Math.random() * (currentDate.getTime() - oneMonthAgo.getTime());
+  return new Date(randomTime);
+}
 
 export const MOCK_INTERNSHIPS: Internship[] = [
   {
@@ -27,6 +37,7 @@ Skills Required:
     endDate: new Date('2025-06-01'),
     applicationDeadline: new Date('2025-01-15'),
     requirements: ['HTML', 'CSS', 'JavaScript'],
+    datePosted: new Date(Date.now()), 
   },
   {
     internshipId: '2',
@@ -51,6 +62,7 @@ Skills Required:
     endDate: new Date('2025-07-01'),
     applicationDeadline: new Date('2025-01-03'),
     requirements: ['Python', 'SQL', 'Data Visualization'],
+    datePosted: new Date('2025-01-03'), 
   },
   {
     internshipId: '3',
@@ -75,6 +87,7 @@ Skills Required:
     endDate: new Date('2025-08-01'),
     applicationDeadline: new Date('2025-03-15'),
     requirements: ['JavaScript', 'React', 'UI/UX Design'],
+    datePosted: new Date('2025-01-04 12:50'),
   },
   {
     internshipId: '4',
@@ -99,6 +112,7 @@ Skills Required:
     endDate: new Date('2025-09-01'),
     applicationDeadline: new Date('2025-04-10'),
     requirements: ['Environmental Science', 'Data Analysis', 'Python'],
+    datePosted: getRandomDateInLastMonth(), 
   },
   {
     internshipId: '5',
@@ -123,6 +137,7 @@ Skills Required:
     endDate: new Date('2025-10-01'),
     applicationDeadline: new Date('2025-05-15'),
     requirements: ['Excel', 'Financial Modeling', 'Data Analysis'],
+    datePosted: getRandomDateInLastMonth(),
   },
   {
     internshipId: '6',
@@ -151,6 +166,7 @@ Skills Required:
       'Penetration Testing',
       'Problem Solving',
     ],
+    datePosted: getRandomDateInLastMonth(), 
   },
   {
     internshipId: '7',
@@ -179,6 +195,7 @@ Skills Required:
       'Market Analysis',
       'Agile Methodologies',
     ],
+    datePosted: getRandomDateInLastMonth(),
   },
   {
     internshipId: '8',
@@ -203,6 +220,7 @@ Skills Required:
     endDate: new Date('2025-08-01'),
     applicationDeadline: new Date('2025-03-15'),
     requirements: ['Python', 'Machine Learning', 'Data Analysis'],
+    datePosted: getRandomDateInLastMonth(), 
   },
   {
     internshipId: '9',
@@ -231,5 +249,6 @@ Skills Required:
       'Organizational Skills',
       'HR Principles',
     ],
+    datePosted: getRandomDateInLastMonth(), 
   },
 ];

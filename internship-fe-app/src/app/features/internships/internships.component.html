@@ -1,3 +1,19 @@
-<app-internship-listings></app-internship-listings>
+<div class="flex justify-between items-center bg-white p-4 shadow">
+    <mat-form-field class="example-form-field">
+        <mat-label>Search for internships</mat-label>
+        <input matInput type="text" [(ngModel)]="searchQuery" (keydown.enter)="onSearchChange()">
+        <button matSuffix mat-icon-button aria-label="Search" *ngIf="searchQuery" (click)="onSearchChange()">
+            <mat-icon>search</mat-icon>
+        </button>
+    </mat-form-field>
 
-  
+    <div class="flex gap-4">
+        <img src="assets/icons/sort.svg" class="w-7 h-7 cursor-pointer">
+        <img src="assets/icons/filter.svg" class="w-7 h-7 cursor-pointer">
+    </div>
+</div>
+<div class="flex w-full border-black">
+    <app-filter-sidebar class="w-1/5 mt-4" (filterChanged)="onFiltersChanged($event)"
+        (sortChanged)="onSortChanged($event)"></app-filter-sidebar>
+    <app-internship-listings class="flex-1" [internships]="filteredInternships"></app-internship-listings>
+</div>

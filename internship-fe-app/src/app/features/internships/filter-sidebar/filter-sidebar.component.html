@@ -1,0 +1,81 @@
+<div class="p-6 bg-gray-100 border-rtb-black shadow-sm h-full overflow-y-auto space-y-6 flex flex-col">
+  <h3 class="font-semibold text-lg mb-4">Filters</h3>
+
+  <!-- Checkbox Filters -->
+  <mat-checkbox [(ngModel)]="filters['remote']" (ngModelChange)="onFilterChange()">
+    Remote
+  </mat-checkbox>
+
+  <mat-checkbox [(ngModel)]="filters['fullTime']" (ngModelChange)="onFilterChange()">
+    Full-Time
+  </mat-checkbox>
+
+  <!-- Location Input -->
+  <mat-form-field class="w-full">
+    <mat-label>Location</mat-label>
+    <input matInput [(ngModel)]="filters['location']" placeholder="Location" (ngModelChange)="onFilterChange()" />
+  </mat-form-field>
+
+  <!-- Experience Input -->
+  <mat-form-field class="w-full">
+    <mat-label>Experience</mat-label>
+    <input matInput [(ngModel)]="filters['experience']" placeholder="Experience (e.g., 1-2 years)" (ngModelChange)="onFilterChange()" />
+  </mat-form-field>
+
+  <!-- Common Requirements Dropdown -->
+  <mat-form-field class="w-full">
+    <mat-label>Common Requirements</mat-label>
+    <mat-select [(ngModel)]="filters['commonRequirements']" (ngModelChange)="onFilterChange()">
+      <mat-option *ngFor="let req of commonRequirements" [value]="req">{{ req }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Filter Tree -->
+  <mat-tree [dataSource]="filterData" [treeControl]="treeControl">
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+      <li>
+        <div class="filter-node">
+          <mat-checkbox [(ngModel)]="node.selected" (change)="onFilterChange()">
+            {{ node.name }}
+          </mat-checkbox>
+        </div>
+      </li>
+    </mat-tree-node>
+  
+    <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodeToggle>
+      <li>
+        <div class="filter-node">
+          <mat-checkbox [(ngModel)]="node.selected" (change)="onFilterChange()">
+            {{ node.name }}
+          </mat-checkbox>
+        </div>
+        <mat-tree [dataSource]="node.children" [treeControl]="treeControl"></mat-tree>
+      </li>
+    </mat-tree-node>
+  </mat-tree>
+
+  <!-- Company Dropdown -->
+  <mat-form-field class="w-full">
+    <mat-label>Company</mat-label>
+    <mat-select [(ngModel)]="filters['company']" (ngModelChange)="onFilterChange()">
+      <mat-option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- On-Site Checkbox -->
+  <mat-checkbox [(ngModel)]="filters['onSite']" (ngModelChange)="onFilterChange()">
+    On-Site
+  </mat-checkbox>
+
+  <h3 class="font-semibold text-lg mt-8 mb-4">Sort By</h3>
+  
+  <!-- Sort Dropdown -->
+  <mat-form-field class="w-full">
+    <mat-label>Sort By</mat-label>
+    <mat-select [(ngModel)]="sortBy" (ngModelChange)="onSortChange(sortBy)">
+      <mat-option value="name">Name</mat-option>
+      <mat-option value="endDate">End Date</mat-option>
+      <mat-option value="deadline">Application Deadline</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

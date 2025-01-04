@@ -8,6 +8,8 @@ import { CustomerProfileComponent } from './features/customers/customer-profile/
 import { LoginComponent } from './features/authentication/login/login.component';
 import { SignupComponent } from './features/authentication/signup/signup.component';
 import { InternshipsComponent } from './features/internships/internships.component';
+import { InternshipDetailsComponent } from './features/internships/internship-details/internship-details.component';
+import { FilterSidebarComponent } from './features/internships/filter-sidebar/filter-sidebar.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/my-profile', pathMatch: 'full' },
