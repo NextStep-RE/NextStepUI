@@ -13,9 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import {MatSliderModule} from '@angular/material/slider';
-import { MatTreeFlatDataSource, MatTreeModule } from '@angular/material/tree';
-import { FlatTreeControl } from '@angular/cdk/tree';  // Correct import
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -32,13 +31,11 @@ import { FlatTreeControl } from '@angular/cdk/tree';  // Correct import
     MatCheckboxModule,
     MatInputModule,
     MatSelectModule,
-    MatSliderModule,
     MatFormFieldModule,
     MatIconModule,
     MatButtonModule,
-    FlatTreeControl,
-    MatTreeModule,
-    MatTreeFlatDataSource
+    MatCardModule,
+    MatDividerModule,
   ],
   exports: [
     InternshipListingsComponent,

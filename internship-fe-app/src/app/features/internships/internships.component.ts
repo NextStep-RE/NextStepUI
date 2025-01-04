@@ -14,6 +14,8 @@ export class InternshipsComponent {
   searchQuery = '';
   filters: any = {};
   sortBy = 'name';
+  isFilterSidebarVisible: boolean = false; // Track visibility of filter sidebar
+
 
   onFiltersChanged(filters: any) {
     this.filters = { ...this.filters, ...filters };
@@ -65,4 +67,9 @@ export class InternshipsComponent {
   viewDetails(internshipId: number): void {
     this.selectedInternshipId = internshipId;
   }
+
+  toggleFilterSidebar() {
+    this.isFilterSidebarVisible = !this.isFilterSidebarVisible;
+  }
+
 }
