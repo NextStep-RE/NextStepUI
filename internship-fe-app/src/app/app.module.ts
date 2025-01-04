@@ -53,16 +53,6 @@ import { InternshipsComponent } from './features/internships/internships.compone
   imports: [
     BrowserModule,
     DashboardModule,
-    MatDialogModule,
-    MatTableModule,
-    CdkTableModule,
-    StoreModule.forRoot({
-      profiles: PROFILE_REDUCER,
-      userInfo: USER_INFO_REDUCER,
-    }),
-    EffectsModule.forRoot([UserInfoEffects]),
-    EffectsModule.forFeature([UserProfilesEffects]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     CustomersModule,
     AppRoutingModule,
     MatStepperModule,

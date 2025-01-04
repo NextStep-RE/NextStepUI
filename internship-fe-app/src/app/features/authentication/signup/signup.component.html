@@ -1,8 +1,8 @@
 <app-dashboard style="opacity: 0.2" (click)="onOutsideClick()"></app-dashboard>
 
-<div class="signup-container">
+<div class="signup-container p-2 py-2">
   <div class="signup-box">
-    <button class="close-button" (click)="closeForm()">X</button>
+    <button class="close-button" (click)="closeForm()"><img src="assets/icons/close.svg" class="w-7 h-7"></button>
     <h1>Sign Up</h1>
     <form #signupForm="ngForm" (ngSubmit)="signup()" autocomplete="off">
         <div class="form-group">
