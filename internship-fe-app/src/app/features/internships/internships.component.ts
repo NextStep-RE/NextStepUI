@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { loadInternships } from '../../core/store/actions/internships.actions';
-import { selectAllInternships, selectLoading, selectError } from '../../core/store/selectors/internships.selector';
-import { Internship } from '../../core/models/internship.model';
+import { Internship, FilterInternship } from '../../core/models/internship.model';
+import { selectInternships, selectLoading, selectError } from '../../core/store/selectors/internships.selector';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-internships',
@@ -18,12 +19,14 @@ export class InternshipsComponent implements OnInit {
   error$: Observable<any>;
 
   searchQuery: string = '';
-  filters: any = {};
-  sortBy: string = 'name';
+  filters: FilterInternship = {}; 
+  sortBy: string = '';
   isFilterSidebarVisible: boolean = false;
+  currentPage: number = 0;
+  pageSize: number = 10;
 
   constructor(private store: Store) {
-    this.internships$ = this.store.select(selectAllInternships);
+    this.internships$ = this.store.select(selectInternships);
     this.loading$ = this.store.select(selectLoading);
     this.error$ = this.store.select(selectError);
   }
@@ -33,16 +36,20 @@ export class InternshipsComponent implements OnInit {
   }
 
   loadInternships() {
-    const searchDTO = {
-      searchQuery: this.searchQuery,
-      filters: this.filters,
+    const filter: FilterInternship = {
+      ...this.filters,
+      title: this.searchQuery,
       sortBy: this.sortBy,
     };
 
-    this.store.dispatch(loadInternships({ offset: 0, limit: 10, searchDTO }));
+    this.store.dispatch(loadInternships({ 
+      offset: this.currentPage * this.pageSize, 
+      limit: this.pageSize, 
+      filter 
+    }));    
   }
 
-  onFiltersChanged(filters: any) {
+  onFiltersChanged(filters: FilterInternship) {
     this.filters = { ...this.filters, ...filters };
     this.loadInternships();
   }
@@ -52,7 +59,6 @@ export class InternshipsComponent implements OnInit {
     this.loadInternships();
   }
 
-  
   onSearchChange() {
     this.loadInternships();
   }
@@ -63,5 +69,12 @@ export class InternshipsComponent implements OnInit {
 
   viewDetails(internshipId: number): void {
     this.selectedInternshipId = internshipId;
+  }
+
+  // Handle page change event
+  onPageChange(event: PageEvent) {
+    this.currentPage = event.pageIndex; // Update currentPage based on pagination
+    this.pageSize = event.pageSize;
+    this.loadInternships(); // Reload internships with new page and size
   }
 }

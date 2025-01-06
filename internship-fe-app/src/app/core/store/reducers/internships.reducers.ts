@@ -1,5 +1,4 @@
 import { createReducer, on } from '@ngrx/store';
-
 import { Internship } from '../../models/internship.model';
 import {
   loadInternships,
@@ -11,6 +10,7 @@ import {
 } from '../actions/internships.actions';
 
 export interface InternshipState {
+  totalNumber: number;
   internships: Internship[];
   selectedInternship: Internship | null;
   loading: boolean;
@@ -18,6 +18,7 @@ export interface InternshipState {
 }
 
 export const initialState: InternshipState = {
+  totalNumber: 0,
   internships: [],
   selectedInternship: null,
   loading: false,

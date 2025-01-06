@@ -22,7 +22,7 @@
     (filterChanged)="onFiltersChanged($event)" (sortChanged)="onSortChanged($event)">
   </app-filter-sidebar>
 
-  <app-internship-listings *ngIf="!(loading$ | async)" [internships]="(internships$ | async) || []" class="flex-1">
+  <app-internship-listings class="flex-1">
   </app-internship-listings>
 
 </div>

@@ -1,9 +1,9 @@
 import { createAction, props } from '@ngrx/store';
-import { Internship } from '../../models/internship.model';
+import { Internship, FilterInternship } from '../../models/internship.model';
 
 export const loadInternships = createAction(
   '[Internships] Load Internships',
-  props<{ offset?: number; limit?: number; searchDTO?: any }>()
+  props<{ offset?: number; limit?: number; filter?: FilterInternship }>()  // Use filter instead of searchDTO
 );
 
 export const loadInternshipsSuccess = createAction(

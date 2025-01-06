@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Internship } from '../../../core/models/internship.model';
 import { loadInternshipById } from '../../../core/store/actions/internships.actions';
-import { selectSelectedInternship } from '../../../core/store/selectors/internships.selector';
+import { selectInternship } from '../../../core/store/selectors/internships.selector';
 
 @Component({
   selector: 'app-internship-details',
@@ -26,7 +26,7 @@ export class InternshipDetailsComponent implements OnInit {
 
     this.store.dispatch(loadInternshipById({ id: +this.internshipId }));
 
-    this.internshipDetails$ = this.store.select(selectSelectedInternship);
+    this.internshipDetails$ = this.store.select(selectInternship);
   }
 
   getFormattedDate(date?: Date): string {
