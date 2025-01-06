@@ -1,28 +1,37 @@
 <div class="flex justify-between items-center bg-white p-4 mt-3 gap-20 shadow">
-    <mat-form-field class="w-full ml-6">
-        <mat-label>Search for internships</mat-label>
-        <input matInput type="text" [(ngModel)]="searchQuery" (keydown.enter)="onSearchChange()">
-        <button matSuffix mat-icon-button aria-label="Search" *ngIf="searchQuery" (click)="onSearchChange()">
-            <mat-icon>search</mat-icon>
-        </button>
-    </mat-form-field>
+  <mat-form-field class="w-full ml-6">
+    <mat-label>Search for internships</mat-label>
+    <input matInput type="text" [(ngModel)]="searchQuery" (keydown.enter)="onSearchChange()">
+    <button matSuffix mat-icon-button aria-label="Search" *ngIf="searchQuery" (click)="onSearchChange()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
 
-    <div class="flex gap-4">
-        <button mat-icon-button (click)="toggleFilterSidebar()">
-            <img src="assets/icons/filter.svg" class="w-7 h-7">
-          </button>
-          <button mat-icon-button (click)="onSortChanged('name')">
-            <img src="assets/icons/sort.svg" class="w-7 h-7">
-          </button>
-    </div>
-</div>
-  
-  <div class="flex w-full">
-    <app-filter-sidebar *ngIf="isFilterSidebarVisible" class="w-1/5 mt-4" 
-                        (filterChanged)="onFiltersChanged($event)" 
-                        (sortChanged)="onSortChanged($event)">
-    </app-filter-sidebar>
-  
-    <app-internship-listings class="flex-1" [internships]="filteredInternships"></app-internship-listings>
+  <div class="flex gap-4">
+    <button mat-icon-button (click)="toggleFilterSidebar()">
+      <img src="assets/icons/filter.svg" class="w-7 h-7">
+    </button>
+    <button mat-icon-button (click)="onSortChanged('name')">
+      <img src="assets/icons/sort.svg" class="w-7 h-7">
+    </button>
   </div>
-  
+</div>
+
+<div class="flex w-full">
+  <app-filter-sidebar *ngIf="isFilterSidebarVisible" class="w-1/5 mt-4" 
+    (filterChanged)="onFiltersChanged($event)" (sortChanged)="onSortChanged($event)">
+  </app-filter-sidebar>
+
+  <app-internship-listings *ngIf="!(loading$ | async)" [internships]="(internships$ | async) || []" class="flex-1">
+  </app-internship-listings>
+
+</div>
+
+<div *ngIf="loading$ | async" class="flex justify-center items-center w-full h-full">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="error$ | async as error" class="flex flex-col gap-3 justify-center items-center w-full h-full">
+  <mat-spinner></mat-spinner>
+  <p class="text-red-500">Error loading internships: {{ error.message }}</p>
+</div>

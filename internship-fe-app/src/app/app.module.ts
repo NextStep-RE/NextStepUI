@@ -32,6 +32,7 @@ import { SwitchUsersPopupComponent } from './features/common/switch-users-popup/
 import { InternshipsModule } from './features/internships/internships.module';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { FormsModule } from '@angular/forms';
     MatDialogModule,
     MatTableModule,
     MatIconModule,
+    MatButtonModule,
     CdkTableModule,
     StoreModule.forRoot({
       profiles: PROFILE_REDUCER,

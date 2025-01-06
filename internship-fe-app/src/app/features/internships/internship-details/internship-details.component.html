@@ -1,146 +1,102 @@
-<div *ngIf="internshipDetails; else notFound">
-    <div
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
-      (click)="closeDetails()"
-    >
-      <div
-        class="bg-white rounded-lg shadow-lg p-6 w-4/5 max-w-3xl relative"
-        (click)="$event.stopPropagation()"
-      >
-        <div class="flex justify-between items-start mb-6">
-          <div class="flex items-center gap-4">
-            <img
-              *ngIf="internshipDetails.company.logoUrl"
-              [src]="'assets/images/' + internshipDetails.company.logoUrl"
-              alt="Company Logo"
-              class="w-20 h-20 rounded-sm object-cover border border-gray-300"
-            />
-            <h2 class="text-3xl font-bold text-rtb-blue">
-              {{ internshipDetails.title }}
-            </h2>
-          </div>
-          <button
-            class="text-gray-500 hover:text-gray-800"
-            (click)="closeDetails()"
-            aria-label="Close"
-          >
-            <img src="assets/icons/close.svg" class="w-8 h-8" alt="Close" />
-          </button>
+<div *ngIf="internshipDetails$ | async as internshipDetails; else notFound">
+  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center" (click)="closeDetails()">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-4/5 max-w-3xl relative" (click)="$event.stopPropagation()">
+      <div class="flex justify-between items-start mb-6">
+        <div class="flex items-center gap-4">
+          <img *ngIf="internshipDetails.companyLogoUrl" [src]="internshipDetails.companyLogoUrl"
+            alt="Company Logo" class="w-20 h-20 rounded-sm object-cover border border-gray-300" />
+          <h2 class="text-3xl font-bold text-rtb-blue">
+            {{ internshipDetails.title }}
+          </h2>
         </div>
-  
-        <div class="mb-6">
-            <h3 class="text-3xl font-semibold text-rtb-gray mb-4">About the Job</h3>
-            <p class="text-rtb-gray bg-rtb-super-light-blue border-l-4 border-rtb-blue pl-4 mb-4">
-              {{ internshipDetails.description }}
-            </p>
-          </div>
-  
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm text-gray-700">
-          <div>
-            <p *ngIf="internshipDetails.company.companyName">
-              <strong class="font-medium text-rtb-grey mr-3">Company:</strong>
-              <a
-                *ngIf="internshipDetails.company.website"
-                [href]="internshipDetails.company.website"
-                class="text-blue-500 hover:underline"
-                target="_blank"
-                >{{ internshipDetails.company.companyName }}</a
-              >
-              <span *ngIf="!internshipDetails.company.website">
-                {{ internshipDetails.company.companyName }}
-              </span>
-            </p>
-            <p>
-              <strong class="font-medium text-rtb-grey mr-3">Location:</strong>
-              {{ internshipDetails.location || 'Not available' }}
-            </p>
-            <p>
-              <strong class="font-medium text-rtb-grey mr-3">Experience Level:</strong>
-              {{ internshipDetails.experience || 'Not specified' }}
-            </p>
-          </div>
-          <div>
-            <p>
-              <strong class="font-medium text-rtb-grey">Start Date:</strong>
-              <span
-                *ngIf="internshipDetails.startDate"
-                class="inline-block bg-rtb-light-gray text-gray-700 px-4 py-1 ml-3 rounded-full"
-              >
-                {{ getFormattedDate(internshipDetails.startDate) }}
-              </span>
-              <span *ngIf="!internshipDetails.startDate">Not available</span>
-            </p>
-            <p>
-              <strong class="font-medium text-rtb-grey">End Date:</strong>
-              <span
-                *ngIf="internshipDetails.endDate"
-                class="inline-block bg-rtb-light-gray text-gray-700 px-4 py-1 ml-3 rounded-full"
-              >
-                {{ getFormattedDate(internshipDetails.endDate) }}
-              </span>
-              <span *ngIf="!internshipDetails.endDate">Not available</span>
-            </p>
-            <p>
-              <strong class="font-medium text-rtb-grey">Application Deadline:</strong>
-              <span
-                *ngIf="internshipDetails.applicationDeadline"
-                [ngClass]="{'inline-block bg-rtb-light-gray text-red-700 px-4 py-1 ml-3 rounded-full': isDeadlineApproaching(internshipDetails.applicationDeadline), 'inline-block bg-rtb-light-gray text-gray-700 px-4 py-1 ml-3 rounded-full': !isDeadlineApproaching(internshipDetails.applicationDeadline)}">
-                {{ getFormattedDate(internshipDetails.applicationDeadline) }}
-              </span>
-              <span *ngIf="!internshipDetails.applicationDeadline">
-                Not available
-              </span>
-            </p>
-          </div>
+        <button mat-button (click)="closeDetails()">
+          <img src="assets/icons/close.svg" class="w-8 h-8" alt="Close" />
+        </button>
+      </div>
+
+      <div class="mb-6">
+        <h3 class="text-3xl font-semibold text-rtb-gray mb-4">About the Job</h3>
+        <p class="text-rtb-gray bg-rtb-super-light-blue border-l-4 border-rtb-blue pl-4 mb-4">
+          {{ internshipDetails.description }}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm text-gray-700">
+        <div>
+          <p *ngIf="internshipDetails.companyName">
+            <strong class="font-medium text-rtb-grey mr-3">Company:</strong>
+            <a *ngIf="internshipDetails.companyWebsite" [href]="internshipDetails.companyWebsite"
+              class="text-blue-500 hover:underline" target="_blank">{{ internshipDetails.companyName }}</a>
+            <span *ngIf="!internshipDetails.companyWebsite">
+              {{ internshipDetails.companyName }}
+            </span>
+          </p>
+          <p>
+            <strong class="font-medium text-rtb-grey mr-3">Location:</strong>
+            {{ internshipDetails.location || 'Not available' }}
+          </p>
+          <p>
+            <strong class="font-medium text-rtb-grey mr-3">Experience Level:</strong>
+            {{ internshipDetails.experience || 'Not specified' }}
+          </p>
         </div>
-  
-        <div class="mt-6">
-          <strong class="font-medium text-rtb-grey">Requirements:</strong>
-          <ul class="list-disc pl-6 text-gray-700">
-            <li *ngFor="let req of internshipDetails.requirements">
-              {{ req }}
-            </li>
-          </ul>
-        </div>
-  
-        <div class="mt-8 flex justify-end gap-4">
-          <a
-            *ngIf="internshipDetails.company.website"
-            [href]="internshipDetails.company.website"
-            target="_blank"
-          >
-            <button
-              class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition"
-            >
-              Apply
-            </button>
-          </a>
-          <button
-            class="bg-rtb-blue text-white px-6 py-3 rounded-lg hover:bg-rtb-dark-blue transition"
-            (click)="closeDetails()"
-          >
-            Close
-          </button>
+        <div>
+          <p>
+            <strong class="font-medium text-rtb-grey">Start Date:</strong>
+            <span *ngIf="internshipDetails.startDate"
+              class="inline-block bg-rtb-light-gray text-gray-700 px-4 py-1 ml-3 rounded-full">
+              {{ getFormattedDate(internshipDetails.startDate) }}
+            </span>
+            <span *ngIf="!internshipDetails.startDate">Not available</span>
+          </p>
+          <p>
+            <strong class="font-medium text-rtb-grey">End Date:</strong>
+            <span *ngIf="internshipDetails.endDate"
+              class="inline-block bg-rtb-light-gray text-gray-700 px-4 py-1 ml-3 rounded-full">
+              {{ getFormattedDate(internshipDetails.endDate) }}
+            </span>
+            <span *ngIf="!internshipDetails.endDate">Not available</span>
+          </p>
+          <p>
+            <strong class="font-medium text-rtb-grey">Application Deadline:</strong>
+            <span *ngIf="internshipDetails.applicationDeadline"
+              [ngClass]="{'inline-block bg-rtb-light-gray text-red-700 px-4 py-1 ml-3 rounded-full': isDeadlineApproaching(internshipDetails.applicationDeadline), 'inline-block bg-rtb-light-gray text-gray-700 px-4 py-1 ml-3 rounded-full': !isDeadlineApproaching(internshipDetails.applicationDeadline)}">
+              {{ getFormattedDate(internshipDetails.applicationDeadline) }}
+            </span>
+            <span *ngIf="!internshipDetails.applicationDeadline">
+              Not available
+            </span>
+          </p>
         </div>
       </div>
-    </div>
-  </div>
-  
-  <ng-template #notFound>
-    <div
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
-    >
-      <div
-        class="bg-white rounded-lg shadow-lg p-6 w-4/5 max-w-2xl text-center"
-      >
-        <p class="text-lg text-gray-700">Internship not found!</p>
-        <button
-          class="mt-4 bg-rtb-blue text-white px-6 py-2 rounded-lg hover:bg-rtb-dark-blue transition"
-          (click)="closeDetails()"
-        >
-          Close
+
+      <div class="mt-6">
+        <strong class="font-medium text-rtb-grey">Requirements:</strong>
+        <ul class="list-disc pl-6 text-gray-700">
+          <li *ngFor="let req of internshipDetails.requirements">
+            {{ req }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-8 flex justify-center gap-8">
+        <button *ngIf="internshipDetails.companyWebsite" (click)="openWebsite(internshipDetails.companyWebsite)"
+          class="bg-rtb-blue text-white px-6 py-3 rounded-lg hover:bg-rtb-dark-blue shadow-lg hover:shadow-md transition-all duration-300 transform hover:scale-105">
+          Apply
         </button>
       </div>
     </div>
-  </ng-template>
-  
+  </div>
+</div>
+
+<ng-template #notFound>
+  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-4/5 max-w-2xl text-center">
+      <p class="text-lg text-gray-700">Internship not found!</p>
+      <button class="mt-4 bg-rtb-blue text-white px-6 py-2 rounded-lg hover:bg-rtb-dark-blue transition"
+        (click)="closeDetails()">
+        Close
+      </button>
+    </div>
+  </div>
+</ng-template>

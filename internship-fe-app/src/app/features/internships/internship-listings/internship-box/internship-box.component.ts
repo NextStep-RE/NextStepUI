@@ -8,7 +8,7 @@ import { Internship } from '../../../../core/models/internship.model';
 })
 export class InternshipBoxComponent {
   @Input() internship!: Internship;
-  @Output() internshipSelected = new EventEmitter<string>(); // Event to emit internship ID
+  @Output() internshipSelected = new EventEmitter<number>(); // Event to emit internship ID as a number
 
   isHeartClicked = false;
 
@@ -16,19 +16,23 @@ export class InternshipBoxComponent {
     this.isHeartClicked = !this.isHeartClicked;
   }
 
-  onMouseEnter() {}
+  onMouseEnter() {
+    // Handle mouse enter if needed, currently empty
+  }
 
-  onMouseLeave() {}
+  onMouseLeave() {
+    // Handle mouse leave if needed, currently empty
+  }
 
   get truncatedDescription(): string {
     const maxLength = 100;
     return this.internship.description.length > maxLength
-      ? this.internship.description.substring(0, maxLength) + '...'
+      ? `${this.internship.description.substring(0, maxLength)}...`
       : this.internship.description;
   }
 
-  viewDetails(internshipId: string): void {
-    this.internshipSelected.emit(internshipId); // Emit the internship ID to the parent component
+  viewDetails(internshipId: number): void {
+    this.internshipSelected.emit(internshipId); // Emit the internship ID as a number
   }
 
   isDeadlineApproaching(deadline: Date): boolean {
@@ -43,23 +47,11 @@ export class InternshipBoxComponent {
     const postedDate = new Date(datePosted);
     const diffInSeconds = Math.floor((now.getTime() - postedDate.getTime()) / 1000);
 
-    if (diffInSeconds < 60) {
-      return 'Posted just now';
-    } else if (diffInSeconds < 3600) {
-      const minutes = Math.floor(diffInSeconds / 60);
-      return `Posted ${minutes} minute${minutes > 1 ? 's' : ''} ago`;
-    } else if (diffInSeconds < 86400) {
-      const hours = Math.floor(diffInSeconds / 3600);
-      return `Posted ${hours} hour${hours > 1 ? 's' : ''} ago`;
-    } else if (diffInSeconds < 2592000) {
-      const days = Math.floor(diffInSeconds / 86400);
-      return `Posted ${days} day${days > 1 ? 's' : ''} ago`;
-    } else if (diffInSeconds < 31536000) {
-      const months = Math.floor(diffInSeconds / 2592000);
-      return `Posted ${months} month${months > 1 ? 's' : ''} ago`;
-    } else {
-      const years = Math.floor(diffInSeconds / 31536000);
-      return `Posted ${years} year${years > 1 ? 's' : ''} ago`;
-    }
+    if (diffInSeconds < 60) return 'Posted just now';
+    if (diffInSeconds < 3600) return `Posted ${Math.floor(diffInSeconds / 60)} minute${diffInSeconds / 60 > 1 ? 's' : ''} ago`;
+    if (diffInSeconds < 86400) return `Posted ${Math.floor(diffInSeconds / 3600)} hour${Math.floor(diffInSeconds / 3600) > 1 ? 's' : ''} ago`;
+    if (diffInSeconds < 2592000) return `Posted ${Math.floor(diffInSeconds / 86400)} day${Math.floor(diffInSeconds / 86400) > 1 ? 's' : ''} ago`;
+    if (diffInSeconds < 31536000) return `Posted ${Math.floor(diffInSeconds / 2592000)} month${Math.floor(diffInSeconds / 2592000) > 1 ? 's' : ''} ago`;
+    return `Posted ${Math.floor(diffInSeconds / 31536000)} year${Math.floor(diffInSeconds / 31536000) > 1 ? 's' : ''} ago`;
   }
 }

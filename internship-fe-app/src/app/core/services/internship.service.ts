@@ -1,62 +1,42 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { environment } from '../../../environments/environment.development';
-import { Internship, LoadInternships, UpdateInternship } from '../models/internship.model';
+import { Internship } from '../models/internship.model';
+import { environment } from "../../../environments/environment.development";
 
 @Injectable({
   providedIn: 'root',
 })
-export class InternshipsService {
-  private apiUrl = `${environment.apiUrl}/internships`;
+export class InternshipService {
 
   constructor(private http: HttpClient) {}
 
-  loadInternships(
-    loadInternships: LoadInternships
-  ): Observable<{ totalCount: number; internships: Internship[] }> {
-    let params = new HttpParams()
-      .set('offset', (loadInternships.pageNumber * loadInternships.pageSize).toString())
-      .set('limit', loadInternships.pageSize.toString());
-
-    if (loadInternships.searchInput) {
-      params = params.append('search', loadInternships.searchInput);
+  getAllInternships(offset?: number, limit?: number, searchDTO?: any): Observable<Internship[]> {
+    let params = new HttpParams();
+    
+    // Add pagination params
+    if (offset) params = params.set('offset', offset.toString());
+    if (limit) params = params.set('limit', limit.toString());
+    
+    // Add the search DTO parameters, ensuring each field is added to the URL
+    if (searchDTO) {
+      if (searchDTO.title) params = params.set('title', searchDTO.title);
+      if (searchDTO.companyName) params = params.set('companyName', searchDTO.companyName);
+      if (searchDTO.location) params = params.set('location', searchDTO.location);
+      if (searchDTO.startDate) params = params.set('startDate', searchDTO.startDate.toISOString());
+      if (searchDTO.endDate) params = params.set('endDate', searchDTO.endDate.toISOString());
+      if (searchDTO.applicationDeadline) params = params.set('applicationDeadline', searchDTO.applicationDeadline.toISOString());
+      if (searchDTO.requirements && searchDTO.requirements.length > 0) {
+        params = params.set('requirements', searchDTO.requirements.join(','));
+      }
+      if (searchDTO.sortBy) params = params.set('sortBy', searchDTO.sortBy);
+      if (searchDTO.ascending !== undefined) params = params.set('ascending', searchDTO.ascending.toString());
     }
 
-    if (loadInternships.sortCriteria && loadInternships.sortDirection) {
-      params = params
-        .append('sortCriteria', loadInternships.sortCriteria)
-        .append('sortDirection', loadInternships.sortDirection);
-    }
-
-    if (loadInternships.filter) {
-      params = params.append('filter', loadInternships.filter);
-    }
-
-    return this.http
-      .get<{ items: Internship[]; totalCount: number }>(this.apiUrl, { params })
-      .pipe(
-        map((response) => ({
-          internships: response.items,
-          totalCount: response.totalCount,
-        }))
-      );
+    return this.http.get<Internship[]>(environment.apiUrl, { params });
   }
 
-  getInternship(id: number): Observable<Internship> {
-    return this.http.get<Internship>(`${this.apiUrl}/${id}`);
-  }
-
-  addInternship(internship: Partial<Internship>): Observable<Internship> {
-    return this.http.post<Internship>(this.apiUrl, internship);
-  }
-
-  updateInternship(id: number, internship: UpdateInternship): Observable<UpdateInternship> {
-    return this.http.put<UpdateInternship>(`${this.apiUrl}/${id}`, internship);
-  }
-
-  deleteInternship(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  getInternshipById(id: number): Observable<Internship> {
+    return this.http.get<Internship>(`${environment.apiUrl}/${id}`);
   }
 }

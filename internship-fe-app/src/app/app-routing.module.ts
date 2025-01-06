@@ -12,7 +12,7 @@ import { InternshipDetailsComponent } from './features/internships/internship-de
 import { FilterSidebarComponent } from './features/internships/filter-sidebar/filter-sidebar.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/my-profile', pathMatch: 'full' },
+  { path: '', redirectTo: '/internships', pathMatch: 'full' },
   { path: 'internships', component: InternshipsComponent },
   { path: 'internship/:id', component: InternshipDetailsComponent },
   { path: 'addCustomers', component: AddCustomersComponent },

@@ -43,6 +43,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatDatepickerModule,
     MatPaginator,
+    MatButtonModule,
     RouterModule,
     MatIconModule,
     MatButtonModule,

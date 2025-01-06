@@ -7,4 +7,11 @@ import { Component} from '@angular/core';
 })
 export class UserInformationCardComponent {
 isLoading: boolean = false;
+isDisabled = true;
+
+toggleAddCv():void {}
+
+  toggleVisibility(): void {
+    console.log('Visibility toggled');
+  }
 }
