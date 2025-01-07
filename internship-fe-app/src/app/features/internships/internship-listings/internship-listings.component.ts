@@ -2,9 +2,7 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
   Output,
-  SimpleChanges,
 } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Internship } from '../../../core/models/internship.model';
@@ -14,7 +12,7 @@ import { Internship } from '../../../core/models/internship.model';
   templateUrl: './internship-listings.component.html',
   styleUrls: ['./internship-listings.component.scss'],
 })
-export class InternshipListingsComponent implements OnChanges {
+export class InternshipListingsComponent {
   @Input() internships: Internship[] | null = [];
   @Output() pageChange = new EventEmitter<{
     pageIndex: number;
@@ -23,12 +21,6 @@ export class InternshipListingsComponent implements OnChanges {
   @Input() totalNumber: number | null = 0;
   @Input() itemsPerPage: number = 5;
   pageIndex: number = 0;
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['totalNumber']) {
-      console.log('Total number of internships:', this.totalNumber);
-    }
-  }
 
   onPageChange(event: PageEvent): void {
     this.pageIndex = event.pageIndex;

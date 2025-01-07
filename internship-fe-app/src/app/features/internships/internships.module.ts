@@ -22,6 +22,7 @@ import { internshipReducer } from '../../core/store/reducers/internships.reducer
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDatepickerModule, MatDatepickerToggle } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatCardModule,
     MatDividerModule,
     MatPaginatorModule,
+    MatDatepickerToggle,
+    MatDatepickerModule,
     StoreModule.forFeature('internships', internshipReducer),
     EffectsModule.forFeature([InternshipEffects]),
   ],
