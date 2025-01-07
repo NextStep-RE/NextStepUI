@@ -33,6 +33,8 @@ import { InternshipsModule } from './features/internships/internships.module';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { AppliedInternshipsModule } from './features/applied-internships/applied-internships/applied-internships.module';
+import { AppliedInternshipsComponent } from './features/applied-internships/applied-internships/applied-internships.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,7 @@ import { MatButtonModule } from '@angular/material/button';
     MenuSidebarComponent,
     DropdownProfileMenuComponent,
     DocumentsDetailedDialogComponent,
-    SwitchUsersPopupComponent,
+    SwitchUsersPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,8 @@ import { MatButtonModule } from '@angular/material/button';
     FormsModule,
     MatSelectCountryModule.forRoot('en'),
     RouterModule.forRoot(routes),
-    InternshipsModule
+    InternshipsModule,
+    AppliedInternshipsModule
   ],
   bootstrap: [AppComponent],
   providers: [
