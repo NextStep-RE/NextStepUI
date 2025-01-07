@@ -7,8 +7,8 @@ export const loadInternships = createAction(
 );
 
 export const loadInternshipsSuccess = createAction(
-  '[Internships] Load Internships Success',
-  props<{ internships: Internship[] }>()
+  '[Internships API] Load Internships Success',
+  props<{ data: { totalNumber: number; internships: Internship[] } }>()
 );
 
 export const loadInternshipsFailure = createAction(

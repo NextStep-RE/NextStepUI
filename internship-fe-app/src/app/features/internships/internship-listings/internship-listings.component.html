@@ -1,13 +1,15 @@
-<div class="container mx-auto p-4">
-  <div *ngFor="let internship of (internships$ | async)">
+<div *ngIf="internships?.length; else noData">
+  <ng-container *ngFor="let internship of internships">
     <app-internship-box [internship]="internship"></app-internship-box>
-  </div>
-
+  </ng-container>
   <mat-paginator
-    [length]="totalNumber$ | async"
+    [length]="25"
     [pageSize]="itemsPerPage"
-    [pageSizeOptions]="[5, 10, 25, 100]"
-    showFirstLastButtons
-    aria-label="Select page"
-  ></mat-paginator>
+    [pageSizeOptions]="[5, 10, 25, 50]"
+    (page)="onPageChange($event)"
+    showFirstLastButtons>
+  </mat-paginator>
 </div>
+<ng-template #noData>
+  <p>No internships available</p>
+</ng-template>

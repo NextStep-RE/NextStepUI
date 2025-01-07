@@ -1,58 +1,41 @@
 import {
-  AfterViewInit,
   Component,
-  DestroyRef,
-  OnInit,
-  ViewChild,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
 } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { FilterInternship, Internship } from '../../../core/models/internship.model';
-import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
-import {
-  selectInternships,
-  selectTotalNumber,
-} from '../../../core/store/selectors/internships.selector';
-import { loadInternships } from '../../../core/store/actions/internships.actions';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { LOAD_CUSTOMERS } from '../../../core/store/actions/customers.actions';
+import { PageEvent } from '@angular/material/paginator';
+import { Internship } from '../../../core/models/internship.model';
 
 @Component({
   selector: 'app-internship-listings',
   templateUrl: './internship-listings.component.html',
   styleUrls: ['./internship-listings.component.scss'],
 })
-export class InternshipListingsComponent implements OnInit, AfterViewInit {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  internships$!: Observable<Internship[]>;
-  totalNumber$: Observable<number>;
-  itemsPerPage: number = 5;
-  pageIndex=0;
+export class InternshipListingsComponent implements OnChanges {
+  @Input() internships: Internship[] | null = [];
+  @Output() pageChange = new EventEmitter<{
+    pageIndex: number;
+    pageSize: number;
+  }>();
+  @Input() totalNumber: number | null = 0;
+  @Input() itemsPerPage: number = 5;
+  pageIndex: number = 0;
 
-  constructor(private store: Store, private destroyRef: DestroyRef) {
-    this.internships$ = this.store.select(selectInternships);
-    this.totalNumber$ = this.store.select(selectTotalNumber);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['totalNumber']) {
+      console.log('Total number of internships:', this.totalNumber);
+    }
   }
-
-  ngOnInit(): void {
-    this.loadInternships();
-  }
-
-  ngAfterViewInit(): void {
-    this.paginator.page
-      .pipe(takeUntilDestroyed(this.destroyRef))
-  }
-
-  loadInternships() {
-    this.store.dispatch(loadInternships({ 
-      offset: this.pageIndex * this.itemsPerPage, 
-      limit: this.itemsPerPage 
-    }));
-  } 
 
   onPageChange(event: PageEvent): void {
     this.pageIndex = event.pageIndex;
     this.itemsPerPage = event.pageSize;
-    this.loadInternships();
+    this.pageChange.emit({
+      pageIndex: this.pageIndex,
+      pageSize: this.itemsPerPage,
+    });
   }
 }

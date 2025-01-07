@@ -11,7 +11,7 @@ export interface Internship {
   startDate: Date;
   endDate: Date;
   applicationDeadline: Date;
-  datePosted: Date;
+  dateAdded: Date;
   requirements: string[];
 }
 

@@ -2,9 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { loadInternships } from '../../core/store/actions/internships.actions';
-import { Internship, FilterInternship } from '../../core/models/internship.model';
-import { selectInternships, selectLoading, selectError } from '../../core/store/selectors/internships.selector';
-import { PageEvent } from '@angular/material/paginator';
+import {
+  Internship,
+  FilterInternship,
+} from '../../core/models/internship.model';
+import {
+  selectInternships,
+  selectLoading,
+  selectError,
+  selectTotalNumber,
+} from '../../core/store/selectors/internships.selector';
 
 @Component({
   selector: 'app-internships',
@@ -12,69 +19,74 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrls: ['./internships.component.scss'],
 })
 export class InternshipsComponent implements OnInit {
-  selectedInternshipId!: number;
-
   internships$: Observable<Internship[]>;
   loading$: Observable<boolean>;
   error$: Observable<any>;
+  totalNumber$: Observable<number>;
 
   searchQuery: string = '';
-  filters: FilterInternship = {}; 
+  filters: FilterInternship = {};
   sortBy: string = '';
   isFilterSidebarVisible: boolean = false;
-  currentPage: number = 0;
-  pageSize: number = 10;
+
+  itemsPerPage: number = 5;
+  pageIndex: number = 0;
 
   constructor(private store: Store) {
     this.internships$ = this.store.select(selectInternships);
+    this.totalNumber$ = this.store.select(selectTotalNumber);
     this.loading$ = this.store.select(selectLoading);
     this.error$ = this.store.select(selectError);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadInternships();
   }
 
-  loadInternships() {
+  loadInternships(): void {
     const filter: FilterInternship = {
       ...this.filters,
       title: this.searchQuery,
       sortBy: this.sortBy,
     };
 
-    this.store.dispatch(loadInternships({ 
-      offset: this.currentPage * this.pageSize, 
-      limit: this.pageSize, 
-      filter 
-    }));    
+    this.store.dispatch(
+      loadInternships({
+        offset: this.pageIndex,
+        limit: this.itemsPerPage,
+        filter,
+      })
+    );
+    this.totalNumber$.subscribe((total) => {
+      console.log('Total number of internships:', total);
+    });    
   }
 
-  onFiltersChanged(filters: FilterInternship) {
+  onPageChange(event: { pageIndex: number; pageSize: number }): void {
+    this.pageIndex = event.pageIndex;
+    this.itemsPerPage = event.pageSize;
+    this.loadInternships();
+  }
+
+  onFiltersChanged(filters: FilterInternship): void {
     this.filters = { ...this.filters, ...filters };
     this.loadInternships();
   }
 
-  onSortChanged(sortBy: string) {
+  onSortChanged(sortBy: string): void {
     this.sortBy = sortBy;
     this.loadInternships();
   }
 
-  onSearchChange() {
+  onSearchChange(): void {
     this.loadInternships();
   }
 
-  toggleFilterSidebar() {
+  toggleFilterSidebar(): void {
     this.isFilterSidebarVisible = !this.isFilterSidebarVisible;
-  }
-
-  viewDetails(internshipId: number): void {
-    this.selectedInternshipId = internshipId;
-  }
-
-  // Handle page change event
-  onPageChange(event: PageEvent) {
-    this.currentPage = event.pageIndex; // Update currentPage based on pagination
-    this.pageSize = event.pageSize;
-    this.loadInternships(); // Reload internships with new page and size
+    this.totalNumber$.subscribe((total) => {
+      console.log('Total number of internships:', total);
+    });
+    
   }
 }

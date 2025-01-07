@@ -17,12 +17,13 @@
   </div>
 </div>
 
-<div class="flex w-full">
-  <app-filter-sidebar *ngIf="isFilterSidebarVisible" class="w-1/5 mt-4" 
-    (filterChanged)="onFiltersChanged($event)" (sortChanged)="onSortChanged($event)">
+<div class="flex w-full mt-4 gap-4">
+  <app-filter-sidebar *ngIf="isFilterSidebarVisible" class="w-1/5" (filterChanged)="onFiltersChanged($event)"
+    (sortChanged)="onSortChanged($event)">
   </app-filter-sidebar>
 
-  <app-internship-listings class="flex-1">
+  <app-internship-listings class="flex-1" [internships]="internships$ | async" [totalNumber]="totalNumber$ | async"
+    [itemsPerPage]="itemsPerPage" (pageChange)="onPageChange($event)">
   </app-internship-listings>
 
 </div>

@@ -32,11 +32,13 @@ export const internshipReducer = createReducer(
     loading: true,
     error: null,
   })),
-  on(loadInternshipsSuccess, (state, { internships }) => ({
+  on(loadInternshipsSuccess, (state, { data }) => ({
     ...state,
-    internships,
+    internships: data.internships,
+    totalNumber: data.totalNumber,
     loading: false,
   })),
+  
   on(loadInternshipsFailure, (state, { error }) => ({
     ...state,
     loading: false,

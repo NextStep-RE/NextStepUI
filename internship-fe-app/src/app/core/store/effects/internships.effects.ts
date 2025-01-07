@@ -16,9 +16,11 @@ export class InternshipEffects {
   loadInternships$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadInternships),
-      mergeMap(({ offset, limit, filter }) =>
+      mergeMap(({ offset = 0, limit = 5, filter }) =>
         this.internshipService.getAllInternships(offset, limit, filter).pipe(
-          map((internships) => loadInternshipsSuccess({ internships })),
+          map((response) => 
+            loadInternshipsSuccess({ data: response })
+          ),
           catchError((error) => of(loadInternshipsFailure({ error })))
         )
       )
