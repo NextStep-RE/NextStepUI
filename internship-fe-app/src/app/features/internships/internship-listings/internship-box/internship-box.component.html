@@ -1,22 +1,22 @@
 <mat-card class="border border-gray-300 bg-white rounded-lg shadow-sm mb-4 p-3 flex items-start">
     <mat-card-header class="flex flex-col items-center">
-        <img mat-card-avatar [src]="'assets/images/' + internship.company.logoUrl" alt="{{ internship.company.companyName }} Logo"
-            class="w-20 h-20 rounded-sm mb-2" />
+        <img mat-card-avatar [src]="'assets/images/' + internship.companyLogoUrl"
+            alt="{{ internship.companyName }} Logo" class="w-20 h-20 rounded-sm mb-2" />
     </mat-card-header>
 
     <mat-card-content class="flex flex-col w-full">
         <div class="flex justify-between items-start">
             <div class="flex gap-4">
                 <mat-card-title class="text-lg font-semibold text-rtb-dark-blue hover:text-rtb-gray cursor-pointer">
-                    <a [routerLink]="['/internship', internship.internshipId]">
+                    <a [routerLink]="['/internship', internship.id]">
                         {{ internship.title }}
                     </a>
                 </mat-card-title>
                 <p class="text-sm text-rtb-gray italic font-normal ml-4 p-2">
-                    {{ getRelativeTime(internship.datePosted) }}
+                    {{ getRelativeTime(internship.dateAdded) }}
                 </p>
             </div>
-            
+
             <div class="flex flex-row mx-2">
                 <img [src]="isHeartClicked ? 'assets/icons/heart-red.svg' : 'assets/icons/heart.svg'"
                     class="w-7 h-7 cursor-pointer transition-colors duration-200" (mouseenter)="onMouseEnter()"
@@ -41,7 +41,8 @@
             <p><strong>Starting date:</strong> {{ internship.startDate.toDateString() }}</p>
             <p><strong>Experience level:</strong> {{ internship.experience }}</p>
             <p>
-                <strong>Deadline application:</strong> <span
+                <strong>Deadline application:</strong>
+                 <span
                     [ngClass]="{'text-red-500': isDeadlineApproaching(internship.applicationDeadline), 'text-gray-500': !isDeadlineApproaching(internship.applicationDeadline)}">
                     {{ internship.applicationDeadline.toDateString() }}</span>
             </p>
@@ -49,7 +50,8 @@
 
         <div class="flex justify-between items-center mt-4">
             <p class="text-sm text-gray-500">
-                Company: <span class="font-medium hover:text-slate-700"> <a [href]="internship.company.website">{{ internship.company.companyName }} </a></span>
+                Company: <span class="font-medium hover:text-slate-700"> <a [href]="internship.companyWebsite">{{
+                        internship.companyName }} </a></span>
             </p>
         </div>
     </mat-card-content>

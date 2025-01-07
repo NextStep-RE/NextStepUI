@@ -15,6 +15,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { InternshipEffects } from '../../core/store/effects/internships.effects';
+import { internshipReducer } from '../../core/store/reducers/internships.reducers';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -29,13 +36,18 @@ import { MatDividerModule } from '@angular/material/divider';
     RouterModule,
     FormsModule,
     MatCheckboxModule,
+    MatProgressSpinnerModule,
     MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
     MatIconModule,
+    BrowserAnimationsModule,
     MatButtonModule,
     MatCardModule,
     MatDividerModule,
+    MatPaginatorModule,
+    StoreModule.forFeature('internships', internshipReducer),
+    EffectsModule.forFeature([InternshipEffects]),
   ],
   exports: [
     InternshipListingsComponent,

@@ -9,14 +9,15 @@
     Full-Time
   </mat-checkbox>
 
-  <mat-form-field class="w-10">
+  <mat-form-field>
     <mat-label>Location</mat-label>
     <input matInput [(ngModel)]="filters['location']" placeholder="Location" (ngModelChange)="onFilterChange()" />
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Experience</mat-label>
-    <input matInput [(ngModel)]="filters['experience']" placeholder="Experience (e.g., 1-2 years)" (ngModelChange)="onFilterChange()" />
+    <input matInput [(ngModel)]="filters['experience']" placeholder="Experience (e.g., 1-2 years)"
+      (ngModelChange)="onFilterChange()" />
   </mat-form-field>
 
   <mat-form-field>
@@ -38,7 +39,7 @@
   </mat-checkbox>
 
   <h3 class="font-semibold text-lg mt-8 mb-4">Sort By</h3>
-  
+
   <mat-form-field class="w-full">
     <mat-label>Sort By</mat-label>
     <mat-select [(ngModel)]="sortBy" (ngModelChange)="onSortChange(sortBy)">

@@ -187,20 +187,6 @@ mat-card.mat-mdc-card.mdc-card.w-96 {
   opacity: 1;
 }
 
-// mat-select-country - arrow
-.mat-mdc-form-field-flex::after {
-  content: "\2039" !important;
-  font-size: 25px !important;
-  margin-right: 10px !important;
-  color: #232931 !important;
-  transform: rotate(270deg) translate(-35%);
-}
-
-// remove the arrow when country selected
-.item-selected .mat-mdc-form-field-flex::after {
-  content: "" !important;
-}
-
 // mat-tab
 .mat-mdc-tab .mdc-tab__text-label {
   color: #96a0b6 !important;

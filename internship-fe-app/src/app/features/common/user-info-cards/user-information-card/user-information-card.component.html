@@ -31,7 +31,8 @@
         </div>
         <div class="w-[17.625rem] h-[2.813rem] flex flex-col">
           <p class="font-[Yaldevi] text-[1rem] font-semibold text-[#7B7F83] m-0">Faculty</p>
-          <h3 class="font-[Yaldevi] font-semibold text-[1.125rem] text-[#232931] m-0">Mathematics and Computer Science</h3>
+          <h3 class="font-[Yaldevi] font-semibold text-[1.125rem] text-[#232931] m-0">Mathematics and Computer Science
+          </h3>
         </div>
         <div class="w-[17.625rem] h-[2.813rem] flex flex-col">
           <p class="font-[Yaldevi] text-[1rem] font-semibold text-[#7B7F83] m-0">University</p>
@@ -39,10 +40,16 @@
         </div>
         <div class="w-[17.625rem] h-[2.813rem] flex flex-col">
           <p class="font-[Yaldevi] text-[1rem] font-semibold text-[#7B7F83] m-0">CV</p>
-          <h3 class="font-[Yaldevi] font-semibold text-[1.125rem] text-[#232931] m-0">Upload my CV <button mat-button class="ml-2"><img src="assets/icons/upload.svg" class="w-6 h-6"> </button></h3>
+          <h3 class="font-[Yaldevi] font-semibold text-[1.125rem] text-[#232931] m-0">Upload my CV
+            <button mat-button class="ml-2" (click)="toggleAddCv()"><img src="assets/icons/upload.svg"
+                class="w-6 h-6"></button>
+            <button *ngIf="!isDisabled" mat-button (click)="toggleVisibility()" class="ml-2">
+              <img src="assets/icons/eye.svg" class="w-6 h-6" />
+            </button>
+          </h3>
         </div>
       </div>
-      
+
     </div>
   </ng-template>
 </div>

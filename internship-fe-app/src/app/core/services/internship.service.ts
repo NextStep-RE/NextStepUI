@@ -1,62 +1,78 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { FilterInternship, Internship } from '../models/internship.model';
 import { environment } from '../../../environments/environment.development';
-import { Internship, LoadInternships, UpdateInternship } from '../models/internship.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class InternshipsService {
-  private apiUrl = `${environment.apiUrl}/internships`;
-
+export class InternshipService {
   constructor(private http: HttpClient) {}
 
-  loadInternships(
-    loadInternships: LoadInternships
-  ): Observable<{ totalCount: number; internships: Internship[] }> {
-    let params = new HttpParams()
-      .set('offset', (loadInternships.pageNumber * loadInternships.pageSize).toString())
-      .set('limit', loadInternships.pageSize.toString());
+  getAllInternships(
+    offset: number,
+    limit: number,
+    filter?: FilterInternship
+  ): Observable<{ totalNumber: number; internships: Internship[] }> {
+    let params = new HttpParams();
 
-    if (loadInternships.searchInput) {
-      params = params.append('search', loadInternships.searchInput);
-    }
+    params = params.set('offset', offset.toString());
+    params = params.set('limit', limit.toString());
 
-    if (loadInternships.sortCriteria && loadInternships.sortDirection) {
-      params = params
-        .append('sortCriteria', loadInternships.sortCriteria)
-        .append('sortDirection', loadInternships.sortDirection);
-    }
-
-    if (loadInternships.filter) {
-      params = params.append('filter', loadInternships.filter);
+    if (filter) {
+      if (filter.title) params = params.set('title', filter.title);
+      if (filter.companyName)
+        params = params.set('companyName', filter.companyName);
+      if (filter.location) params = params.set('location', filter.location);
+      if (filter.startDate)
+        params = params.set('startDate', filter.startDate.toISOString());
+      if (filter.endDate)
+        params = params.set('endDate', filter.endDate.toISOString());
+      if (filter.applicationDeadline)
+        params = params.set(
+          'applicationDeadline',
+          filter.applicationDeadline.toISOString()
+        );
+      if (filter.requirements && filter.requirements.length > 0) {
+        params = params.set('requirements', filter.requirements.join(','));
+      }
+      if (filter.sortBy) params = params.set('sortBy', filter.sortBy);
+      if (filter.ascending !== undefined)
+        params = params.set('ascending', filter.ascending.toString());
     }
 
     return this.http
-      .get<{ items: Internship[]; totalCount: number }>(this.apiUrl, { params })
+      .get<{ totalNumber: number; internships: Internship[] }>(
+        `${environment.apiUrl}/internships`,
+        { params }
+      )
       .pipe(
         map((response) => ({
-          internships: response.items,
-          totalCount: response.totalCount,
+          totalNumber: response.totalNumber,
+          internships: response.internships.map((internship) => ({
+            ...internship,
+            startDate: new Date(internship.startDate),
+            endDate: new Date(internship.endDate),
+            dateAdded: new Date(internship.dateAdded),
+            applicationDeadline: new Date(internship.applicationDeadline),
+          })),
         }))
       );
   }
 
-  getInternship(id: number): Observable<Internship> {
-    return this.http.get<Internship>(`${this.apiUrl}/${id}`);
-  }
-
-  addInternship(internship: Partial<Internship>): Observable<Internship> {
-    return this.http.post<Internship>(this.apiUrl, internship);
-  }
-
-  updateInternship(id: number, internship: UpdateInternship): Observable<UpdateInternship> {
-    return this.http.put<UpdateInternship>(`${this.apiUrl}/${id}`, internship);
-  }
-
-  deleteInternship(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  getInternshipById(id: number): Observable<Internship> {
+    return this.http
+      .get<Internship>(`${environment.apiUrl}/internships/${id}`)
+      .pipe(
+        map((internship) => ({
+          ...internship,
+          startDate: new Date(internship.startDate),
+          endDate: new Date(internship.endDate),
+          dateAdded: new Date(internship.dateAdded),
+          applicationDeadline: new Date(internship.applicationDeadline),
+        }))
+      );
   }
 }

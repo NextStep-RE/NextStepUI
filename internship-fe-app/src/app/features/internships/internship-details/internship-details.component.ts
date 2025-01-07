@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MOCK_INTERNSHIPS } from '../../../core/models/mock-data/internship.mock';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Internship } from '../../../core/models/internship.model';
+import { loadInternshipById } from '../../../core/store/actions/internships.actions';
+import { selectInternship } from '../../../core/store/selectors/internships.selector';
 
 @Component({
   selector: 'app-internship-details',
@@ -10,27 +13,25 @@ import { Internship } from '../../../core/models/internship.model';
 })
 export class InternshipDetailsComponent implements OnInit {
   internshipId!: string;
-  internshipDetails!: Internship | undefined;
+  internshipDetails$!: Observable<Internship | null>;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private store: Store
+  ) {}
 
   ngOnInit() {
     this.internshipId = this.route.snapshot.paramMap.get('id')!;
 
-    this.internshipDetails = MOCK_INTERNSHIPS.find(
-      (i) => i.internshipId === this.internshipId
-    );
+    this.store.dispatch(loadInternshipById({ id: +this.internshipId }));
 
-    if (this.internshipDetails) {
-      console.log('Internship found:', this.internshipDetails);
-    } else {
-      console.error('Internship not found!');
-    }
+    this.internshipDetails$ = this.store.select(selectInternship);
   }
 
   getFormattedDate(date?: Date): string {
-    if (!date) return 'Not available'; // Return a fallback string if the date is undefined
-    
+    if (!date) return 'Not available';
+
     const options: Intl.DateTimeFormatOptions = {
       weekday: 'short',
       year: 'numeric',
@@ -39,15 +40,20 @@ export class InternshipDetailsComponent implements OnInit {
     };
     return new Date(date).toLocaleDateString(undefined, options);
   }
-  
+
   isDeadlineApproaching(deadline: Date): boolean {
     const currentDate = new Date();
-    const timeDifference = deadline.getTime() - currentDate.getTime();
+    const deadlineDate = new Date(deadline);
+    const timeDifference = deadlineDate.getTime() - currentDate.getTime();
     const daysRemaining = timeDifference / (1000 * 3600 * 24);
     return daysRemaining <= 10 && daysRemaining >= 0;
   }
 
   closeDetails() {
     this.router.navigate(['/internships']);
+  }
+
+  openWebsite(url: string): void {
+    window.open(url, '_blank');
   }
 }
