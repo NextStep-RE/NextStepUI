@@ -3,7 +3,7 @@
     <app-internship-box [internship]="internship"></app-internship-box>
   </ng-container>
   <mat-paginator
-    [length]="25"
+    [length]="totalNumber"
     [pageSize]="itemsPerPage"
     [pageSizeOptions]="[5, 10, 25, 50]"
     (page)="onPageChange($event)"
