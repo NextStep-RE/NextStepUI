@@ -1,51 +1,47 @@
 <div class="p-6 bg-gray-100 border-rtb-black shadow-lg h-full space-y-6 flex flex-col">
   <h3 class="font-semibold text-lg mb-4">Filters</h3>
 
-  <mat-checkbox [(ngModel)]="filters['remote']" (ngModelChange)="onFilterChange()">
-    Remote
-  </mat-checkbox>
-
-  <mat-checkbox [(ngModel)]="filters['fullTime']" (ngModelChange)="onFilterChange()">
-    Full-Time
-  </mat-checkbox>
-
   <mat-form-field>
     <mat-label>Location</mat-label>
-    <input matInput [(ngModel)]="filters['location']" placeholder="Location" (ngModelChange)="onFilterChange()" />
+    <input matInput [(ngModel)]="filters.location" placeholder="Location or 'Remote'" (ngModelChange)="onFilterChange()" />
+  </mat-form-field>
+  
+  <mat-form-field>
+    <mat-label>Start Date</mat-label>
+    <input matInput [matDatepicker]="startDatePicker" [(ngModel)]="filters.startDate" (ngModelChange)="onFilterChange()" />
+    <mat-datepicker-toggle matIconSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #startDatePicker></mat-datepicker>
+    <mat-hint>MM/DD/YYYY</mat-hint>
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Experience</mat-label>
-    <input matInput [(ngModel)]="filters['experience']" placeholder="Experience (e.g., 1-2 years)"
-      (ngModelChange)="onFilterChange()" />
+    <mat-label>End Date</mat-label>
+    <input matInput [matDatepicker]="endDatePicker" [(ngModel)]="filters.endDate" (ngModelChange)="onFilterChange()" />
+    <mat-datepicker-toggle matIconSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #endDatePicker></mat-datepicker>
+    <mat-hint>MM/DD/YYYY</mat-hint>
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Common Requirements</mat-label>
-    <mat-select [(ngModel)]="filters['commonRequirements']" (ngModelChange)="onFilterChange()">
-      <mat-option *ngFor="let req of commonRequirements" [value]="req">{{ req }}</mat-option>
-    </mat-select>
+    <mat-label>Application Deadline</mat-label>
+    <input matInput [matDatepicker]="deadlinePicker" [(ngModel)]="filters.applicationDeadline" (ngModelChange)="onFilterChange()" />
+    <mat-datepicker-toggle matIconSuffix [for]="deadlinePicker"></mat-datepicker-toggle>
+    <mat-datepicker #deadlinePicker></mat-datepicker>
+    <mat-hint>MM/DD/YYYY</mat-hint>
   </mat-form-field>
-
-  <mat-form-field class="w-full">
-    <mat-label>Company</mat-label>
-    <mat-select [(ngModel)]="filters['company']" (ngModelChange)="onFilterChange()">
-      <mat-option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-checkbox [(ngModel)]="filters['onSite']" (ngModelChange)="onFilterChange()">
-    On-Site
-  </mat-checkbox>
 
   <h3 class="font-semibold text-lg mt-8 mb-4">Sort By</h3>
 
   <mat-form-field class="w-full">
     <mat-label>Sort By</mat-label>
-    <mat-select [(ngModel)]="sortBy" (ngModelChange)="onSortChange(sortBy)">
-      <mat-option value="name">Name</mat-option>
+    <mat-select [(ngModel)]="filters.sortBy" (ngModelChange)="onSortChange(filters.sortBy)">
+      <mat-option value="title">Title</mat-option>
       <mat-option value="endDate">End Date</mat-option>
-      <mat-option value="deadline">Application Deadline</mat-option>
+      <mat-option value="applicationDeadline">Application Deadline</mat-option>
     </mat-select>
   </mat-form-field>
+
+  <mat-checkbox [(ngModel)]="filters.ascending" (ngModelChange)="onFilterChange()">
+    Ascending
+  </mat-checkbox>
 </div>

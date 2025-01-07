@@ -27,6 +27,7 @@ export class InternshipsComponent implements OnInit {
   searchQuery: string = '';
   filters: FilterInternship = {};
   sortBy: string = '';
+  sortOrder: boolean = true;
   isFilterSidebarVisible: boolean = false;
 
   itemsPerPage: number = 5;
@@ -48,6 +49,9 @@ export class InternshipsComponent implements OnInit {
       ...this.filters,
       title: this.searchQuery,
       sortBy: this.sortBy,
+      startDate: this.filters.startDate ? new Date(this.filters.startDate) : undefined,
+      endDate: this.filters.endDate ? new Date(this.filters.endDate) : undefined,
+      applicationDeadline: this.filters.applicationDeadline ? new Date(this.filters.applicationDeadline) : undefined,
     };
 
     this.store.dispatch(
@@ -56,10 +60,7 @@ export class InternshipsComponent implements OnInit {
         limit: this.itemsPerPage,
         filter,
       })
-    );
-    this.totalNumber$.subscribe((total) => {
-      console.log('Total number of internships:', total);
-    });    
+    );   
   }
 
   onPageChange(event: { pageIndex: number; pageSize: number }): void {
@@ -74,7 +75,12 @@ export class InternshipsComponent implements OnInit {
   }
 
   onSortChanged(sortBy: string): void {
-    this.sortBy = sortBy;
+    if (this.sortBy === sortBy) {
+      this.filters.ascending = this.sortOrder;
+    } else {
+      this.sortBy = sortBy; 
+      this.sortOrder = true;
+    }
     this.loadInternships();
   }
 
@@ -84,9 +90,5 @@ export class InternshipsComponent implements OnInit {
 
   toggleFilterSidebar(): void {
     this.isFilterSidebarVisible = !this.isFilterSidebarVisible;
-    this.totalNumber$.subscribe((total) => {
-      console.log('Total number of internships:', total);
-    });
-    
   }
 }
