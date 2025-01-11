@@ -35,6 +35,7 @@ import { MatButtonModule } from '@angular/material/button';
     UserInformationCardComponent,
     UserInformationCardComponent,
     LoadingSpinnerComponent,
+    DashboardHeaderComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +48,6 @@ import { MatButtonModule } from '@angular/material/button';
     RouterModule,
     MatIconModule,
     MatButtonModule,
-    DashboardHeaderComponent,
     StoreModule.forFeature('events', EVENT_REDUCER),
     StoreModule.forFeature('personalEvents', PERSONAL_EVENT_REDUCER),
     EffectsModule.forFeature([EventsEffects, PersonalEventsEffect]),

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 import { TimesheetCard } from '../../../core/models/timesheetCard.model';
 import { SELECT_USER_PROFILE_ROLE } from '../../../core/store/selectors/user-profiles.selectors';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-info-cards',
   templateUrl: './user-info-cards.component.html',
-  styleUrl: './user-info-cards.component.scss',
+  styleUrls: ['./user-info-cards.component.scss'],
 })
 export class UserInfoCardsComponent implements OnInit {
   selectedRole$: Observable<string | null>;
@@ -26,11 +26,10 @@ export class UserInfoCardsComponent implements OnInit {
   }
 
   initializeTimesheetCards(): void {
-
     this.userCards = [
-      { title: 'My Applications', imagePath: 'assets/icons/applications.svg' },
-      { title: 'My Education', imagePath: 'assets/icons/education.svg' },
-      { title: 'My Experience', imagePath: 'assets/icons/experience.svg' },
+      new TimesheetCard('My Applications', 'assets/icons/applications.svg'),
+      new TimesheetCard('My Education', 'assets/icons/education.svg'),
+      new TimesheetCard('My Experience', 'assets/icons/experience.svg'),
     ];
   }
 
@@ -44,15 +43,18 @@ export class UserInfoCardsComponent implements OnInit {
     });
   }
 
-  navigateTo(cardTitle: string): void {
-    console.log(cardTitle)
-    if (cardTitle === 'My Applications') {
-      this.router.navigate(['/applied-internships']);
-    } else if (cardTitle === 'My Education') {
-      this.router.navigate(['/education']);
-    } else if (cardTitle === 'My Experience') {
-      this.router.navigate(['/experience']);
+  onCardClick(title: string): void {
+    const routeMapping: Record<string, string> = {
+      'My Applications': '/applied-internships',
+      'My Education': '/education',
+      'My Experience': '/experience',
+    };
+
+    const route = routeMapping[title];
+    if (route) {
+      this.router.navigate([route]);
+    } else {
+      console.error(`No route defined for title: ${title}`);
     }
   }
-  
 }

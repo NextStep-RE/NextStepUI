@@ -42,7 +42,6 @@ import { MatDatepickerModule, MatDatepickerToggle } from '@angular/material/date
     MatSelectModule,
     MatFormFieldModule,
     MatIconModule,
-    BrowserAnimationsModule,
     MatButtonModule,
     MatCardModule,
     MatDividerModule,

@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core'; 
-import { Router } from '@angular/router';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-timesheet-card',
@@ -9,21 +8,9 @@ import { Router } from '@angular/router';
 export class TimesheetCardComponent {
   @Input() title!: string;
   @Input() imagePath!: string;
-
-  constructor(private router: Router) {}
+  @Output() cardClick = new EventEmitter<string>();
 
   handleButtonClick(): void {
-    const routeMapping: Record<string, string> = {
-      'My Education': 'my-education',
-      'My Experience': 'my-experience',
-      'My Applications': 'my-applications',
-    };
-
-    const route = routeMapping[this.title];
-    if (route) {
-      this.router.navigate([route]);
-    } else {
-      console.error(`No route defined for title: ${this.title}`);
-    }
+    this.cardClick.emit(this.title); // Emitere eveniment
   }
 }
