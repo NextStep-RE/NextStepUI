@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {}
 
   closeForm() {
-    this.router.navigate(['/my-profile']);
+    this.router.navigate(['/internships']);
   }
 
   passwordsMatch(): boolean {
@@ -59,7 +59,7 @@ export class SignupComponent implements OnInit {
         const navigationExtras: NavigationExtras = {
           queryParams: { message: 'Înregistrare reușită!' },
         };
-        this.router.navigate(['/my-profile'], navigationExtras);
+        this.router.navigate(['/internships'], navigationExtras);
       },
       (error) => {
         this.isLoading = false;
@@ -71,6 +71,6 @@ export class SignupComponent implements OnInit {
   }
 
   onOutsideClick() {
-    this.router.navigate(['/my-profile']);
+    this.router.navigate(['/internships']);
   }
 }

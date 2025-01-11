@@ -35,7 +35,7 @@ export class LoginComponent {
   }
 
   closeForm() {
-    this.router.navigate(['/my-profile']);
+    this.router.navigate(['/internships']);
   }
 
   login() {
@@ -51,7 +51,7 @@ export class LoginComponent {
       (response) => {
         console.log('Login successful:', response);
         this.isLoading = false;
-        this.router.navigate(['/my-profile']); // Redirect to the dashboard or another protected route
+        this.router.navigate(['/internships']); // Redirect to the dashboard or another protected route
       },
       (error: { error: any }) => {
         this.isLoading = false;
@@ -63,6 +63,6 @@ export class LoginComponent {
   }
 
   onOutsideClick() {
-    this.router.navigate(['/my-profile']);
+    this.router.navigate(['/internships']);
   }
 }
