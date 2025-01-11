@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 
 @Injectable({
@@ -10,6 +10,10 @@ export class AuthenticationService {
   private baseUrl = environment.apiUrl;
   private userKey = 'auth_user'; // Key to store the user object
 
+  private loggedIn = new BehaviorSubject<boolean>(this.isUserLoggedIn()); // Stare inițială
+
+  isLoggedIn$ = this.loggedIn.asObservable(); // Observable pentru componente
+
   constructor(private http: HttpClient) {}
 
   register(user: any): Observable<any> {
@@ -18,22 +22,18 @@ export class AuthenticationService {
 
   login(user: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/users/login`, user).pipe(
-      tap(
-        (response) => this.handleLoginAuthentication(response),
-        (error) => console.error('Login error:', error)
-      )
+      tap((response) => this.handleLoginAuthentication(response))
     );
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem(this.userKey);
+    this.loggedIn.next(false); // Actualizează starea
   }
 
   private handleLoginAuthentication(response: any): void {
-    console.log('Authentication response:', response);
-
-    // Store the entire user object in localStorage as a JSON string
     localStorage.setItem(this.userKey, JSON.stringify(response));
+    this.loggedIn.next(true); // Actualizează starea
   }
 
   getUser(): any | null {
@@ -49,9 +49,7 @@ export class AuthenticationService {
     }
   }
 
-  isLoggedIn(): boolean {
-    // Check if the user object exists in localStorage
-    const user = this.getUser();
-    return user !== null;
+  private isUserLoggedIn(): boolean {
+    return this.getUser() !== null;
   }
 }

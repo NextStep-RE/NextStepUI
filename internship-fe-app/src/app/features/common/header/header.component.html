@@ -3,18 +3,28 @@
 >
   <app-search-bar></app-search-bar>
   <div class="flex justify-end mr-4">
-    <app-account-profile></app-account-profile>
-    <button
-      class="text-white w-auto h-14 px-4 py-2 rounded-lg bg-rtb-blue text-lg ml-auto mr-4"
-      [routerLink]="'/login'"
-    >
-      Login
-    </button>
-    <button
-      class="text-white w-auto h-14 px-4 py-2 rounded-lg bg-rtb-blue text-lg ml-auto"
-      [routerLink]="'/signup'"
-    >
-      Register
-    </button>
+    <app-account-profile *ngIf="isLoggedIn"></app-account-profile>
+    <ng-container *ngIf="isLoggedIn; else notLoggedIn">
+      <button
+        class="text-white w-auto h-14 px-4 py-2 rounded-lg bg-red-600 text-lg ml-auto mr-4"
+        (click)="logout()"
+      >
+        Logout
+      </button>
+    </ng-container>
+    <ng-template #notLoggedIn>
+      <button
+        class="text-white w-auto h-14 px-4 py-2 rounded-lg bg-rtb-blue text-lg ml-auto mr-4"
+        [routerLink]="'/login'"
+      >
+        Login
+      </button>
+      <button
+        class="text-white w-auto h-14 px-4 py-2 rounded-lg bg-rtb-blue text-lg ml-auto"
+        [routerLink]="'/signup'"
+      >
+        Register
+      </button>
+    </ng-template>
   </div>
 </div>
