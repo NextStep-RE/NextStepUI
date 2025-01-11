@@ -5,11 +5,10 @@ import { FormsModule } from '@angular/forms';
 import { DashboardModule } from "../../dashboard/dashboard.module";
 import { CommonModule } from '@angular/common';
 import { faXmark, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { InternshipsModule } from "../../internships/internships.module";
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [FormsModule, DashboardModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -46,12 +45,13 @@ export class LoginComponent {
       password: this.password,
     };
 
-    console.log(user)
+    console.log(user);
 
     this.authenticationService.login(user).subscribe(
-      () => {
-        console.log('Login successful');
-
+      (response) => {
+        console.log('Login successful:', response);
+        this.isLoading = false;
+        this.router.navigate(['/my-profile']); // Redirect to the dashboard or another protected route
       },
       (error: { error: any }) => {
         this.isLoading = false;
@@ -61,6 +61,7 @@ export class LoginComponent {
       }
     );
   }
+
   onOutsideClick() {
     this.router.navigate(['/my-profile']);
   }

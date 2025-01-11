@@ -35,6 +35,10 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { AppliedInternshipsModule } from './features/applied-internships/applied-internships/applied-internships.module';
 import { AppliedInternshipsComponent } from './features/applied-internships/applied-internships/applied-internships.component';
+import { ExperienceComponent } from './features/experience/experience.component';
+import { EducationComponent } from './features/education/education.component';
+import { LoginComponent } from './features/authentication/login/login.component';
+import { SignupComponent } from './features/authentication/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +50,11 @@ import { AppliedInternshipsComponent } from './features/applied-internships/appl
     MenuSidebarComponent,
     DropdownProfileMenuComponent,
     DocumentsDetailedDialogComponent,
-    SwitchUsersPopupComponent
+    SwitchUsersPopupComponent,
+    ExperienceComponent,
+    EducationComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

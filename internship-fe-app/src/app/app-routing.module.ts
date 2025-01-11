@@ -11,6 +11,8 @@ import { InternshipsComponent } from './features/internships/internships.compone
 import { InternshipDetailsComponent } from './features/internships/internship-details/internship-details.component';
 import { FilterSidebarComponent } from './features/internships/filter-sidebar/filter-sidebar.component';
 import { AppliedInternshipsComponent } from './features/applied-internships/applied-internships/applied-internships.component';
+import { EducationComponent } from './features/education/education.component';
+import { ExperienceComponent } from './features/experience/experience.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/internships', pathMatch: 'full' },
@@ -23,6 +25,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'applied-internships', component: AppliedInternshipsComponent },
+  { path: 'education', component: EducationComponent },
+  { path: 'experience', component: ExperienceComponent },
   { path: 'not-found', component: NotFoundPageComponent },
   { path: '**', redirectTo: '/not-found' },
 ];

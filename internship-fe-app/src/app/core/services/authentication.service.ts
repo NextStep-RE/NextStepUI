@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
@@ -8,23 +8,16 @@ import { environment } from '../../../environments/environment.development';
 })
 export class AuthenticationService {
   private baseUrl = environment.apiUrl;
-  private apiUrl = `${this.baseUrl}/Authentication`;
-  private tokenKey = 'auth_token';
-  private emailKey = 'auth_email';
-  private userIDKey = 'user_id';
+  private userKey = 'auth_user'; // Key to store the user object
 
   constructor(private http: HttpClient) {}
 
   register(user: any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-
-    return this.http.post<any>(`${this.apiUrl}/register`, user, { headers });
+    return this.http.post<any>(`${this.baseUrl}/users`, user);
   }
 
   login(user: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, user).pipe(
+    return this.http.post<any>(`${this.baseUrl}/users/login`, user).pipe(
       tap(
         (response) => this.handleLoginAuthentication(response),
         (error) => console.error('Login error:', error)
@@ -33,50 +26,32 @@ export class AuthenticationService {
   }
 
   logout() {
-    localStorage.removeItem(this.tokenKey);
-    localStorage.removeItem(this.emailKey);
-    localStorage.removeItem(this.userIDKey);
+    localStorage.removeItem(this.userKey);
   }
 
   private handleLoginAuthentication(response: any): void {
     console.log('Authentication response:', response);
 
-    if (response && response.token) {
-      localStorage.setItem(this.tokenKey, response.token);
-    }
-
-    if (response && response.email) {
-      localStorage.setItem(this.emailKey, response.email);
-    }
-
-    if (response && response.userId) {
-      localStorage.setItem(this.userIDKey, response.userId.toString());
-    }
-
+    // Store the entire user object in localStorage as a JSON string
+    localStorage.setItem(this.userKey, JSON.stringify(response));
   }
 
-  getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
-  }
-
-  getUserId(): number | null {
-    const userIdString = localStorage.getItem(this.userIDKey);
-
-    if (userIdString === null || userIdString === undefined) {
+  getUser(): any | null {
+    const userJson = localStorage.getItem(this.userKey);
+    if (!userJson) {
       return null;
     }
-
-    const userId = parseInt(userIdString, 10);
-
-    if (isNaN(userId)) {
+    try {
+      return JSON.parse(userJson);
+    } catch (error) {
+      console.error('Error parsing user data from localStorage:', error);
       return null;
     }
-
-    return userId;
   }
 
-  getEmail(): string | null {
-    return localStorage.getItem(this.emailKey);
+  isLoggedIn(): boolean {
+    // Check if the user object exists in localStorage
+    const user = this.getUser();
+    return user !== null;
   }
-
 }
