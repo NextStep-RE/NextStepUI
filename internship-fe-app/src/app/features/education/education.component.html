@@ -1,0 +1,108 @@
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center" *ngIf="isModalOpen" (click)="closeModal()">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-4/5 max-w-3xl relative" (click)="$event.stopPropagation()">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-3xl font-bold text-blue-500">Add Education</h2>
+        <button class="text-black" (click)="closeModal()">X</button>
+      </div>
+      <form (ngSubmit)="saveEducation()">
+        <div class="grid grid-cols-1 gap-4">
+          <div>
+            <label for="degree" class="font-medium">Degree:</label>
+            <input
+              type="text"
+              id="degree"
+              [(ngModel)]="newEducation.degree"
+              name="degree"
+              class="border rounded px-4 py-2 w-full"
+              required
+            />
+          </div>
+          <div>
+            <label for="major" class="font-medium">Major:</label>
+            <input
+              type="text"
+              id="major"
+              [(ngModel)]="newEducation.major"
+              name="major"
+              class="border rounded px-4 py-2 w-full"
+              required
+            />
+          </div>
+          <div>
+            <label for="university" class="font-medium">University:</label>
+            <input
+              type="text"
+              id="university"
+              [(ngModel)]="newEducation.university"
+              name="university"
+              class="border rounded px-4 py-2 w-full"
+              required
+            />
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="startYear" class="font-medium">Start Year:</label>
+              <input
+                type="date"
+                id="startYear"
+                [(ngModel)]="newEducation.startYear"
+                name="startYear"
+                class="border rounded px-4 py-2 w-full"
+                required
+              />
+            </div>
+            <div>
+              <label for="graduationYear" class="font-medium">Graduation Year:</label>
+              <input
+                type="date"
+                id="graduationYear"
+                [(ngModel)]="newEducation.graduationYear"
+                name="graduationYear"
+                class="border rounded px-4 py-2 w-full"
+              />
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 transition"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <div class="p-6">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl font-bold">My Education</h1>
+      <button
+        class="bg-gray-300 text-gray-700 px-4 py-2 rounded shadow hover:bg-gray-400 transition"
+        routerLink="/my-profile"
+      >
+        Return to My Profile
+      </button>
+    </div>
+    <div
+      *ngFor="let edu of educationList; let i = index"
+      class="mb-4 border rounded p-4 bg-white shadow"
+    >
+      <div class="flex justify-between">
+        <div>
+          <p><strong>Degree:</strong> {{ edu.degree }}</p>
+          <p><strong>Major:</strong> {{ edu.major }}</p>
+          <p><strong>University:</strong> {{ edu.university }}</p>
+          <p><strong>Start Year:</strong> {{ edu.startYear | date }}</p>
+          <p><strong>Graduation Year:</strong> {{ edu.graduationYear | date }}</p>
+        </div>
+        <button class="text-red-500" (click)="deleteEducation(i)">Delete</button>
+      </div>
+    </div>
+    <button
+      class="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 transition"
+      (click)="openModal()"
+    >
+      Add Education
+    </button>
+  </div>
+  
