@@ -15,8 +15,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { RouterModule } from '@angular/router';
-import { EVENT_REDUCER } from '../../core/store/reducers/events.reducer';
-import { EventsEffects } from '../../core/store/effects/events.effects';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { PERSONAL_EVENT_REDUCER } from '../../core/store/reducers/personal-events.reducer';
@@ -49,9 +47,8 @@ import { AuthenticationService } from '../../core/services/authentication.servic
     RouterModule,
     MatIconModule,
     MatButtonModule,
-    StoreModule.forFeature('events', EVENT_REDUCER),
     StoreModule.forFeature('personalEvents', PERSONAL_EVENT_REDUCER),
-    EffectsModule.forFeature([EventsEffects, PersonalEventsEffect])
+    EffectsModule.forFeature([PersonalEventsEffect])
   ],
   exports: [DashboardComponent, LoadingSpinnerComponent],
   providers: [provideNativeDateAdapter()],

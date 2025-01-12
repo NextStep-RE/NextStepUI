@@ -2,21 +2,16 @@ import {
   Component,
   AfterViewInit,
   ViewChild,
-  Input,
   DestroyRef,
   OnInit,
 } from '@angular/core';
 import { MatCalendar } from '@angular/material/datepicker';
-import { Event } from '../../../core/models/event.model';
-import { combineLatest, filter, map, Observable } from 'rxjs';
+import { filter, map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { SELECT_EVENTS } from '../../../core/store/selectors/events.selectors';
-import { LOAD_EVENTS } from '../../../core/store/actions/events.actions';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PersonalEvent } from '../../../core/models/personalEvent.model';
 import { SELECT_PERSONAL_EVENTS } from '../../../core/store/selectors/personal-events.selectors';
 import { LOAD_PERSONAL_EVENTS } from '../../../core/store/actions/personal-event.actions';
-import { Employee } from '../../../core/models/employee.model';
 import { EmployeeService } from '../../../core/services/employee.service';
 
 @Component({
@@ -29,8 +24,8 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
   selected: Date = new Date();
   today: Date = new Date();
   previousActiveDate!: Date;
-  combinedEvents$!: Observable<(PersonalEvent | Event)[]>;
-  events: Event[] = [];
+  events$!: Observable<PersonalEvent[]>;
+  eventList: PersonalEvent[] = [];
 
   constructor(
     private store: Store,
@@ -39,11 +34,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.combinedEvents$ = combineLatest([
-      this.store.select(SELECT_PERSONAL_EVENTS),
-      this.store.select(SELECT_EVENTS),
-    ]).pipe(map(([personalEvents, events]) => [...personalEvents, ...events]));
-
+    this.events$ = this.store.select(SELECT_PERSONAL_EVENTS);
     this.loadEvents();
     this.updateEvents();
   }
@@ -51,10 +42,9 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
   loadEvents(): void {
     this.store.dispatch(
       LOAD_PERSONAL_EVENTS({
-        employeeId: this.employeeService.getSelectedEmployeeId(),
+        userId: this.employeeService.getSelectedEmployeeId(),
       })
     );
-    this.store.dispatch(LOAD_EVENTS());
   }
 
   ngAfterViewInit(): void {
@@ -82,10 +72,6 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // isPersonalEvent(event: Event | PersonalEvent): event is PersonalEvent {
-  //   return (event as PersonalEvent).employeeId !== undefined;
-  // }
-
   isSameMonthAndYear(d1: Date, d2: Date): boolean {
     const date1 = new Date(d1);
     const date2 = new Date(d2);
@@ -105,12 +91,12 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
     this.getEventsForDay(this.selected)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((events) => {
-        this.events = events;
+        this.eventList = events;
       });
   }
 
-  getEventsForDay(selectedDate: Date): Observable<Event[] | PersonalEvent[]> {
-    return this.combinedEvents$.pipe(
+  getEventsForDay(selectedDate: Date): Observable<PersonalEvent[]> {
+    return this.events$.pipe(
       filter((events) => events.length > 0),
       map((events) =>
         events

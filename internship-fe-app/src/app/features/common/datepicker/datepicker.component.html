@@ -10,13 +10,13 @@
       ></mat-calendar>
     </mat-card>
   </div>
-  @if (events.length > 0) {
+  @if (eventList.length > 0) {
   <div class="max-h-64 overflow-y-auto ml-2 no-scrollbar">
-    @for (event of events; track event.startDate) {
+    @for (event of eventList; track event.startDate) {
     <div class="flex mb-10 space-x-5">
-      <div class="w-[5.5px] h-20 bg-gray-900"></div>
+      <div class="w-1.5 h-20 bg-rtb-black"></div>
 
-      <div class="flex flex-col -space-y-2">
+      <div class="flex flex-col ">
         <p class="text-3xl font-semibold">
           {{ event.startDate | date : "dd" }}
         </p>
@@ -24,20 +24,13 @@
           {{ event.startDate | date : "MMM" }}
         </p>
       </div>
-      <div class="flex flex-col pl-20 w-full text-left">
-        <p class="text-gray-900 text-lg font-semibold">{{ event.title }}</p>
-        <p class="text-gray-300">
+      <div class="flex flex-col pl-9 w-full text-left">
+        <p class="text-rtb-blue text-lg font-semibold">{{ event.title }}</p>
+        <p class="text-gray-500">
           {{ event.startDate | date : "dd MMM/HH:mm" }}
         </p>
-        <p class="text-gray-300">{{ event.location }}</p>
+        <p class="text-gray-500">{{ event.location }}</p>
       </div>
-      <button class="ml-4 self-center">
-        <img
-          src="assets/icons/left-icon.svg"
-          alt="Event Image"
-          class="w-8 h-8"
-        />
-      </button>
     </div>
     }
   </div>

@@ -3,7 +3,7 @@ import { PersonalEvent } from '../../models/personalEvent.model';
 
 export const LOAD_PERSONAL_EVENTS = createAction(
   '[PersonalEvents] Load Personal Events',
-  props<{ employeeId: number }>()
+  props<{ userId: number }>()
 );
 
 export const LOAD_PERSONAL_EVENTS_SUCCESS = createAction(
