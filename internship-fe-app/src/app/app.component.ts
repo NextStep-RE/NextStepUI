@@ -6,7 +6,7 @@ import { AfterViewChecked, ChangeDetectorRef, Component } from '@angular/core';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements AfterViewChecked {
-  title = 'hr-management-fe-app';
+  title = 'intenrship-fe-app';
   scrollable: boolean = false;
  
   constructor(private cdr: ChangeDetectorRef) {}

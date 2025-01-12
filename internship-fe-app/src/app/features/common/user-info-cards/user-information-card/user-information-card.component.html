@@ -1,6 +1,5 @@
 <div>
   <div class="text-center" *ngIf="isLoading; else userInfoContent">
-    <app-loading-spinner></app-loading-spinner>
   </div>
   <ng-template #userInfoContent>
     <div class="w-[30rem] h-[28.5rem] rounded-lg border border-[#E9EAEA] shadow-md p-6 gap-[3rem] bg-white">
@@ -26,7 +25,6 @@
           <h3 class="font-[Yaldevi] font-semibold text-[1.125rem] text-[#232931] m-0">{{ user?.email }}</h3>
         </div>
 
-        <!-- Added Bio Section -->
         <div class="w-[17.625rem] h-[2.813rem] flex flex-col">
           <p class="font-[Yaldevi] text-[1rem] font-semibold text-[#7B7F83] m-0">Bio</p>
           <h3 class="font-[Yaldevi] font-semibold text-[1.125rem] text-[#232931] m-0">{{ user?.bio || 'No bio available' }}</h3>

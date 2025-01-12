@@ -48,7 +48,7 @@ export class AuthenticationService {
     }
   }
 
-  getUserId(): number | null {
+  getUserId(): number {
     const user = this.getUser();
     return user?.id ?? null; // Returnează `userId` sau `null` dacă nu este disponibil
   }

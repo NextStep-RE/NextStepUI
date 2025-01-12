@@ -1,7 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { PersonalEvent } from "../../models/personalEvent.model";
 import { LOAD_PERSONAL_EVENTS,LOAD_PERSONAL_EVENTS_SUCCESS, LOAD_PERSONAL_EVENTS_FAILURE } from "../actions/personal-event.actions";
-import { SET_LOADING } from "../actions/userInfo.actions";
 
 export interface IPersonalEventState {
     personalEvents: PersonalEvent[];
@@ -43,7 +42,6 @@ export const PERSONAL_EVENT_REDUCER = createReducer(
         })
       ),
       on(
-        SET_LOADING,
         (
           state: IPersonalEventState,
           action: { isLoading: boolean }

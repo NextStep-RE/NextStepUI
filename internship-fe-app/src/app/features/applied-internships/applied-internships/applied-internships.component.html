@@ -36,7 +36,7 @@
     <ng-container *ngFor="let application of userApplications">
       <mat-card class="border border-gray-300 bg-white rounded-lg shadow-sm mb-4 p-3 flex items-start">
         <mat-card-header class="flex flex-col items-center">
-          <img mat-card-avatar [src]="application.internship.companyLogoUrl"
+          <img mat-card-avatar [src]="'assets/images/' + application.internship.companyLogoUrl"
             alt="{{ application.internship.companyName }} Logo" class="w-20 h-20 rounded-sm mb-2" />
         </mat-card-header>
 
