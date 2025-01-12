@@ -1,49 +1,49 @@
-import { Component } from '@angular/core';
-import { Experience } from '../../core/models/user.model';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Experience } from '../../core/models/user.model'; // Adjust the path to your model
+import { UserService } from '../../core/services/user.service';
+import { AuthenticationService } from '../../core/services/authentication.service';
 
 @Component({
   selector: 'app-experience',
   templateUrl: './experience.component.html',
-  styleUrl: './experience.component.scss'
+  styleUrls: ['./experience.component.scss'],
 })
-export class ExperienceComponent {
-  experiences: Experience[] = [
-    {
-      role: 'Software Developer Intern',
-      company: 'Tech Solutions',
-      description: 'Worked on developing web applications using Angular and Node.js.',
-      startDate: new Date('2024-01-15'),
-      endDate: new Date('2024-06-15'),
-    },
-    {
-      role: 'Junior Frontend Developer',
-      company: 'Web Innovators',
-      description: 'Contributed to UI/UX designs and implemented responsive websites.',
-      startDate: new Date('2024-07-01'),
-      endDate: new Date('2024-12-31'),
-    },
-  ];
-
-  constructor(private router: Router){}
-
-  isModalOpen = false;
+export class ExperienceComponent implements OnInit {
+  experiences: Experience[] = [];
   newExperience: Experience = {
+    id: 0,
     role: '',
-    company: '',
+    companyName: '',
     description: '',
     startDate: new Date(),
     endDate: undefined,
+    userId: 0, // Dynamically set from AuthenticationService
   };
+  isModalOpen = false;
+  userId: number | null = null;
+
+  constructor(
+    private userService: UserService,
+    private authenticationService: AuthenticationService
+  ) {}
+
+  ngOnInit(): void {
+    this.userId = this.authenticationService.getUserId(); // Get userId dynamically
+    if (this.userId) {
+      this.loadExperiences();
+    }
+  }
 
   openModal(): void {
     this.isModalOpen = true;
     this.newExperience = {
+      id: 0,
       role: '',
-      company: '',
+      companyName: '',
       description: '',
       startDate: new Date(),
       endDate: undefined,
+      userId: this.userId ?? 0,
     };
   }
 
@@ -51,16 +51,42 @@ export class ExperienceComponent {
     this.isModalOpen = false;
   }
 
+  // Fetch experience entries for the user using UserService
+  loadExperiences(): void {
+    console.log(this.userId);
+    if (this.userId) {
+      this.userService.getExperiences(this.userId).subscribe((data) => {
+        this.experiences = data;
+      });
+    }
+    console.log(this.experiences);
+  }
+
+  // Save the new experience entry using UserService
   saveExperience(): void {
-    this.experiences.push({ ...this.newExperience });
-    this.closeModal();
+    if (this.userId) {
+      this.newExperience.userId = this.userId;
+      this.userService.createExperience(this.newExperience).subscribe((savedExperience) => {
+        this.experiences.push(savedExperience); // Add to list
+        this.closeModal();
+        // Option 1: Refresh the page to reload all data (whole page reload)
+        window.location.reload(); 
+
+        // Option 2: Refresh just the experiences (without page reload)
+        // this.loadExperiences();
+      });
+    }
   }
 
-  deleteExperience(index: number): void {
-    this.experiences.splice(index, 1);
-  }
+  // Delete an experience entry by ID using UserService
+  deleteExperience(id: number): void {
+    this.userService.deleteExperience(id).subscribe(() => {
+      this.experiences = this.experiences.filter((exp) => exp.id !== id); // Remove from list
+      // Option 1: Refresh the page to reload all data (whole page reload)
+      window.location.reload();
 
-  onOutsideClick() {
-    this.router.navigate(['/my-profile']);
+      // Option 2: Refresh just the experiences (without page reload)
+      // this.loadExperiences();
+    });
   }
 }

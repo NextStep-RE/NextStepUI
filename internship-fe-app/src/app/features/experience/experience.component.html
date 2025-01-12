@@ -1,107 +1,95 @@
 <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center" *ngIf="isModalOpen" (click)="closeModal()">
-    <div class="bg-white rounded-lg shadow-lg p-6 w-4/5 max-w-3xl relative" (click)="$event.stopPropagation()">
-      <div class="flex justify-between items-center mb-6">
-        <h2 class="text-3xl font-bold text-blue-500">Add Experience</h2>
-        <button class="text-red-500" (click)="closeModal()">X</button>
-      </div>
-      <form (ngSubmit)="saveExperience()">
-        <div class="grid grid-cols-1 gap-4">
-          <div>
-            <label for="role" class="font-medium">Role:</label>
-            <input
-              type="text"
-              id="role"
-              [(ngModel)]="newExperience.role"
-              name="role"
-              class="border rounded px-4 py-2 w-full"
-              required
-            />
-          </div>
-          <div>
-            <label for="company" class="font-medium">Company:</label>
-            <input
-              type="text"
-              id="company"
-              [(ngModel)]="newExperience.company"
-              name="company"
-              class="border rounded px-4 py-2 w-full"
-              required
-            />
-          </div>
-          <div>
-            <label for="description" class="font-medium">Description:</label>
-            <textarea
-              id="description"
-              [(ngModel)]="newExperience.description"
-              name="description"
-              class="border rounded px-4 py-2 w-full"
-              required
-            ></textarea>
-          </div>
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label for="startDate" class="font-medium">Start Date:</label>
-              <input
-                type="date"
-                id="startDate"
-                [(ngModel)]="newExperience.startDate"
-                name="startDate"
-                class="border rounded px-4 py-2 w-full"
-                required
-              />
-            </div>
-            <div>
-              <label for="endDate" class="font-medium">End Date:</label>
-              <input
-                type="date"
-                id="endDate"
-                [(ngModel)]="newExperience.endDate"
-                name="endDate"
-                class="border rounded px-4 py-2 w-full"
-              />
-            </div>
-          </div>
-          <button
-            type="submit"
-            class="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 transition"
-          >
-            Save
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-  
-  <div class="p-6">
+  <div class="bg-white rounded-lg shadow-lg p-6 w-4/5 max-w-3xl relative" (click)="$event.stopPropagation()">
     <div class="flex justify-between items-center mb-6">
-      <h1 class="text-3xl font-bold">My Experience</h1>
-      <button
-        class="bg-gray-300 text-gray-700 px-4 py-2 rounded shadow hover:bg-gray-400 transition"
-        routerLink="/my-profile"
-      >
-        Return to My Profile
-      </button>
+      <h2 class="text-3xl font-bold text-blue-500">Add Experience</h2>
+      <button class="text-red-500" (click)="closeModal()">X</button>
     </div>
-    <div
-      *ngFor="let exp of experiences; let i = index"
-      class="mb-4 border rounded p-4 bg-gray-50 shadow"
-    >
-      <div class="flex justify-between">
+    <form (ngSubmit)="saveExperience()">
+      <div class="grid grid-cols-1 gap-4">
         <div>
-          <p><strong>Role:</strong> {{ exp.role }}</p>
-          <p><strong>Company:</strong> {{ exp.company }}</p>
-          <p><strong>Description:</strong> {{ exp.description }}</p>
-          <p><strong>Start Date:</strong> {{ exp.startDate | date }}</p>
-          <p><strong>End Date:</strong> {{ exp.endDate ? (exp.endDate | date) : 'Ongoing' }}</p>
+          <label for="role" class="font-medium">Role:</label>
+          <input
+            type="text"
+            id="role"
+            [(ngModel)]="newExperience.role"
+            name="role"
+            class="border rounded px-4 py-2 w-full"
+            required
+          />
         </div>
-        <button class="text-red-500" (click)="deleteExperience(i)">Delete</button>
+        <div>
+          <label for="companyName" class="font-medium">Company:</label>
+          <input
+            type="text"
+            id="companyName"
+            [(ngModel)]="newExperience.companyName"
+            name="companyName"
+            class="border rounded px-4 py-2 w-full"
+            required
+          />
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label for="startDate" class="font-medium">Start Date:</label>
+            <input
+              type="date"
+              id="startDate"
+              [(ngModel)]="newExperience.startDate"
+              name="startDate"
+              class="border rounded px-4 py-2 w-full"
+              required
+            />
+          </div>
+          <div>
+            <label for="endDate" class="font-medium">End Date:</label>
+            <input
+              type="date"
+              id="endDate"
+              [(ngModel)]="newExperience.endDate"
+              name="endDate"
+              class="border rounded px-4 py-2 w-full"
+            />
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 transition"
+        >
+          Save
+        </button>
       </div>
-    </div>
+    </form>
+  </div>
+</div>
+
+<div class="p-6">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold">My Experience</h1>
     <button
-      class="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 transition"
-      (click)="openModal()"
+      class="bg-gray-300 text-gray-700 px-4 py-2 rounded shadow hover:bg-gray-400 transition"
+      routerLink="/my-profile"
     >
-      Add Experience
+      Return to My Profile
     </button>
   </div>
-  
+  <div
+    *ngFor="let exp of experiences; let i = index"
+    class="mb-4 border rounded p-4 bg-gray-50 shadow"
+  >
+    <div class="flex justify-between">
+      <div>
+        <p><strong>Role:</strong> {{ exp.role }}</p>
+        <p><strong>Company:</strong> {{ exp.companyName }}</p>
+        <p><strong>Start Date:</strong> {{ exp.startDate | date: 'EEE MMM dd yyyy' }}</p>
+        <p><strong>End Date:</strong> {{ exp.endDate ? (exp.endDate | date: 'EEE MMM dd yyyy') : 'Ongoing' }}</p>
+      </div>
+      <button class="text-red-500" (click)="deleteExperience(exp.id)">Delete</button>
+    </div>
+  </div>
+  <button
+    class="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 transition"
+    (click)="openModal()"
+  >
+    Add Experience
+  </button>
+</div>
