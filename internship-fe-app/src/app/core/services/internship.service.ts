@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FilterInternship, Internship } from '../models/internship.model';
 import { environment } from '../../../environments/environment.development';
+import { FilterInternship, Internship } from '../models/internship.model'; // Importă modelele
 
 @Injectable({
   providedIn: 'root',
@@ -74,5 +74,9 @@ export class InternshipService {
           applicationDeadline: new Date(internship.applicationDeadline),
         }))
       );
+  }
+
+  applyLocal(applicationRequest: { internshipId: number; userId: number }): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/applications`, applicationRequest);
   }
 }

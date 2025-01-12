@@ -80,11 +80,23 @@
       </div>
 
       <div class="mt-8 flex justify-center gap-8">
-        <button *ngIf="internshipDetails.companyWebsite" (click)="openWebsite(internshipDetails.companyWebsite)"
-          class="bg-rtb-blue text-white px-6 py-3 rounded-lg hover:bg-rtb-dark-blue shadow-lg hover:shadow-md transition-all duration-300 transform hover:scale-105">
-          Apply
+        <!-- Apply via site -->
+        <button 
+          *ngIf="internshipDetails.companyWebsite" 
+          (click)="openWebsite(internshipDetails.companyWebsite)"
+          class="apply-btn-site text-white bg-black px-6 py-3 rounded-lg hover:bg-gray-800 shadow-lg hover:shadow-md transition-all duration-300 transform hover:scale-105">
+          Apply via Site
+        </button>
+      
+        <!-- Apply locally -->
+        <button 
+          (click)="applyLocally(internshipDetails.id)"
+          class="apply-btn-local text-white bg-black px-6 py-3 rounded-lg hover:bg-gray-800 shadow-lg hover:shadow-md transition-all duration-300 transform hover:scale-105">
+          Apply Locally
         </button>
       </div>
+      
+      
     </div>
   </div>
 </div>
