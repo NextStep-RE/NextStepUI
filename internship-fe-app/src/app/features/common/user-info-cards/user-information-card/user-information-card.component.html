@@ -5,20 +5,16 @@
   <ng-template #userInfoContent>
     <div class="w-[30rem] h-[28.5rem] rounded-lg border border-[#E9EAEA] shadow-md p-6 gap-[3rem] bg-white">
       <div class="w-full h-[4.4375rem] flex justify-between items-center">
-
         <div class="flex items-center gap-3 mt-4">
           <img src="assets/images/TedMarshal.png" class="w-20 h-20 mr-2 rounded-full">
           <div class="flex flex-col ml-2 mt-2">
-            <span class="font-[Yaldevi] font-semibold text-2xl text-[#232931]">Ted Marshal</span>
-            <span class="font-[Yaldevi] text-sm leading-[1.48rem] text-[#7B7F83]">
-              student at <i> Babes Bolyai University </i>
-            </span>
+            <span class="font-[Yaldevi] font-semibold text-2xl text-[#232931]">{{ user?.firstName }} {{ user?.lastName }}</span>
           </div>
         </div>
 
         <div class="w-[5.875rem] h-[3.437rem] rounded-lg flex items-center justify-center">
           <div class="flex flex-col items-center">
-            <span class="font-[Yaldevi] font-bold text-[1.875rem] text-[#00AEEF] mb-3 mt-12">10</span>
+            <span class="font-[Yaldevi] font-bold text-[1.875rem] text-[#00AEEF] mb-3 mt-12">{{ user?.applications?.length || 0 }}</span>
             <p class="font-[Yaldevi] font-medium text-[0.75rem] text-center text-[#7B7F83] m-0">Applications pending</p>
           </div>
         </div>
@@ -27,29 +23,36 @@
       <div class="w-[13.625rem] h-[11.438rem] flex flex-col gap-[1.5rem] mt-[4rem]">
         <div class="w-[17.625rem] h-[2.813rem] flex flex-col">
           <p class="font-[Yaldevi] text-[1rem] font-semibold text-[#7B7F83] m-0">E-mail</p>
-          <h3 class="font-[Yaldevi] font-semibold text-[1.125rem] text-[#232931] m-0">jhon&#64;example.com</h3>
+          <h3 class="font-[Yaldevi] font-semibold text-[1.125rem] text-[#232931] m-0">{{ user?.email }}</h3>
         </div>
+
+        <!-- Added Bio Section -->
         <div class="w-[17.625rem] h-[2.813rem] flex flex-col">
-          <p class="font-[Yaldevi] text-[1rem] font-semibold text-[#7B7F83] m-0">Faculty</p>
-          <h3 class="font-[Yaldevi] font-semibold text-[1.125rem] text-[#232931] m-0">Mathematics and Computer Science
-          </h3>
+          <p class="font-[Yaldevi] text-[1rem] font-semibold text-[#7B7F83] m-0">Bio</p>
+          <h3 class="font-[Yaldevi] font-semibold text-[1.125rem] text-[#232931] m-0">{{ user?.bio || 'No bio available' }}</h3>
         </div>
-        <div class="w-[17.625rem] h-[2.813rem] flex flex-col">
-          <p class="font-[Yaldevi] text-[1rem] font-semibold text-[#7B7F83] m-0">University</p>
-          <h3 class="font-[Yaldevi] font-semibold text-[1.125rem] text-[#232931] m-0">Babes Bolyai University</h3>
-        </div>
+
+        <!-- Button for My Applications -->
+        <!-- Button for My Applications -->
+<div class="w-[17.625rem] h-[2.813rem] flex flex-col mt-4">
+  <p class="font-[Yaldevi] text-[1rem] font-semibold text-[#7B7F83] m-0"></p>
+  <h3 class="font-[Yaldevi] font-semibold text-[1.125rem] text-[#232931] m-0">
+    <button mat-button class="text-[#00AEEF] mt-3 mb-3" (click)="goToApplications()">See My Applications</button>
+  </h3>
+</div>
+
+
         <div class="w-[17.625rem] h-[2.813rem] flex flex-col">
           <p class="font-[Yaldevi] text-[1rem] font-semibold text-[#7B7F83] m-0">CV</p>
-          <h3 class="font-[Yaldevi] font-semibold text-[1.125rem] text-[#232931] m-0">Upload my CV
-            <button mat-button class="ml-2" (click)="toggleAddCv()"><img src="assets/icons/upload.svg"
-                class="w-6 h-6"></button>
+          <h3 class="font-[Yaldevi] font-semibold text-[1.125rem] text-[#232931] m-0">
+            Upload my CV
+            <button mat-button class="ml-2" (click)="toggleAddCv()"><img src="assets/icons/upload.svg" class="w-6 h-6"></button>
             <button *ngIf="!isDisabled" mat-button (click)="toggleVisibility()" class="ml-2">
               <img src="assets/icons/eye.svg" class="w-6 h-6" />
             </button>
           </h3>
         </div>
       </div>
-
     </div>
   </ng-template>
 </div>

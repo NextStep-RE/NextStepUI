@@ -1,10 +1,36 @@
 <div class="flex flex-col">
   <app-dashboard-header></app-dashboard-header>
-  <div class="flex">
-    <div class="flex flex-col gap-6">
-      <app-user-info-cards></app-user-info-cards>
-      <app-upcoming-events></app-upcoming-events>
+  <div class="flex flex-col items-center justify-center mt-10" *ngIf="!isLoggedIn; else loggedInTemplate">
+    <h1 class="text-3xl font-bold text-center mb-4">
+      You need to be logged in to view your profile!
+    </h1>
+    <p class="text-lg text-gray-600 text-center mb-6 max-w-lg">
+      Now is the perfect time to search for an internship, start your career journey, 
+      and discover the amazing world of work. Sign in and unlock endless opportunities!
+    </p>
+    <div class="flex gap-4">
+      <button 
+        class="text-white px-6 py-3 rounded-lg bg-rtb-blue text-lg"
+        [routerLink]="'/login'"
+      >
+        Login
+      </button>
+      <button 
+        class="text-white px-6 py-3 rounded-lg bg-green-500 text-lg"
+        [routerLink]="'/signup'"
+      >
+        Register
+      </button>
     </div>
-    <app-datepicker class="ml-auto"></app-datepicker>
   </div>
+
+  <ng-template #loggedInTemplate>
+    <div class="flex">
+      <div class="flex flex-col gap-6">
+        <app-user-info-cards></app-user-info-cards>
+        <app-upcoming-events></app-upcoming-events>
+      </div>
+      <app-datepicker class="ml-auto"></app-datepicker>
+    </div>
+  </ng-template>
 </div>

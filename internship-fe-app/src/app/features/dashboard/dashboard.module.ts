@@ -23,6 +23,7 @@ import { PERSONAL_EVENT_REDUCER } from '../../core/store/reducers/personal-event
 import { PersonalEventsEffect } from '../../core/store/effects/personal-events.effects';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthenticationService } from '../../core/services/authentication.service';
 
 
 @NgModule({
@@ -50,7 +51,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     StoreModule.forFeature('events', EVENT_REDUCER),
     StoreModule.forFeature('personalEvents', PERSONAL_EVENT_REDUCER),
-    EffectsModule.forFeature([EventsEffects, PersonalEventsEffect]),
+    EffectsModule.forFeature([EventsEffects, PersonalEventsEffect])
   ],
   exports: [DashboardComponent, LoadingSpinnerComponent],
   providers: [provideNativeDateAdapter()],
