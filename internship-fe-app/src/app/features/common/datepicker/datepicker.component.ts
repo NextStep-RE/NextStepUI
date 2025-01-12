@@ -12,7 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PersonalEvent } from '../../../core/models/personalEvent.model';
 import { SELECT_PERSONAL_EVENTS } from '../../../core/store/selectors/personal-events.selectors';
 import { LOAD_PERSONAL_EVENTS } from '../../../core/store/actions/personal-event.actions';
-import { EmployeeService } from '../../../core/services/employee.service';
+import { AuthenticationService } from '../../../core/services/authentication.service';
 
 @Component({
   selector: 'app-datepicker',
@@ -30,7 +30,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
   constructor(
     private store: Store,
     private destroyRef: DestroyRef,
-    private employeeService: EmployeeService
+    private auhentificationService: AuthenticationService
   ) {}
 
   ngOnInit(): void {
@@ -42,7 +42,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
   loadEvents(): void {
     this.store.dispatch(
       LOAD_PERSONAL_EVENTS({
-        userId: this.employeeService.getSelectedEmployeeId(),
+        userId: this.auhentificationService.getUserId()
       })
     );
   }
@@ -70,6 +70,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
       }
       this.updateEvents();
     });
+    console.log(this.auhentificationService.getUserId())
   }
 
   isSameMonthAndYear(d1: Date, d2: Date): boolean {

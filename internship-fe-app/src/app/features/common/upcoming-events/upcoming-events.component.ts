@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { SELECT_PERSONAL_EVENTS } from '../../../core/store/selectors/personal-events.selectors';
 import { LOAD_PERSONAL_EVENTS } from '../../../core/store/actions/personal-event.actions';
 import { PersonalEvent } from '../../../core/models/personalEvent.model';
-import { EmployeeService } from '../../../core/services/employee.service';
+import { AuthenticationService } from '../../../core/services/authentication.service';
 
 @Component({
   selector: 'app-upcoming-events',
@@ -14,7 +14,7 @@ import { EmployeeService } from '../../../core/services/employee.service';
 export class UpcomingEventsComponent implements OnInit {
   personalEvents$!: Observable<PersonalEvent[]>;
 
-  constructor(private store: Store, private employeeService: EmployeeService) {}
+  constructor(private store: Store, private authentificationService: AuthenticationService) {}
 
   ngOnInit(): void {
     const today = new Date();
@@ -36,7 +36,7 @@ export class UpcomingEventsComponent implements OnInit {
   loadEvents(): void {
     this.store.dispatch(
       LOAD_PERSONAL_EVENTS({
-        userId: this.employeeService.getSelectedEmployeeId(),
+        userId: this.authentificationService.getUserId(),
       })
     );
   }

@@ -3,7 +3,6 @@ import { TimesheetCardComponent } from '../common/user-info-cards/timesheet-card
 import { UserInformationCardComponent } from '../common/user-info-cards/user-information-card/user-information-card.component';
 import { UpcomingEventsComponent } from '../common/upcoming-events/upcoming-events.component';
 import { DashboardComponent } from './dashboard.component';
-import { LoadingSpinnerComponent } from '../common/loading-spinner/loading-spinner.component';
 import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.component';
 
 import { NgModule } from '@angular/core';
@@ -21,7 +20,6 @@ import { PERSONAL_EVENT_REDUCER } from '../../core/store/reducers/personal-event
 import { PersonalEventsEffect } from '../../core/store/effects/personal-events.effects';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthenticationService } from '../../core/services/authentication.service';
 
 
 @NgModule({
@@ -33,7 +31,6 @@ import { AuthenticationService } from '../../core/services/authentication.servic
     TimesheetCardComponent,
     UserInformationCardComponent,
     UserInformationCardComponent,
-    LoadingSpinnerComponent,
     DashboardHeaderComponent
   ],
   imports: [
@@ -50,7 +47,7 @@ import { AuthenticationService } from '../../core/services/authentication.servic
     StoreModule.forFeature('personalEvents', PERSONAL_EVENT_REDUCER),
     EffectsModule.forFeature([PersonalEventsEffect])
   ],
-  exports: [DashboardComponent, LoadingSpinnerComponent],
+  exports: [DashboardComponent],
   providers: [provideNativeDateAdapter()],
 })
 export class DashboardModule {}

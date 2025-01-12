@@ -11,6 +11,6 @@ export class TimesheetCardComponent {
   @Output() cardClick = new EventEmitter<string>();
 
   handleButtonClick(): void {
-    this.cardClick.emit(this.title); // Emitere eveniment
+    this.cardClick.emit(this.title);
   }
 }

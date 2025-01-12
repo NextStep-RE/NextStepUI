@@ -23,7 +23,7 @@ export class PersonalEventsEffect {
   loadPersonalEvents$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LOAD_PERSONAL_EVENTS),
-      mergeMap((action: { userId: number }): Observable<Action> => {
+      mergeMap((action: { userId: number}): Observable<Action> => {
         this.store.dispatch(SET_LOADING({ isLoading: true }));
         return this.eventsService
           .getPersonalEventsByEmployeeId(action.userId)
