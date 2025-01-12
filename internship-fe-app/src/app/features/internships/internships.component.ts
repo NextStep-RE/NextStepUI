@@ -82,13 +82,14 @@ export class InternshipsComponent implements OnInit {
 
   onSortChanged(sortBy: string): void {
     if (this.sortBy === sortBy) {
-      this.filters.ascending = this.sortOrder;
+      this.filters.ascending = !this.filters.ascending;
     } else {
       this.sortBy = sortBy;
-      this.sortOrder = true;
+      this.filters.ascending = true;
     }
     this.loadInternships();
   }
+  
 
   onSearchChange(): void {
     this.loadInternships();

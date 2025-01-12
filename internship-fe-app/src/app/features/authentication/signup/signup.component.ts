@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
-import { DashboardModule } from '../../dashboard/dashboard.module';
-import { CommonModule } from '@angular/common';
 import { AuthenticationService } from '../../../core/services/authentication.service';
-import { InternshipsModule } from '../../internships/internships.module';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -22,7 +19,8 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {}
@@ -39,6 +37,7 @@ export class SignupComponent implements OnInit {
     this.isLoading = true;
     if (!this.passwordsMatch()) {
       this.errorMessage = 'Parolele nu se potrivesc. Vă rugăm să încercați din nou.';
+      this.toastr.error(this.errorMessage, 'Error');
       this.isLoading = false;
       return;
     }
@@ -59,13 +58,15 @@ export class SignupComponent implements OnInit {
         const navigationExtras: NavigationExtras = {
           queryParams: { message: 'Înregistrare reușită!' },
         };
+        this.toastr.success('You`re officially one of us now!', 'Registration successful!');
         this.router.navigate(['/internships'], navigationExtras);
       },
       (error) => {
         this.isLoading = false;
         this.errorMessage =
-          'Înregistrarea a eșuat. Vă rugăm să verificați datele introduse și să încercați din nou.';
-        console.error('Înregistrarea a eșuat:', error.error);
+          'Uh-oh! That didn`t work. Double-check your details and give it another shot!';
+          this.toastr.error(this.errorMessage, 'Error');
+        console.error('Uh-oh! That didn`t work. Double-check your details and give it another shot!', 'Error');
       }
     );
   }

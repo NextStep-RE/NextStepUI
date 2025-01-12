@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../../core/services/authentication.service';
-import { FormsModule } from '@angular/forms';
-import { DashboardModule } from "../../dashboard/dashboard.module";
-import { CommonModule } from '@angular/common';
 import { faXmark, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { InternshipsModule } from "../../internships/internships.module";
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-login',
@@ -23,7 +21,8 @@ export class LoginComponent {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   removeAlert(index: number): void {
@@ -51,13 +50,14 @@ export class LoginComponent {
       (response) => {
         console.log('Login successful:', response);
         this.isLoading = false;
-        this.router.navigate(['/internships']); // Redirect to the dashboard or another protected route
+        this.toastr.success('You`re in! Welcome back, hero!', 'Success');
+        this.router.navigate(['/internships']);
       },
       (error: { error: any }) => {
         this.isLoading = false;
-        const errorMessage = 'Autentificare eșuată: ' + error.error;
+        const errorMessage = 'Error' + error.error;
         console.error(errorMessage);
-        this.alertErrorMessages.push(errorMessage);
+        this.toastr.error('Oops! Wrong password. Were you trying to hack us?', 'Error');
       }
     );
   }
