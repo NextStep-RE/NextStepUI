@@ -1,84 +1,101 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { FilterInternship, Internship } from '../../../core/models/internship.model';
-import { Store } from '@ngrx/store';
-import { selectError, selectInternships, selectLoading, selectTotalNumber } from '../../../core/store/selectors/internships.selector';
-import { loadInternships } from '../../../core/store/actions/internships.actions';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { AuthenticationService } from '../../../core/services/authentication.service';
+import { UserService } from '../../../core/services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-applied-internships',
   templateUrl: './applied-internships.component.html',
-  styleUrl: './applied-internships.component.scss'
+  styleUrls: ['./applied-internships.component.scss'],
 })
-export class AppliedInternshipsComponent implements OnInit {
-  internships$: Observable<Internship[]>;
-  loading$: Observable<boolean>;
-  error$: Observable<any>;
-  totalNumber$: Observable<number>;
+export class AppliedInternshipsComponent implements OnInit, OnDestroy {
+  userApplications: any[] = [];
+  loading: boolean = false;
+  error: any = null;
+  isLoggedIn: boolean = false; // Adăugăm statusul autentificării
+  private authSubscription: Subscription | undefined;
 
-  searchQuery: string = '';
-  filters: FilterInternship = {};
-  sortBy: string = '';
-  isFilterSidebarVisible: boolean = false;
-
-  itemsPerPage: number = 5;
-  pageIndex: number = 0;
-
-  constructor(private store: Store) {
-    this.internships$ = this.store.select(selectInternships);
-    this.totalNumber$ = this.store.select(selectTotalNumber);
-    this.loading$ = this.store.select(selectLoading);
-    this.error$ = this.store.select(selectError);
-  }
+  constructor(
+    private userService: UserService,
+    private authService: AuthenticationService
+  ) {}
 
   ngOnInit(): void {
-    this.loadInternships();
-  }
-
-  loadInternships(): void {
-    const filter: FilterInternship = {
-      ...this.filters,
-      title: this.searchQuery,
-      sortBy: this.sortBy,
-    };
-
-    this.store.dispatch(
-      loadInternships({
-        offset: this.pageIndex,
-        limit: this.itemsPerPage,
-        filter,
-      })
-    );
-    this.totalNumber$.subscribe((total) => {
-      console.log('Total number of internships:', total);
-    });    
-  }
-
-  onPageChange(event: { pageIndex: number; pageSize: number }): void {
-    this.pageIndex = event.pageIndex;
-    this.itemsPerPage = event.pageSize;
-    this.loadInternships();
-  }
-
-  onFiltersChanged(filters: FilterInternship): void {
-    this.filters = { ...this.filters, ...filters };
-    this.loadInternships();
-  }
-
-  onSortChanged(sortBy: string): void {
-    this.sortBy = sortBy;
-    this.loadInternships();
-  }
-
-  onSearchChange(): void {
-    this.loadInternships();
-  }
-
-  toggleFilterSidebar(): void {
-    this.isFilterSidebarVisible = !this.isFilterSidebarVisible;
-    this.totalNumber$.subscribe((total) => {
-      console.log('Total number of internships:', total);
+    // Verificăm dacă utilizatorul este autentificat
+    this.authSubscription = this.authService.isLoggedIn$.subscribe((status) => {
+      this.isLoggedIn = status;
+      if (this.isLoggedIn) {
+        this.getUserApplications(); // Dacă utilizatorul este logat, preluăm aplicațiile
+      }
     });
-    
+  }
+
+  ngOnDestroy(): void {
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe(); // Dezabonăm pentru a evita scurgerile de memorie
+    }
+  }
+
+  getUserApplications(): void {
+    if (!this.isLoggedIn) return; // Dacă nu este logat, nu încărcăm aplicațiile
+    this.loading = true;
+    this.userService
+      .getUserById('1') // Folosește ID-ul corect al utilizatorului
+      .pipe(
+        catchError((err) => {
+          console.error('Error fetching user data:', err);
+          this.error = err;
+          return of(null);
+        })
+      )
+      .subscribe({
+        next: (user) => {
+          this.userApplications = user?.applications || [];
+          this.loading = false;
+        },
+        error: (err) => {
+          this.error = err;
+          this.loading = false;
+        },
+      });
+  }
+
+  isDeadlineApproaching(deadline: string): boolean {
+    const deadlineDate = new Date(deadline);
+    const today = new Date();
+    const timeDiff = deadlineDate.getTime() - today.getTime();
+    return timeDiff <= 7 * 24 * 60 * 60 * 1000; // Mai puțin de 7 zile
+  }
+
+  formatStatus(status: string): string {
+    switch (status) {
+      case 'PENDING':
+        return 'Pending';
+      case 'CV_IN_REVIEW':
+        return 'CV in Review';
+      case 'UPCOMING_INTERVIEW':
+        return 'Upcoming Interview';
+      case 'ACCEPTED':
+        return 'Accepted';
+      default:
+        return status;
+    }
+  }
+
+  getStatusClass(status: string): string {
+    switch (status) {
+      case 'PENDING':
+        return 'text-yellow-500';
+      case 'CV_IN_REVIEW':
+        return 'text-blue-500';
+      case 'UPCOMING_INTERVIEW':
+        return 'text-purple-500';
+      case 'ACCEPTED':
+        return 'text-green-500';
+      default:
+        return 'text-gray-500';
+    }
   }
 }

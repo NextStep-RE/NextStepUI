@@ -1,38 +1,109 @@
-<div class="flex justify-between items-center bg-white p-4 mt-3 gap-20 shadow">
-    <mat-form-field class="w-full ml-6">
-      <mat-label>Search for internships</mat-label>
-      <input matInput type="text" [(ngModel)]="searchQuery" (keydown.enter)="onSearchChange()">
-      <button matSuffix mat-icon-button aria-label="Search" *ngIf="searchQuery" (click)="onSearchChange()">
-        <mat-icon>search</mat-icon>
-      </button>
-    </mat-form-field>
-  
+<div *ngIf="!isLoggedIn; else loggedInTemplate">
+  <div class="flex flex-col items-center justify-center mt-10">
+    <h1 class="text-3xl font-bold text-center mb-4">
+      You need to be logged in to view the internships you've applied to!
+    </h1>
+    <p class="text-lg text-gray-600 text-center mb-6 max-w-lg">
+      Sign in to view your internship applications and track your progress!
+    </p>
     <div class="flex gap-4">
-      <button mat-icon-button (click)="toggleFilterSidebar()">
-        <img src="assets/icons/filter.svg" class="w-7 h-7">
+      <button 
+        class="text-white px-6 py-3 rounded-lg bg-rtb-blue text-lg"
+        [routerLink]="'/login'"
+      >
+        Login
       </button>
-      <button mat-icon-button (click)="onSortChanged('name')">
-        <img src="assets/icons/sort.svg" class="w-7 h-7">
+      <button 
+        class="text-white px-6 py-3 rounded-lg bg-green-500 text-lg"
+        [routerLink]="'/signup'"
+      >
+        Register
       </button>
     </div>
   </div>
-  
-  <div class="flex w-full mt-4 gap-4">
-    <app-filter-sidebar *ngIf="isFilterSidebarVisible" class="w-1/5" (filterChanged)="onFiltersChanged($event)"
-      (sortChanged)="onSortChanged($event)">
-    </app-filter-sidebar>
-  
-    <app-internship-listings class="flex-1" [internships]="internships$ | async" [totalNumber]="totalNumber$ | async"
-      [itemsPerPage]="itemsPerPage" (pageChange)="onPageChange($event)">
-    </app-internship-listings>
-  
-  </div>
-  
-  <div *ngIf="loading$ | async" class="flex justify-center items-center w-full h-full">
+</div>
+
+<ng-template #loggedInTemplate>
+  <div *ngIf="loading" class="flex justify-center items-center w-full h-full">
     <mat-spinner></mat-spinner>
   </div>
-  
-  <div *ngIf="error$ | async as error" class="flex flex-col gap-3 justify-center items-center w-full h-full">
-    <mat-spinner></mat-spinner>
-    <p class="text-red-500">Error loading internships: {{ error.message }}</p>
+
+  <div *ngIf="!loading && error" class="text-red-500 text-center">
+    <p>Error loading data: {{ error.message }}</p>
   </div>
+
+  <div *ngIf="!loading && userApplications?.length; else noData">
+    <ng-container *ngFor="let application of userApplications">
+      <mat-card class="border border-gray-300 bg-white rounded-lg shadow-sm mb-4 p-3 flex items-start">
+        <mat-card-header class="flex flex-col items-center">
+          <img mat-card-avatar [src]="application.internship.companyLogoUrl"
+            alt="{{ application.internship.companyName }} Logo" class="w-20 h-20 rounded-sm mb-2" />
+        </mat-card-header>
+
+        <mat-card-content class="flex flex-col w-full">
+          <div class="flex justify-between items-start">
+            <div class="flex gap-4">
+              <mat-card-title class="text-lg font-semibold text-rtb-dark-blue hover:text-rtb-gray cursor-pointer">
+                <a [routerLink]="['/internship', application.internship.id]">
+                  {{ application.internship.title }}
+                </a>
+              </mat-card-title>
+            </div>
+          </div>
+
+          <p class="text-sm text-gray-500 mt-2 mb-2">
+            <strong>Applied On:</strong> {{ application.dateApplied | date: 'dd MMM yyyy' }}
+          </p>
+
+          <p class="text-sm text-gray-500 mb-2">
+            <strong>Status:</strong>
+            <span [ngClass]="getStatusClass(application.status)">
+              {{ formatStatus(application.status) }}
+            </span>
+          </p>
+
+          <p *ngIf="application.interviewDate" class="text-sm text-gray-500 mb-2">
+            <strong>Interview Date:</strong> {{ application.interviewDate | date: 'dd MMM yyyy' }}
+          </p>
+
+          <p class="text-sm text-gray-500 mt-2 mb-6">
+            {{ application.internship.location }}
+          </p>
+
+          <div class="flex flex-wrap gap-2 mt-5 mb-3">
+            <span *ngFor="let req of application.internship.requirements"
+              class="bg-gray-100 text-gray-700 text-sm px-2 py-1 rounded-lg">
+              {{ req }}
+            </span>
+          </div>
+
+          <mat-divider class="my-3"></mat-divider>
+
+          <div class="grid grid-cols-3 text-sm text-gray-700 mt-3">
+            <p><strong>Starting date:</strong> {{ application.internship.startDate | date: 'dd MMM yyyy' }}</p>
+            <p><strong>Experience level:</strong> {{ application.internship.experience }}</p>
+            <p>
+              <strong>Deadline application:</strong>
+              <span
+                [ngClass]="{'text-red-500': isDeadlineApproaching(application.internship.applicationDeadline), 'text-gray-500': !isDeadlineApproaching(application.internship.applicationDeadline)}">
+                {{ application.internship.applicationDeadline | date: 'dd MMM yyyy' }}
+              </span>
+            </p>
+          </div>
+
+          <div class="flex justify-between items-center mt-4">
+            <p class="text-sm text-gray-500">
+              Company: <span class="font-medium hover:text-slate-700">
+                <a [href]="application.internship.companyWebsite" target="_blank">{{ application.internship.companyName }}</a>
+              </span>
+            </p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+  </div>
+
+  <ng-template #noData>
+    <p class="text-center text-gray-500 mt-4">No applications found</p>
+  </ng-template>
+</ng-template>

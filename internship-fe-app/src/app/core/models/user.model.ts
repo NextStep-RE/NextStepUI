@@ -13,17 +13,23 @@ export interface User {
   }
   
   export interface Experience {
+    id: number;
     role: string;
-    company: string;
-    description: string;
+    companyName: string;
+    description?: string;
     startDate: Date;
-    endDate?: Date; 
+    endDate?: Date;
+    userId: number;
   }
   
   export interface Education {
+    id: number;
     degree: string;
     major: string;
     university: string;
-    startYear: Date;
-    graduationYear: Date;
+    startDate: Date;
+    endDate?: Date;
+    userId: number;
   }
+  
+  
