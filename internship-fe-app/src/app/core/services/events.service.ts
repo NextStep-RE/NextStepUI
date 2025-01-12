@@ -2,7 +2,6 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "../../../environments/environment.development";
-import { Event } from '../models/event.model';
 import { PersonalEvent } from "../models/personalEvent.model";
 
 @Injectable({
@@ -11,15 +10,13 @@ import { PersonalEvent } from "../models/personalEvent.model";
 export class EventsService {
     constructor(private http: HttpClient) {}
 
-    getAllEvents(): Observable<Event[]> {
-        return this.http.get<Event[]>(environment.apiUrl + '/event');
-    }
-
-    getPersonalEventsByEmployeeId(employeeId: number): Observable<PersonalEvent[]> {
-        return this.http.get<PersonalEvent[]>(environment.apiUrl + `/personal-event/get-by-employee/${employeeId}`);
+    getPersonalEventsByEmployeeId(userId: number): Observable<PersonalEvent[]> {
+        return this.http.get<PersonalEvent[]>(`${environment.apiUrl}/applications/events`, {
+            params: { userId: userId.toString() },
+        });
     }
 
     addEvent(event: Partial<Event>): Observable<Event> {
-        return this.http.post<Event>(environment.apiUrl + '/event', event);
+        return this.http.post<Event>(environment.apiUrl + '/events', event);
     }
 }

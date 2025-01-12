@@ -10,17 +10,17 @@
     </div>
   </div>
   <ul class="max-h-40 overflow-y-auto flex flex-col ml-2 no-scrollbar">
-    @for (event of combinedEvents$ | async; track event.id){
+    @for (event of personalEvents$ | async; track event.id){
     <li>
       <div class="font-semibold ml-2">
-        <div class="m-1 text-base">{{ event.title }}</div>
+        <div class="m-1 text-rtb-blue text-base">{{ event.title }}</div>
         <div class="flex items-center ml-1">
           <img
             src="assets/icons/clock-icon-date.svg"
             alt="clock-icon"
             class="w-3 h-3 mr-1"
           />
-          <span class="text-sm text-gray-400 font-normal">{{
+          <span class="text-sm text-gray-500 font-normal">{{
             event.startDate | date : "dd.MM.yyyy"
           }}</span>
         </div>

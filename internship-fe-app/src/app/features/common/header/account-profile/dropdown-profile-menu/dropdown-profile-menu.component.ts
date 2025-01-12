@@ -102,7 +102,7 @@ export class DropdownProfileMenuComponent implements OnInit, OnDestroy {
   }
 
   loadPersonalEvents(id: number): void {
-    this.store.dispatch(LOAD_PERSONAL_EVENTS({ employeeId: id }));
+    this.store.dispatch(LOAD_PERSONAL_EVENTS({userId: id }));
   }
 
   updateSelectedProfileRole(role: string): void {
