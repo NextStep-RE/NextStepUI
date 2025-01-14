@@ -95,9 +95,11 @@
   >
     <button
       type="button"
+      [routerLink]="['/update-user']"
+      routerLinkActive="active-link"
       [ngClass]="{
         'flex items-center justify-center w-8 h-8': !isHovered,
-        'flex items-center justify-start w-full h-full': isHovered,
+        'flex items-center justify-start w-full h-full': isHovered
       }"
       class="bg-gray-700 text-white rounded-md font-semibold cursor-pointer"
     >
@@ -106,7 +108,7 @@
         alt="settings icon"
         [ngClass]="{
           'mx-auto': !isHovered,
-          'active-link': isActive('/settings'),
+          'active-link': isActive('/update-user'),
           'pl-2': isHovered
         }"
       />
@@ -114,7 +116,7 @@
         *ngIf="isHovered"
         class="ml-2 pt-1"
         [ngClass]="{
-          'flex flex-col items-center justify-center': !isHovered,
+          'flex flex-col items-center justify-center': !isHovered
         }"
       >
         Settings

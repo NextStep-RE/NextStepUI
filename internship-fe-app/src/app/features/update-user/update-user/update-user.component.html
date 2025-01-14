@@ -1,0 +1,121 @@
+<div class="update-user-container">
+  <h2 class="text-2xl font-bold text-center mb-6">Update User</h2>
+  <form (ngSubmit)="onSubmit()" #updateUserForm="ngForm" class="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto">
+    
+    <!-- First Name -->
+    <div class="mb-4">
+      <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
+      <input
+        id="firstName"
+        name="firstName"
+        type="text"
+        [(ngModel)]="user.firstName"
+        #firstNameField="ngModel"
+        required
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+      />
+      <div
+        *ngIf="firstNameField.errors && (firstNameField.dirty || firstNameField.touched)"
+        class="error-message text-red-600 text-sm"
+      >
+        <span *ngIf="firstNameField.errors['required']">
+          First Name is required
+        </span>
+      </div>
+    </div>
+
+    <!-- Last Name -->
+    <div class="mb-4">
+      <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
+      <input
+        id="lastName"
+        name="lastName"
+        type="text"
+        [(ngModel)]="user.lastName"
+        #lastNameField="ngModel"
+        required
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+      />
+      <div
+        *ngIf="lastNameField.errors && (lastNameField.dirty || lastNameField.touched)"
+        class="error-message text-red-600 text-sm"
+      >
+        <span *ngIf="lastNameField.errors['required']">
+          Last Name is required
+        </span>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="mb-4">
+      <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        [(ngModel)]="user.email"
+        #emailField="ngModel"
+        required
+        email
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+      />
+      <div
+        *ngIf="emailField.errors && (emailField.dirty || emailField.touched)"
+        class="error-message text-red-600 text-sm"
+      >
+        <span *ngIf="emailField.errors['required']">
+          Email is required
+        </span>
+        <span *ngIf="emailField.errors['email']">
+          Please enter a valid email address
+        </span>
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="mb-4">
+      <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        [(ngModel)]="user.password"
+        #passwordField="ngModel"
+        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d])[A-Za-z\d\S]{8,}$"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+      />
+      <div
+        *ngIf="passwordField.errors && (passwordField.dirty || passwordField.touched)"
+        class="error-message text-red-600 text-sm"
+      >
+        <span *ngIf="passwordField.errors['pattern']">
+          Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character (any character that is not a letter or digit).
+        </span>
+      </div>
+    </div>
+
+    <!-- Bio -->
+    <div class="mb-4">
+      <label for="bio" class="block text-sm font-medium text-gray-700">Bio</label>
+      <textarea
+        id="bio"
+        name="bio"
+        [(ngModel)]="user.bio"
+        #bioField="ngModel"
+        rows="3"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+      ></textarea>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="mt-6 flex justify-center">
+      <button
+        type="submit"
+        [disabled]="!updateUserForm.valid"
+        class="px-6 py-2 text-white bg-indigo-600 rounded-md shadow-md hover:bg-indigo-500 focus:outline-none focus:ring focus:ring-indigo-300"
+      >
+        Update User
+      </button>
+    </div>
+  </form>
+</div>

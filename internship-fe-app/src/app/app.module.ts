@@ -31,6 +31,7 @@ import { EducationComponent } from './features/education/education.component';
 import { LoginComponent } from './features/authentication/login/login.component';
 import { SignupComponent } from './features/authentication/signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
+import { UpdateUserComponent } from './features/update-user/update-user/update-user.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { HttpClientModule } from '@angular/common/http';
     ExperienceComponent,
     EducationComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    UpdateUserComponent
   ],
   imports: [
     HttpClientModule,
