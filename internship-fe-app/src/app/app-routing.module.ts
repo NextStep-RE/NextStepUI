@@ -9,6 +9,7 @@ import { InternshipDetailsComponent } from './features/internships/internship-de
 import { AppliedInternshipsComponent } from './features/applied-internships/applied-internships/applied-internships.component';
 import { EducationComponent } from './features/education/education.component';
 import { ExperienceComponent } from './features/experience/experience.component';
+import { UpdateUserComponent } from './features/update-user/update-user/update-user.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/internships', pathMatch: 'full' },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'applied-internships', component: AppliedInternshipsComponent },
   { path: 'education', component: EducationComponent },
   { path: 'experience', component: ExperienceComponent },
+  { path: 'update-user', component: UpdateUserComponent },
   { path: 'not-found', component: NotFoundPageComponent },
   { path: '**', redirectTo: '/not-found' },
 ];
